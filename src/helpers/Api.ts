@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://gamingdevs.up.railway.app/",
+	baseURL: "https://gamingdevs.up.railway.app/",
 });
