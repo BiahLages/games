@@ -1,4 +1,5 @@
-# [GamingDevs landing]('https://vtmgenerator.vercel.app/')
+# [GamingDevs landing]('https://gamingdevs.vercel.app/')
+
 ##### [GamingDevs API]('https://gamingdevs.up.railway.app/')
 
 #### REACT APP created for students purpose
@@ -77,6 +78,7 @@ In the project directory, you can run:
 > -   [Thabata Campos](https://github.com/ThabataGCampos)
 > -   [Matheus Santos](https://github.com/santos95mat)
 > -   [Alexandre Pereira](https://github.com/Malkavianson)
+
 ---
 
 ## License

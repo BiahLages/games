@@ -6,21 +6,21 @@ import { BrowserRouter } from "react-router-dom";
 import { ReactNode } from "react";
 
 interface ProvidersProps {
-  children: ReactNode;
+	children: ReactNode;
 }
 
 const Providers = ({ children }: ProvidersProps): JSX.Element => {
-  return (
-    <BrowserRouter>
-      <AuthProvider>
-        <FavoritesProvider>
-          <OrderSettingsProvider>
-            <GamesProvider>{children}</GamesProvider>
-          </OrderSettingsProvider>
-        </FavoritesProvider>
-      </AuthProvider>
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<AuthProvider>
+				<FavoritesProvider>
+					<OrderSettingsProvider>
+						<GamesProvider>{children}</GamesProvider>
+					</OrderSettingsProvider>
+				</FavoritesProvider>
+			</AuthProvider>
+		</BrowserRouter>
+	);
 };
 
 export default Providers;
