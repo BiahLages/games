@@ -17,9 +17,9 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	const [endOfPage, setEndOfPage] = useState(false);
 	const [status, getStatus] = useState(false);
 
-	const handleGetGamesByGenre = (): void => {
+	const handleGetGamesByGenre = (id: string): void => {
 		if (status && category !== "all") {
-			api.get(`/games/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`).then(res => {
+			api.get(`/genres/search/${id}/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`).then(res => {
 				if (games.length <= 1) {
 					setGames(res.data);
 				} else if (games.length < allGames.length) {
@@ -34,7 +34,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 		}
 	};
 	const handleGetGames = (): void => {
-		if (status && category === "all") {
+		if (category === "all") {
 			api.get(`/games/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`).then(res => {
 				if (games.length <= 1) {
 					setGames(res.data);
