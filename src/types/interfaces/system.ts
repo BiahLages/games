@@ -8,6 +8,12 @@ export interface CssColors {
 	baseBg1: string;
 	baseBg2: string;
 	baseBg3: string;
+	baseBg1Dark: string;
+	baseBg2Dark: string;
+	baseBg1Light: string;
+	baseBg2Light: string;
+	secondaryBg1: string;
+	secondaryBg2: string;
 	baseLine: string;
 	contrast0: string;
 	contrast1: string;
