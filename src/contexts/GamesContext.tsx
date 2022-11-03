@@ -26,6 +26,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	};
 
 	// Tem que pensar como vai fazer
+  
 	// const handleGetGamesByGenre = (id: string): void => {
 	// 	if (status && category !== "all") {
 	// 		api.get(`/genres/search/${id}/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`).then(res => {
