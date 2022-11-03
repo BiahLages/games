@@ -26,7 +26,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	};
 
 	// Tem que pensar como vai fazer
-  
+
 	// const handleGetGamesByGenre = (id: string): void => {
 	// 	if (status && category !== "all") {
 	// 		api.get(`/genres/search/${id}/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`).then(res => {
@@ -45,7 +45,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	const handleGetGames = async (): Promise<void> => {
 		if (category === "all") {
-			await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`,headers).then(res => {
+			await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
 				if (games.length <= 1) {
 					setGames(res.data);
 				} else if (games.length < allGames.length) {
@@ -61,7 +61,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	};
 	const handleGetAllGames = async (): Promise<void> => {
 		if (status) {
-			await api.get("/games",headers).then(res => {
+			await api.get("/games", headers).then(res => {
 				setAllGames(res.data);
 			});
 		}
@@ -78,17 +78,17 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	useEffect(() => {
 		handleGetGames();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentPage]);
 
 	useEffect(() => {
 		handleGetAllGames();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status]);
 
 	useEffect(() => {
 		handleGetGames();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status]);
 
 	return (
