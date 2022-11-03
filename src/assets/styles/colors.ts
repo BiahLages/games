@@ -1,10 +1,12 @@
 import { CssColors } from "../../types/interfaces/system";
 
 export const colors: CssColors = {
-	baseBg1: "#282a36",
-	baseBg2: "#44475a",
-	baseBg3: "#bd93f9",
+	baseBg1: "#212121",
+	baseBg2: "#DEDEDE",
 
+	secondaryBg1: "313131",
+	secondaryBg2: "CECECE",
+	
 	baseLine: "#393C49",
 
 	contrast0: "#000000",
