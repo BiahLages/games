@@ -1,7 +1,7 @@
 import { ApiGames } from "./api";
 
 export interface GameProviderData {
-	endOfPage: boolean;
+	// endOfPage: boolean;
 	currentPage: number;
 	setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 	status: boolean;
