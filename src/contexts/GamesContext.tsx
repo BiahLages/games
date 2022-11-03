@@ -14,25 +14,26 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	const [games, setGames] = useState<ApiGames[]>([]);
 	const [lastValidPage, setLastValidPage] = useState(1);
 	const [currentPage, setCurrentPage] = useState(1);
-	const [endOfPage, setEndOfPage] = useState(false);
 	const [status, getStatus] = useState(false);
 
-	const handleGetGamesByGenre = (id: string): void => {
-		if (status && category !== "all") {
-			api.get(`/genres/search/${id}/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`).then(res => {
-				if (games.length <= 1) {
-					setGames(res.data);
-				} else if (games.length < allGames.length) {
-					const data: ApiGames[] = [...games, ...res.data];
-					setLastValidPage(currentPage);
-					setGames(data);
-				} else {
-					setEndOfPage(true);
-					setCurrentPage(lastValidPage);
-				}
-			});
-		}
-	};
+
+			// Tem que pensar como vai fazer
+	// const handleGetGamesByGenre = (id: string): void => {
+	// 	if (status && category !== "all") {
+	// 		api.get(`/genres/search/${id}/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`).then(res => {
+	// 			if (games.length <= 1) {
+	// 				setGames(res.data);
+	// 			} else if (games.length < allGames.length) {
+	// 				const data: ApiGames[] = [...games, ...res.data];
+	// 				setLastValidPage(currentPage);
+	// 				setGames(data);
+	// 			} else {
+	// 				setCurrentPage(1);
+	// 			}
+	// 		});
+	// 	}
+	// };
+
 	const handleGetGames = (): void => {
 		if (category === "all") {
 			api.get(`/games/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`).then(res => {
@@ -43,8 +44,8 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 					setLastValidPage(currentPage);
 					setGames(data);
 				} else {
-					setEndOfPage(true);
-					setCurrentPage(lastValidPage);
+					setGames([]);
+					setCurrentPage(1);
 				}
 			});
 		}
@@ -81,7 +82,6 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	return (
 		<GameContext.Provider
 			value={{
-				endOfPage,
 				currentPage,
 				setCurrentPage,
 				status,
