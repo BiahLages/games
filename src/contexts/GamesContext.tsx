@@ -12,12 +12,21 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	const [allGames, setAllGames] = useState<ApiGames[]>([]);
 	const [games, setGames] = useState<ApiGames[]>([]);
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [lastValidPage, setLastValidPage] = useState(1);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [status, getStatus] = useState(false);
 
+	const token = localStorage.getItem("token");
 
-			// Tem que pensar como vai fazer
+	const headers = {
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	};
+
+	// Tem que pensar como vai fazer
+  
 	// const handleGetGamesByGenre = (id: string): void => {
 	// 	if (status && category !== "all") {
 	// 		api.get(`/genres/search/${id}/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`).then(res => {
@@ -34,9 +43,9 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	// 	}
 	// };
 
-	const handleGetGames = (): void => {
+	const handleGetGames = async (): Promise<void> => {
 		if (category === "all") {
-			api.get(`/games/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`).then(res => {
+			await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`,headers).then(res => {
 				if (games.length <= 1) {
 					setGames(res.data);
 				} else if (games.length < allGames.length) {
@@ -50,9 +59,9 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 			});
 		}
 	};
-	const handleGetAllGames = (): void => {
+	const handleGetAllGames = async (): Promise<void> => {
 		if (status) {
-			api.get("/games").then(res => {
+			await api.get("/games",headers).then(res => {
 				setAllGames(res.data);
 			});
 		}
@@ -69,14 +78,17 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	useEffect(() => {
 		handleGetGames();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentPage]);
 
 	useEffect(() => {
 		handleGetAllGames();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status]);
 
 	useEffect(() => {
 		handleGetGames();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status]);
 
 	return (

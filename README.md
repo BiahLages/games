@@ -1,4 +1,4 @@
-# [GamingDevs landing]('https://gamingdevs.vercel.app/')
+# [GamingDevs landing]('https://gamingdevs.vercel.app')
 
 ##### [GamingDevs API]('https://gamingdevs.up.railway.app/')
 
