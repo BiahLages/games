@@ -1,5 +1,5 @@
 import { error, isPw, validateEmail, validateName, validatePassword } from "../../utils/validation.tools";
-import { SubmitButtom, SwicherButtom, VerificationResponse } from "./styles";
+import { BackgroundForm, SubmitButtom, SwicherContainer, SwicherButtom, ContainerVerification, VerificationResponse } from "./styles";
 import { DataType } from "../../types/interfaces/users";
 import { useAuth } from "../../contexts/AccountContext";
 import { useEffect, useState } from "react";
@@ -81,28 +81,34 @@ const Gate = (): JSX.Element => {
 	}, [valuePassword]);
 
 	return (
-		<>
+		<BackgroundForm>
+			<h1>{!mode ? `Register` : `SignIn`}</h1>
 			<form name="Gate">
 				<div>
 					{!mode && (
 						<Input
 							label="name"
+							placeholder="User Name"
 							type="text"
 							value={setValueName}
 						/>
 					)}
 					<Input
 						label="email"
+						placeholder="username2022@email.com"
 						type="email"
 						value={setValueEmail}
 					/>
 					<Input
 						label="password"
+						placeholder="********"
 						type="password"
 						value={setValuePassword}
 					/>
-					<VerificationResponse>{validPasswordLength ? "✅" : "⛔️"} 8 characters</VerificationResponse>
-					<VerificationResponse>{validPasswordCharacters ? "✅" : "⛔️"} Uppercase | Lowercase | Symbol | Number</VerificationResponse>
+					<ContainerVerification>
+						<VerificationResponse>{validPasswordLength ? "✅" : "⛔️"} 8 characters</VerificationResponse>
+						<VerificationResponse>{validPasswordCharacters ? "✅" : "⛔️"} Uppercase | Lowercase | Symbol | Number</VerificationResponse>
+					</ContainerVerification>
 				</div>
 				<SubmitButtom
 					onClick={(e): void => {
@@ -114,14 +120,18 @@ const Gate = (): JSX.Element => {
 					{!mode ? `Register` : `SignIn`}
 				</SubmitButtom>
 			</form>
-			<SwicherButtom
-				onClick={(): void => {
-					setMode(!mode);
-				}}
-			>
-				{mode ? `Register` : `SignIn`}
-			</SwicherButtom>
-		</>
+			<SwicherContainer>
+				<p>{mode ? `Don't have an account?` : `Alread have an account?`}</p>
+
+				<SwicherButtom
+					onClick={(): void => {
+						setMode(!mode);
+					}}
+				>
+					{mode ? `Register` : `SignIn`}
+				</SwicherButtom>
+			</SwicherContainer>
+		</BackgroundForm>
 	);
 };
 

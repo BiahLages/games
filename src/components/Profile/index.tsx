@@ -19,11 +19,13 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 				<div key={`form${currentKey}`}>
 					<Input
 						label="new Title"
+						placeholder="new Title"
 						type="text"
 						value={setTitle}
 					/>
 					<Input
 						label="new ImageUrl"
+						placeholder="new ImageUrl"
 						type="text"
 						value={setImageUrl}
 					/>
