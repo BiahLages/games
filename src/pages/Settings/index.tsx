@@ -6,14 +6,14 @@ const Settings = (): JSX.Element => {
 	return (
 		<>
 			<Menu path="settings" />
-			<Container>
-				<ContentContainer>
-					<SettingsContent>
-						<div>Aqui irão os componentes de settings da página e do usuário</div>
-					</SettingsContent>
-				</ContentContainer>
-			</Container>
-		</>
+			<ContentContainer>
+				<SettingsContent>
+					<div>Aqui irão os componentes de settings da página e do usuário</div>
+					<button>Update profile</button>
+					<button>Check all profiles</button>
+				</SettingsContent>
+			</ContentContainer>
+		</Container>
 	);
 };
 
