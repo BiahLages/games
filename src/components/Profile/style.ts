@@ -1,4 +1,4 @@
-import styled, {keyframes} from "styled-components";
+import styled, { keyframes } from "styled-components";
 import mixings from "src/assets/styles/mixins";
 
 /*first initial state(case false)*/
@@ -59,11 +59,11 @@ export const toBottom = keyframes`
         position: fixed;
         top: -100vh;
     }
-`
+`;
 
 export const Overlay = styled.div`
 	position: fixed;
-    top: 0;
+	top: 0;
 	width: 100vw;
 	height: 100vh;
 	background: ${mixings.colors.primaryColorOpacity};
@@ -72,15 +72,15 @@ export const Overlay = styled.div`
 	justify-content: center;
 	align-items: center;
 	z-index: 9999;
-    animation: ${toBottom} 2s normal;
+	animation: ${toBottom} 2s normal;
 `;
 
 export const FormEditProfile = styled.div`
 	width: 60em;
 	height: 65em;
-    padding: 5em;
+	padding: 5em;
 	background: ${mixings.colors.baseBg1Dark};
-    border-radius: 1em;
+	border-radius: 1em;
 	box-shadow: 1px 1px 3px 2px ${mixings.colors.primaryColor};
 	display: flex;
 	flex-direction: column;
@@ -107,8 +107,8 @@ export const OptionsEditDelete = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-        div {
-            width: 7em;
-            cursor: pointer;
-    }
+	div {
+		width: 7em;
+		cursor: pointer;
+	}
 `;

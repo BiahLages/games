@@ -54,4 +54,3 @@ export interface IMixings {
 	colors: CssColors;
 	constants: CssConstants;
 }
-
