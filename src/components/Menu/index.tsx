@@ -1,14 +1,16 @@
-import { MenuContainer /*, MenuItem, MenuItemButton*/ } from "./styles";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { MenuContainer, MenuOptions, Profile } from "./styles";
 import type { MenuProps } from "../../types/interfaces/system";
 import { useAuth } from "../../contexts/AccountContext";
 import triangule from "../../assets/icons/triangulo.png";
 import { useState } from "react";
+import Input from "../Input";
 
 const Menu = ({ path }: MenuProps): JSX.Element => {
 	const { logged, logout } = useAuth();
 	const navigate: NavigateFunction = useNavigate();
 	const [active, setActive] = useState(false);
+	const [search, setSearch] = useState("");
 
 	return (
 		<MenuContainer>
@@ -21,17 +23,17 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 					Logo
 				</h1>
 				{path === "home" ? (
-					<input
+					<Input
+						label="search"
 						type="text"
-						name="search"
-						id="search"
 						placeholder="Pesquisa"
+						value={setSearch}
 					/>
 				) : (
 					<></>
 				)}
 				{logged && (
-					<article>
+					<Profile>
 						<div
 							id="profileMenu"
 							onClick={() => {
@@ -45,10 +47,10 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 								setActive(!active);
 							}}
 						/>
-					</article>
+					</Profile>
 				)}
 				{active ? (
-					<div id="menuOptions">
+					<MenuOptions>
 						<li
 							onClick={() => {
 								navigate("/profile");
@@ -73,7 +75,7 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 						>
 							Logout
 						</li>
-					</div>
+					</MenuOptions>
 				) : (
 					<></>
 				)}
