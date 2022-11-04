@@ -27,7 +27,7 @@ export const colors: CssColors = {
 
 	primaryColor: "#ff5555",
 
-	primaryColorOpacity: "rgba(98, 114, 164, 0.4)",
+	primaryColorOpacity: "rgba(0, 0, 0, 0.3)",
 
 	secondaryColor: "#ffff55",
 
