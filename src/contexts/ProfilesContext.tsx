@@ -1,18 +1,9 @@
+import { IProfilePatcher, IProfiles } from "../types/interfaces/profiles";
 import { AllProvidersProps } from "../types/interfaces/system";
 import { createContext, useContext, useState } from "react";
+import { ApiProfiles } from "../types/interfaces/api";
 import { useAuth } from "./AccountContext";
-import { IProfilePatcher } from "src/types/interfaces/profiles";
-import { api } from "src/helpers/Api";
-import { ApiProfiles } from "src/types/interfaces/api";
-
-export interface IProfiles {
-	userProfiles: ApiProfiles[];
-	currentProfileId: string;
-	setCurrentProfileId: React.Dispatch<React.SetStateAction<string>>;
-	getAllProfiles: () => void;
-	editProfile: (id: string, title: string, imageUrl: string) => void;
-	deleteProfile: (id: string) => void;
-}
+import { api } from "../helpers/Api";
 
 const ProfilesContext = createContext({} as IProfiles);
 
@@ -30,7 +21,6 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 				},
 			};
 			api.get(`/users/${currentUser.user.id}`, headers).then(res => {
-				console.log(res);
 				if (res.status === 200) {
 					setUserProfiles(res.data.profile);
 				}
@@ -38,13 +28,26 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 		}
 	};
 
-	const editProfile = (id: string, title: string, imageUrl: string): void => {
+	const createProfile = (title: string, imageUrl: string): void => {
 		const data: IProfilePatcher = {};
 
-		if (title !== "") data.title = title;
-		if (imageUrl !== "") data.imageUrl = imageUrl;
-
+		if (title) data.title = title;
+		if (imageUrl) data.imageUrl = imageUrl;
 		if (logged && currentUser) {
+			data.userId = currentUser.user.id;
+
+			api.post(`/profiles`, data).then(res => {
+				console.log(res);
+			});
+		}
+	};
+
+	const editProfile = (id: string, title: string, imageUrl: string): void => {
+		const data: IProfilePatcher = {};
+		if (logged && currentUser) {
+			if (title) data.title = title;
+			if (imageUrl) data.imageUrl = imageUrl;
+
 			api.patch(`/profiles/${id}`, data).then(res => {
 				console.log(res);
 			});
@@ -62,12 +65,13 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 	return (
 		<ProfilesContext.Provider
 			value={{
-				userProfiles,
-				getAllProfiles,
+				createProfile,
 				currentProfileId,
-				setCurrentProfileId,
-				editProfile,
 				deleteProfile,
+				editProfile,
+				getAllProfiles,
+				setCurrentProfileId,
+				userProfiles,
 			}}
 		>
 			{children}

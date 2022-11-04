@@ -1,18 +1,23 @@
-import { ProfileContentCards } from "./styles";
 import { Container, ContentContainer } from "../styles";
-import Menu from "../../components/Menu";
+import { useAuth } from "../../contexts/AccountContext";
 import Profiles from "../../components/Profiles";
+import { ProfileContentCards } from "./styles";
+import Menu from "../../components/Menu";
 
 const Profile = (): JSX.Element => {
+	const { logged, currentUser } = useAuth();
+
 	return (
-		<Container>
-			<Menu path="profile" />
-			<ContentContainer>
-				<ProfileContentCards>
-					<Profiles />
-				</ProfileContentCards>
-			</ContentContainer>
-		</Container>
+		<>
+			{logged && currentUser && <Menu path="profile" />}
+			<Container>
+				<ContentContainer>
+					<ProfileContentCards>
+						<Profiles />
+					</ProfileContentCards>
+				</ContentContainer>
+			</Container>
+		</>
 	);
 };
 

@@ -1,63 +1,83 @@
-import { MenuContainer, MenuItem, MenuItemButton } from "./styles";
+import { MenuContainer /*, MenuItem, MenuItemButton*/ } from "./styles";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { Gear, Home, Lock, LogOut, User } from "../../assets/icons";
 import type { MenuProps } from "../../types/interfaces/system";
 import { useAuth } from "../../contexts/AccountContext";
+import triangule from "../../assets/icons/triangulo.png";
+import { useState } from "react";
 
 const Menu = ({ path }: MenuProps): JSX.Element => {
 	const { logged, logout } = useAuth();
 	const navigate: NavigateFunction = useNavigate();
+	const [active, setActive] = useState(false);
 
 	return (
 		<MenuContainer>
-			{!logged && (
-				<MenuItem>
-					<MenuItemButton onClick={(): void => navigate("/login")}>
-						<Lock />
-					</MenuItemButton>
-				</MenuItem>
-			)}
-			<nav>
-				<MenuItem active={path === "home"}>
-					<MenuItemButton
-						onClick={(): void => navigate("/")}
-						active={path === "home"}
-					>
-						<Home />
-					</MenuItemButton>
-				</MenuItem>
-				{logged && (
-					<>
-						<MenuItem active={path === "profile"}>
-							<MenuItemButton
-								onClick={(): void => navigate("/profile")}
-								active={path === "profile"}
-							>
-								<User />
-							</MenuItemButton>
-						</MenuItem>
-						<MenuItem active={path === "settings"}>
-							<MenuItemButton
-								onClick={(): void => navigate("/settings")}
-								active={path === "settings"}
-							>
-								<Gear />
-							</MenuItemButton>
-						</MenuItem>
-					</>
+			<div className="menuContainer">
+				<h1
+					onClick={() => {
+						navigate("/");
+					}}
+				>
+					Logo
+				</h1>
+				{path === "home" ? (
+					<input
+						type="text"
+						name="search"
+						id="search"
+						placeholder="Pesquisa"
+					/>
+				) : (
+					<></>
 				)}
-			</nav>
-			{logged && (
-				<MenuItem logout>
-					<MenuItemButton
-						onClick={(): void => {
-							logout();
-						}}
-					>
-						<LogOut />
-					</MenuItemButton>
-				</MenuItem>
-			)}
+				{logged && (
+					<article>
+						<div
+							id="profileMenu"
+							onClick={() => {
+								setActive(!active);
+							}}
+						></div>
+						<img
+							src={triangule}
+							alt="triangule"
+							onClick={() => {
+								setActive(!active);
+							}}
+						/>
+					</article>
+				)}
+				{active ? (
+					<div id="menuOptions">
+						<li
+							onClick={() => {
+								navigate("/profile");
+								setActive(!active);
+							}}
+						>
+							Profiles
+						</li>
+						<li
+							onClick={() => {
+								navigate("/settings");
+								setActive(!active);
+							}}
+						>
+							Settings
+						</li>
+						<li
+							onClick={() => {
+								logout();
+								setActive(!active);
+							}}
+						>
+							Logout
+						</li>
+					</div>
+				) : (
+					<></>
+				)}
+			</div>
 		</MenuContainer>
 	);
 };

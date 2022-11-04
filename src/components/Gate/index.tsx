@@ -13,6 +13,7 @@ const Gate = (): JSX.Element => {
 	const [valueName, setValueName] = useState("");
 	const [valueEmail, setValueEmail] = useState("");
 	const [valuePassword, setValuePassword] = useState("");
+	const [valueCPF, setValueCPF] = useState("");
 	const [validPasswordCharacters, setValidPasswordCharacters] = useState(false);
 	const [validPasswordLength, setValidPasswordLength] = useState(false);
 
@@ -24,6 +25,7 @@ const Gate = (): JSX.Element => {
 			const data: DataType = {
 				email: valueEmail,
 				password: valuePassword,
+				cpf: valueCPF,
 			};
 
 			switch (mode) {
@@ -86,12 +88,20 @@ const Gate = (): JSX.Element => {
 			<form name="Gate">
 				<div>
 					{!mode && (
-						<Input
-							label="name"
-							placeholder="User Name"
-							type="text"
-							value={setValueName}
-						/>
+						<>
+							<Input
+								label="name"
+								placeholder="User Name"
+								type="text"
+								value={setValueName}
+							/>
+							<Input
+								label="CPF"
+								placeholder="01234567890"
+								type="text"
+								value={setValueCPF}
+							/>
+						</>
 					)}
 					<Input
 						label="email"

@@ -1,6 +1,6 @@
-# [GamingDevs landing]('https://gamingdevs.vercel.app')
+# [GamingDevs landing](https://gamedevs.vercel.app)
 
-##### [GamingDevs API]('https://gamingdevs.up.railway.app/')
+##### [GamingDevs API](https://gamingdevs.up.railway.app/)
 
 #### REACT APP created for students purpose
 
@@ -74,9 +74,10 @@ In the project directory, you can run:
 
 > -   [Beatriz Lages](https://github.com/BiahLages)
 > -   [Bianca Aguiar](https://github.com/SraSidle/)
+> -   [Dener Batista](https://github.com/denerbatista/games)
+> -   [Matheus Santos](https://github.com/santos95mat)
 > -   [Max Cleiton](https://github.com/maxxcleiton)
 > -   [Thabata Campos](https://github.com/ThabataGCampos)
-> -   [Matheus Santos](https://github.com/santos95mat)
 > -   [Alexandre Pereira](https://github.com/Malkavianson)
 
 ---
