@@ -1,8 +1,9 @@
 import { OrderSettingsProvider } from "./OrderSettingsContext";
 import { FavoritesProvider } from "./FavoritesContext";
-import { GamesProvider } from "./GamesContext";
-import { AuthProvider } from "./AccountContext";
+import { ProfilesProvider } from "./ProfilesContext";
 import { BrowserRouter } from "react-router-dom";
+import { AuthProvider } from "./AccountContext";
+import { GamesProvider } from "./GamesContext";
 import { ReactNode } from "react";
 
 interface ProvidersProps {
@@ -13,11 +14,13 @@ const Providers = ({ children }: ProvidersProps): JSX.Element => {
 	return (
 		<BrowserRouter>
 			<AuthProvider>
-				<FavoritesProvider>
-					<OrderSettingsProvider>
-						<GamesProvider>{children}</GamesProvider>
-					</OrderSettingsProvider>
-				</FavoritesProvider>
+				<ProfilesProvider>
+					<FavoritesProvider>
+						<OrderSettingsProvider>
+							<GamesProvider>{children}</GamesProvider>
+						</OrderSettingsProvider>
+					</FavoritesProvider>
+				</ProfilesProvider>
 			</AuthProvider>
 		</BrowserRouter>
 	);
