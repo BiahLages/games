@@ -3,7 +3,7 @@ import { useProfiles } from "src/contexts/ProfilesContext";
 import Profile from "../Profile";
 
 const Profiles = () => {
-	const { getAllProfiles, userProfiles } = useProfiles();
+	const { getAllProfiles, userProfiles, createProfile } = useProfiles();
 
 	useEffect(() => {
 		getAllProfiles();
@@ -21,6 +21,12 @@ const Profiles = () => {
 					/>
 				);
 			})}
+
+			{/* div que vai criar o perfil */}
+			<div onDoubleClick={ () => {
+				createProfile("title", "imageUrl")
+			}}>➕</div>
+
 		</section>
 	);
 };
