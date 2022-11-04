@@ -17,7 +17,7 @@ export const colors: CssColors = {
 
 	secondaryBg1: "#313131",
 	secondaryBg2: "#CECECE",
-	
+
 	baseLine: "#393C49",
 
 	contrast0: "#000000",

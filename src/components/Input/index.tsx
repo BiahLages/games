@@ -4,13 +4,14 @@ import { Blind, Values } from "./styles";
 interface InputType {
 	label: string;
 	type: string;
+	placeholder: string;
 	value: React.Dispatch<React.SetStateAction<string>>;
 	step?: number;
 	max?: number;
 	min?: number;
 }
 
-const Input = ({ label, type, value, step, max, min }: InputType): JSX.Element => {
+const Input = ({ label, placeholder, type, value, step, max, min }: InputType): JSX.Element => {
 	const [blind, setBlind] = useState<boolean>(true);
 
 	switch (type) {
@@ -21,7 +22,7 @@ const Input = ({ label, type, value, step, max, min }: InputType): JSX.Element =
 					<input
 						id={`${label}_${type}_input`}
 						name={label}
-						placeholder={label}
+						placeholder={placeholder}
 						title={`Choose ${label}`}
 						type={type}
 						onChange={(e): void => {
@@ -42,7 +43,7 @@ const Input = ({ label, type, value, step, max, min }: InputType): JSX.Element =
 					<input
 						id={`${label}_${type}_input`}
 						name={label}
-						placeholder={label}
+						placeholder={placeholder}
 						title={`Choose ${label}`}
 						type={blind ? `password` : `text`}
 						onChange={(e): void => {
@@ -65,7 +66,7 @@ const Input = ({ label, type, value, step, max, min }: InputType): JSX.Element =
 					<input
 						id={`${label}_${type}_input`}
 						name={label}
-						placeholder={label}
+						placeholder={placeholder}
 						title={`Choose ${label}`}
 						type={type}
 						onChange={(e): void => {
