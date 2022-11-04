@@ -24,5 +24,6 @@ export interface DataType {
 	name?: string;
 	email?: string;
 	password?: string;
+	cpf?: string;
 	isAdmin?: boolean;
 }
