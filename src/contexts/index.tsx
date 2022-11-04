@@ -14,21 +14,15 @@ const Providers = ({ children }: ProvidersProps): JSX.Element => {
 	return (
 		<BrowserRouter>
 			<AuthProvider>
-<<<<<<< HEAD
 				<ConfigUserProvider>
-=======
-				<ProfilesProvider>
->>>>>>> 3ea2746848fe5825555193dd64216672a30b7370
-					<FavoritesProvider>
-						<OrderSettingsProvider>
-							<GamesProvider>{children}</GamesProvider>
-						</OrderSettingsProvider>
-					</FavoritesProvider>
-<<<<<<< HEAD
+					<ProfilesProvider>
+						<FavoritesProvider>
+							<OrderSettingsProvider>
+								<GamesProvider>{children}</GamesProvider>
+							</OrderSettingsProvider>
+						</FavoritesProvider>
+					</ProfilesProvider>
 				</ConfigUserProvider>
-=======
-				</ProfilesProvider>
->>>>>>> 3ea2746848fe5825555193dd64216672a30b7370
 			</AuthProvider>
 		</BrowserRouter>
 	);
