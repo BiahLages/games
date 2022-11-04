@@ -9,7 +9,7 @@ import { useAuth } from "./AccountContext";
 const ConfigUserContext = createContext({} as IConfigUserProviderData);
 
 export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element => {
-	const { currentUser, logout } = useAuth();
+	const { logged, currentUser, logout } = useAuth();
 
 	const [name, setName] = useState(currentUser?.user.name);
 	const [email, setEmail] = useState(currentUser?.user.email);
@@ -32,31 +32,31 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 
 	// Implentar um modal de confirmação.
 	const handdleUpdateUser = async (): Promise<void> => {
-		await api
-			.patch(`/user${currentUser?.user.id}`, data, headers)
-			.then(res => {
-				localStorage.setItem("user", JSON.stringify({ ...res.data, isAdmin, cpf }));
-				console.log("handdleUpdateUser", "Usuário Atualizado");
-			})
-			.catch(error => console.log("handdleUpdateUser", `Erro ${error.status} Usuário não atualizado`));
+		if (logged && currentUser)
+			await api
+				.patch(`/user${currentUser.user.id}`, data, headers)
+				.then(res => {
+					localStorage.setItem("user", JSON.stringify({ ...res.data, isAdmin, cpf }));
+					console.log("handdleUpdateUser", "Usuário Atualizado");
+				})
+				.catch(error => console.log("handdleUpdateUser", `Erro ${error.status} Usuário não atualizado`));
 	};
 
 	// Implentar um modal de confirmação.
 	const handdleDeleteUser = async (): Promise<void> => {
-		await api
-			.delete(`/user${currentUser?.user.id}`, headers)
-			.then(() => {
-				logout()
-				console.log("handdleDeleteUser", "Usuário Deletado");
-			})
-			.catch(error => console.log("handdleDeleteUser", `Erro ${error.status} Usuário não deletado`));
+		if (logged && currentUser)
+			await api
+				.delete(`/user${currentUser.user.id}`, headers)
+				.then(() => {
+					logout();
+					console.log("handdleDeleteUser", "Usuário Deletado");
+				})
+				.catch(error => console.log("handdleDeleteUser", `Erro ${error.status} Usuário não deletado`));
 	};
-
-
 
 	return (
 		<>
-			<ConfigUserContext.Provider value={{ name: { name, setName }, email: { email, setEmail }, cpf: { cpf, setCpf }, password: { setPassword }, functions:{handdleUpdateUser, handdleDeleteUser} }}>{children}</ConfigUserContext.Provider>;
+			<ConfigUserContext.Provider value={{ name: { name, setName }, email: { email, setEmail }, cpf: { cpf, setCpf }, password: { setPassword }, functions: { handdleUpdateUser, handdleDeleteUser } }}>{children}</ConfigUserContext.Provider>;
 		</>
 	);
 };
