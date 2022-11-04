@@ -1,4 +1,4 @@
-import {ContainerProfiles, DivAdd} from "./style";
+import { ContainerProfiles, DivAdd } from "./style";
 import { useEffect } from "react";
 import { useProfiles } from "src/contexts/ProfilesContext";
 import Profile from "../Profile";
@@ -15,20 +15,24 @@ const Profiles = () => {
 		<ContainerProfiles>
 			{userProfiles.map((profile, i) => {
 				return (
-						<Profile
-							profile={profile}
-							currentKey={i}
-							key={i}
-						/>
+					<Profile
+						profile={profile}
+						currentKey={i}
+						key={i}
+					/>
 				);
 			})}
 
 			{/* div que vai criar o perfil */}
 
 			<DivAdd>
-			<div onDoubleClick={ () => {
-				createProfile("title", "imageUrl")
-			}}>➕</div>
+				<div
+					onDoubleClick={() => {
+						createProfile("title", "imageUrl");
+					}}
+				>
+					➕
+				</div>
 			</DivAdd>
 			<div
 				onDoubleClick={() => {
@@ -37,8 +41,7 @@ const Profiles = () => {
 			>
 				➕
 			</div>
-			</ContainerProfiles>
-
+		</ContainerProfiles>
 	);
 };
 
