@@ -1,6 +1,6 @@
 import type { AllProvidersProps } from "../types/interfaces/system";
 import type { Auth, AuthProviderData } from "../types/interfaces/users";
-import React, { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { api } from "../helpers/Api";
 
@@ -15,14 +15,12 @@ export const AuthProvider = ({ children }: AllProvidersProps): JSX.Element => {
 		localStorage.setItem("token", token);
 		localStorage.setItem("user", JSON.stringify(user));
 		setLogged(true);
-		navigate("/");
 		navigate(0);
 	};
 
 	const logout = (): void => {
 		localStorage.clear();
 		setLogged(false);
-		navigate("/login");
 		navigate(0);
 	};
 

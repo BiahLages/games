@@ -14,6 +14,7 @@ const Router = (): JSX.Element => {
 		<Routes>
 			{logged ? (
 				<>
+					{/* colocar o currentProfileId ao clicar no perfil e mudar para !currentProfileId */}
 					{currentProfileId ? (
 						<Route
 							path="/profile"
