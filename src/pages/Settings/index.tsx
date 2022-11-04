@@ -4,8 +4,8 @@ import Menu from "../../components/Menu";
 import { useConfigUser } from "src/contexts/ConfigUserContext";
 
 const Settings = (): JSX.Element => {
-	const { name,email } = useConfigUser();
-	console.log(name.name,email);
+	const { name, email } = useConfigUser();
+	console.log(name.name, email);
 	return (
 		<>
 			<Menu path="settings" />

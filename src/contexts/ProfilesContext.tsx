@@ -5,7 +5,6 @@ import { ApiProfiles } from "../types/interfaces/api";
 import { useAuth } from "./AccountContext";
 import { api } from "../helpers/Api";
 
-
 const ProfilesContext = createContext({} as IProfiles);
 
 export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element => {
@@ -36,13 +35,11 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 		if (imageUrl) data.imageUrl = imageUrl;
 		if (logged && currentUser) {
 			data.userId = currentUser.user.id;
-			
-			api.post(`/profiles`, data).then( res => {
-				console.log(res)
-			})
-		};
 
-
+			api.post(`/profiles`, data).then(res => {
+				console.log(res);
+			});
+		}
 	};
 
 	const editProfile = (id: string, title: string, imageUrl: string): void => {
