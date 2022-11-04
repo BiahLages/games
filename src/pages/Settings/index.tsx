@@ -4,7 +4,7 @@ import Menu from "../../components/Menu";
 
 const Settings = (): JSX.Element => {
 	return (
-		<>
+		<Container>
 			<Menu path="settings" />
 			<ContentContainer>
 				<SettingsContent>
