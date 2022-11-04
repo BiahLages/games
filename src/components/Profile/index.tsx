@@ -6,9 +6,12 @@ import edit from "../../assets/icons/edit.png";
 import formEdit from "../../assets/icons/formEdit.png";
 import { useState } from "react";
 import Input from "../Input";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: number }): JSX.Element => {
-	const { setCurrentProfileId, editProfile, deleteProfile } = useProfiles();
+	const { getAllProfiles, setCurrentProfileId, editProfile, deleteProfile } = useProfiles();
+
+	const navigate: NavigateFunction = useNavigate();
 
 	const [editingThis, setEditingThis] = useState(false);
 	const [title, setTitle] = useState("");
@@ -51,6 +54,7 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 								key={`formEdit${currentKey}`}
 								onClick={(): void => {
 									editProfile(profile.id, title, imageUrl);
+									getAllProfiles();
 								}}
 							>
 								<ImgEditDelete
@@ -62,6 +66,7 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 								key={`formDel${currentKey}`}
 								onClick={(): void => {
 									deleteProfile(profile.id);
+									getAllProfiles();
 								}}
 							>
 								<ImgEditDelete
@@ -80,6 +85,7 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 						key={`profileContent${currentKey}`}
 						onDoubleClick={(): void => {
 							setCurrentProfileId(profile.id);
+							navigate("/");
 						}}
 					>
 						<ContainerImgProfile>
