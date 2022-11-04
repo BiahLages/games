@@ -1,6 +1,6 @@
-import { MenuItemButtonProps, MenuItemProps } from "../../types/interfaces/system";
-import styled, { css, Interpolation } from "styled-components";
-import mixings from "../..//assets/styles/mixins";
+import { MenuItemButtonProps } from "../../types/interfaces/system";
+import styled from "styled-components";
+import mixings from "../../assets/styles/mixins";
 
 export const MenuContainer = styled.header`
 	position: fixed;
@@ -12,34 +12,63 @@ export const MenuContainer = styled.header`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+`;
 
-	div.menuContainer {
-		position: relative;
-		width: 100%;
-		height: 8vh;
-		max-width: 1280px;
+export const MenuContent = styled.div`
+	position: relative;
+	width: 100%;
+	height: 8vh;
+	max-width: 1280px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	h1 {
+		font-size: 4rem;
+		cursor: pointer;
+	}
+	div {
+		width: 60%;
 		display: flex;
-		justify-content: space-between;
+		justify-content: flex-end;
 		align-items: center;
 
-		h1 {
-			font-size: 4rem;
-			cursor: pointer;
+		label {
+			display: none;
 		}
-
 		input {
 			outline: none;
 			border: none;
-			width: 50%;
-			max-width: 250px;
+			height: calc(100% - 7rem);
+			width: 100%;
+			max-width: 400px;
 			padding: 1.2rem;
 			border-radius: 5px;
-			background-color: rgba(255, 255, 255, 0.7);
+			background-color: ${mixings.colors.baseLine};
 		}
 	}
 `;
 
-export const MenuOptions = styled.div`
+export const LogoContainer = styled.header`
+	max-height: 90%;
+	width: 20%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+
+	img {
+		margin-top: 10rem;
+		max-height: 100%;
+		max-width: 40rem;
+		cursor: pointer;
+		transition: 0.42s;
+	}
+
+	img:active {
+		transform: scale(0.995);
+	}
+`;
+export const MenuOptions = styled.nav<MenuItemButtonProps>`
 	position: absolute;
 	right: 0;
 	top: 8vh;
@@ -57,6 +86,7 @@ export const MenuOptions = styled.div`
 		text-align: center;
 		font-size: 2.5rem;
 		cursor: pointer;
+		
 
 		:hover {
 			background-color: ${mixings.colors.primaryColorOpacity};
@@ -65,23 +95,21 @@ export const MenuOptions = styled.div`
 `;
 
 export const Profile = styled.article`
-	article {
-		width: 10rem;
-		display: flex;
-		justify-content: center;
+	width: 20%;
+	display: flex;
+	justify-content: flex-end;
 
-		div#profileMenu {
-			width: 7rem;
-			height: 7rem;
-			border-radius: 3.5rem;
-			background-color: black;
-			cursor: pointer;
-		}
+	div#profileMenu {
+		width: 7rem;
+		height: 7rem;
+		border-radius: 3.5rem;
+		background-color: black;
+		cursor: pointer;
+	}
 
-		img {
-			width: 3rem;
-			height: 3rem;
-			cursor: pointer;
-		}
+	img {
+		width: 3rem;
+		height: 3rem;
+		cursor: pointer;
 	}
 `;

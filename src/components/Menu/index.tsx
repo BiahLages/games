@@ -1,8 +1,9 @@
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { MenuContainer, MenuOptions, Profile } from "./styles";
+import { LogoContainer, MenuContainer, MenuContent, MenuOptions, Profile } from "./styles";
 import type { MenuProps } from "../../types/interfaces/system";
-import { useAuth } from "../../contexts/AccountContext";
 import triangule from "../../assets/icons/triangulo.png";
+import { useAuth } from "../../contexts/AccountContext";
+import logo from "../../assets/images/gamedevs.png";
 import { useState } from "react";
 import Input from "../Input";
 
@@ -14,23 +15,23 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 
 	return (
 		<MenuContainer>
-			<div className="menuContainer">
-				<h1
-					onClick={() => {
-						navigate("/");
-					}}
-				>
-					Logo
-				</h1>
-				{path === "home" ? (
+			<MenuContent>
+				<LogoContainer>
+					<img
+						onClick={() => {
+							navigate("/");
+						}}
+						src={logo}
+						alt="GameDevs Logo"
+					/>
+				</LogoContainer>
+				{path === "home" && (
 					<Input
 						label="search"
 						type="text"
 						placeholder="Pesquisa"
 						value={setSearch}
 					/>
-				) : (
-					<></>
 				)}
 				{logged && (
 					<Profile>
@@ -79,7 +80,7 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 				) : (
 					<></>
 				)}
-			</div>
+			</MenuContent>
 		</MenuContainer>
 	);
 };
