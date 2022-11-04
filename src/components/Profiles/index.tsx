@@ -24,13 +24,21 @@ const Profiles = () => {
 			})}
 
 			{/* div que vai criar o perfil */}
+
 			<DivAdd>
 			<div onDoubleClick={ () => {
 				createProfile("title", "imageUrl")
 			}}>➕</div>
 			</DivAdd>
+			<div
+				onDoubleClick={() => {
+					createProfile("title", "imageUrl");
+				}}
+			>
+				➕
+			</div>
+			</ContainerProfiles>
 
-		</ContainerProfiles>
 	);
 };
 

@@ -1,6 +1,5 @@
-import { MenuContainer, MenuItem, MenuItemButton } from "./styles";
+import { MenuContainer /*, MenuItem, MenuItemButton*/ } from "./styles";
 import { NavigateFunction, useNavigate } from "react-router-dom";
-import { Gear, Home, Lock, LogOut, User } from "../../assets/icons";
 import type { MenuProps } from "../../types/interfaces/system";
 import { useAuth } from "../../contexts/AccountContext";
 import triangule from "../../assets/icons/triangulo.png";
@@ -31,21 +30,23 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 				) : (
 					<></>
 				)}
-				<article>
-					<div
-						id="profileMenu"
-						onClick={() => {
-							setActive(!active);
-						}}
-					></div>
-					<img
-						src={triangule}
-						alt="triangule"
-						onClick={() => {
-							setActive(!active);
-						}}
-					/>
-				</article>
+				{logged && (
+					<article>
+						<div
+							id="profileMenu"
+							onClick={() => {
+								setActive(!active);
+							}}
+						></div>
+						<img
+							src={triangule}
+							alt="triangule"
+							onClick={() => {
+								setActive(!active);
+							}}
+						/>
+					</article>
+				)}
 				{active ? (
 					<div id="menuOptions">
 						<li
@@ -63,6 +64,14 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 							}}
 						>
 							Settings
+						</li>
+						<li
+							onClick={() => {
+								logout();
+								setActive(!active);
+							}}
+						>
+							Logout
 						</li>
 					</div>
 				) : (
