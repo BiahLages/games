@@ -88,12 +88,20 @@ const Gate = (): JSX.Element => {
 			<form name="Gate">
 				<div>
 					{!mode && (
-						<Input
-							label="name"
-							placeholder="User Name"
-							type="text"
-							value={setValueName}
-						/>
+						<>
+							<Input
+								label="name"
+								placeholder="User Name"
+								type="text"
+								value={setValueName}
+							/>
+							<Input
+								label="CPF"
+								placeholder="01234567890"
+								type="text"
+								value={setValueCPF}
+							/>
+						</>
 					)}
 					<Input
 						label="email"
@@ -111,12 +119,6 @@ const Gate = (): JSX.Element => {
 						<VerificationResponse>{validPasswordLength ? "✅" : "⛔️"} 8 characters</VerificationResponse>
 						<VerificationResponse>{validPasswordCharacters ? "✅" : "⛔️"} Uppercase | Lowercase | Symbol | Number</VerificationResponse>
 					</ContainerVerification>
-					<Input
-						label="CPF"
-						placeholder="01234567890"
-						type="text"
-						value={setValueCPF}
-					/>
 				</div>
 				<SubmitButtom
 					onClick={(e): void => {
