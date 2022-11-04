@@ -13,7 +13,13 @@ const Profiles = () => {
 	return (
 		<section>
 			{userProfiles.map((profile, i) => {
-				return <Profile profile={profile} currentKey={i} key={i} />;
+				return (
+					<Profile
+						profile={profile}
+						currentKey={i}
+						key={i}
+					/>
+				);
 			})}
 		</section>
 	);

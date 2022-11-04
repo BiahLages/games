@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import mixings from "../../assets/styles/mixins";
 
 export const Values = styled.div`
 	position: relative;
@@ -6,30 +7,35 @@ export const Values = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: 0.3em;
-	font-size: 16px;
+	align-content: center;
+	gap: 0.5em;
+	font-size: 8px;
 
 	label {
 		text-transform: capitalize;
 		font-size: 1.5em;
-		margin-bottom: 0.8em;
-		text-align: center;
+		margin-bottom: 0.7em;
+		color: ${mixings.colors.primaryColor};
 	}
 
 	input {
-		height: 3em;
-		margin-bottom: 1em;
+		height: 2em;
+		margin-bottom: 0.7em;
+		background: ${mixings.colors.baseBg2Dark};
+		color: gray;
 		border: none;
 		border-radius: 0.5em;
-		padding-left: 1.5em;
+		padding-left: 1em;
+		outline: 0;
 	}
 `;
 
 export const Blind = styled.span`
 	position: absolute;
-	right: 1em;
-	bottom: 1.5em;
+	right: 0.5em;
+	bottom: calc(50% - 1.2em);
 	max-height: 100%;
+	font-size: 2em;
 	text-shadow: 0 0 1px #fff;
 	color: #000b;
 	cursor: pointer;

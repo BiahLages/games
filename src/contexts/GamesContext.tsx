@@ -45,7 +45,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	const handleGetGames = async (): Promise<void> => {
 		if (category === "all" && !headers.headers.Authorization.includes("null")) {
-			await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`,headers).then(res => {
+			await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
 				if (games.length <= 1) {
 					setGames(res.data);
 				} else if (games.length < allGames.length) {
