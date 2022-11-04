@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./AccountContext";
 import { GamesProvider } from "./GamesContext";
 import { ReactNode } from "react";
-
+import { ConfigUserProvider } from "./ConfigUserContext";
 interface ProvidersProps {
 	children: ReactNode;
 }
@@ -14,13 +14,15 @@ const Providers = ({ children }: ProvidersProps): JSX.Element => {
 	return (
 		<BrowserRouter>
 			<AuthProvider>
-				<ProfilesProvider>
-					<FavoritesProvider>
-						<OrderSettingsProvider>
-							<GamesProvider>{children}</GamesProvider>
-						</OrderSettingsProvider>
-					</FavoritesProvider>
-				</ProfilesProvider>
+				<ConfigUserProvider>
+					<ProfilesProvider>
+						<FavoritesProvider>
+							<OrderSettingsProvider>
+								<GamesProvider>{children}</GamesProvider>
+							</OrderSettingsProvider>
+						</FavoritesProvider>
+					</ProfilesProvider>
+				</ConfigUserProvider>
 			</AuthProvider>
 		</BrowserRouter>
 	);
