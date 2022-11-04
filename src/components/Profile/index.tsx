@@ -1,3 +1,4 @@
+import { ContainerProfile, ContentProfile, ContainerImgProfile, NameUser, DivImgEdit, ImgEditDelete, ImgProfile, Overlay, FormEditProfile, HeaderForm, OptionsEditDelete } from "./style";
 import { useProfiles } from "src/contexts/ProfilesContext";
 import { ApiProfiles } from "../../types/interfaces/api";
 import trash from "../../assets/icons/trash.png";
@@ -16,84 +17,94 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 	switch (editingThis) {
 		case true:
 			return (
-				<div key={`form${currentKey}`}>
-					<Input
-						label="new Title"
-						placeholder="new Title"
-						type="text"
-						value={setTitle}
-					/>
-					<Input
-						label="new ImageUrl"
-						placeholder="new ImageUrl"
-						type="text"
-						value={setImageUrl}
-					/>
-					<div
-						key={`formEdit${currentKey}`}
-						onClick={(): void => {
-							editProfile(profile.id, title, imageUrl);
-						}}
-					>
-						<img
-							src={edit}
-							alt="Edit profile button"
+				<Overlay>
+					<FormEditProfile key={`form${currentKey}`}>
+						<HeaderForm>
+							<div
+								key={`formEditBtn${currentKey}`}
+								onClick={(): void => {
+									setEditingThis(!editingThis);
+								}}
+							>
+								<ImgEditDelete
+									src={formEdit}
+									alt="Delete profile button"
+								/>
+							</div>
+							<h2>Edit your Profile!</h2>
+						</HeaderForm>
+						<Input
+							label="new Title"
+							placeholder="new Title"
+							type="text"
+							value={setTitle}
 						/>
-					</div>
-					<div
-						key={`formDel${currentKey}`}
-						onClick={(): void => {
-							deleteProfile(profile.id);
-						}}
-					>
-						<img
-							src={trash}
-							alt="Delete profile button"
+						<Input
+							label="new ImageUrl"
+							placeholder="new ImageUrl"
+							type="text"
+							value={setImageUrl}
 						/>
-					</div>
-					<div
-						key={`formEditBtn${currentKey}`}
-						onClick={(): void => {
-							setEditingThis(!editingThis);
-						}}
-					>
-						<img
-							src={formEdit}
-							alt="Delete profile button"
-						/>
-					</div>
-				</div>
+
+						<OptionsEditDelete>
+							<div
+								key={`formEdit${currentKey}`}
+								onClick={(): void => {
+									editProfile(profile.id, title, imageUrl);
+								}}
+							>
+								<ImgEditDelete
+									src={edit}
+									alt="Edit profile button"
+								/>
+							</div>
+							<div
+								key={`formDel${currentKey}`}
+								onClick={(): void => {
+									deleteProfile(profile.id);
+								}}
+							>
+								<ImgEditDelete
+									src={trash}
+									alt="Delete profile button"
+								/>
+							</div>
+						</OptionsEditDelete>
+					</FormEditProfile>
+				</Overlay>
 			);
 		case false:
 			return (
-				<div key={`profile${currentKey}`}>
-					<div
+				<ContainerProfile key={`profile${currentKey}`}>
+					<ContentProfile
 						key={`profileContent${currentKey}`}
 						onDoubleClick={(): void => {
 							setCurrentProfileId(profile.id);
 						}}
 					>
-						<img
-							key={`profileImage${currentKey}`}
-							src={profile.imageUrl}
-							alt={`${profile.title}'s profile`}
-						/>
-						<div key={`profileContentTitle${currentKey}`}>
+						<ContainerImgProfile>
+							<ImgProfile
+								key={`profileImage${currentKey}`}
+								src={profile.imageUrl}
+								alt={`${profile.title}'s profile`}
+							/>
+						</ContainerImgProfile>
+						<NameUser key={`profileContentTitle${currentKey}`}>
 							<h2 key={`profileTitle${currentKey}`}>{profile.title}</h2>
-						</div>
-					</div>
-					<div
+						</NameUser>
+					</ContentProfile>
+					<DivImgEdit
 						key={`profileEditBtn${currentKey}`}
 						onClick={(): void => {
 							setEditingThis(!editingThis);
 						}}
 					>
-						<img
+						<ImgEditDelete
 							src={formEdit}
 							alt="Delete profile button"
 						/>
-					</div>
-				</div>
+					</DivImgEdit>
+				</ContainerProfile>
 			);
 	}
 };
