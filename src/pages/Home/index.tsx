@@ -4,14 +4,16 @@ import Menu from "../../components/Menu";
 
 const Home = (): JSX.Element => {
 	return (
-		<Container>
+		<>
 			<Menu path="home" />
-			<ContentContainer>
-				<HomeContentCards>
-					<div>aqui aparecerão os cards dos jogos</div>
-				</HomeContentCards>
-			</ContentContainer>
-		</Container>
+			<Container>
+				<ContentContainer>
+					<HomeContentCards>
+						<div>aqui aparecerão os cards dos jogos</div>
+					</HomeContentCards>
+				</ContentContainer>
+			</Container>
+		</>
 	);
 };
 

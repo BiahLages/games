@@ -5,14 +5,16 @@ import Profiles from "../../components/Profiles";
 
 const Profile = (): JSX.Element => {
 	return (
-		<Container>
+		<>
 			<Menu path="profile" />
-			<ContentContainer>
-				<ProfileContentCards>
-					<Profiles />
-				</ProfileContentCards>
-			</ContentContainer>
-		</Container>
+			<Container>
+				<ContentContainer>
+					<ProfileContentCards>
+						<Profiles />
+					</ProfileContentCards>
+				</ContentContainer>
+			</Container>
+		</>
 	);
 };
 
