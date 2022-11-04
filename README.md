@@ -1,6 +1,6 @@
-# [GamingDevs landing]('https://gamingdevs.vercel.app')
+# [GamingDevs landing](https://gamedevs.vercel.app)
 
-##### [GamingDevs API]('https://gamingdevs.up.railway.app/')
+##### [GamingDevs API](https://gamingdevs.up.railway.app/)
 
 #### REACT APP created for students purpose
 
