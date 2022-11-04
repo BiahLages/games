@@ -23,10 +23,13 @@ const Profiles = () => {
 			})}
 
 			{/* div que vai criar o perfil */}
-			<div onDoubleClick={ () => {
-				createProfile("title", "imageUrl")
-			}}>➕</div>
-
+			<div
+				onDoubleClick={() => {
+					createProfile("title", "imageUrl");
+				}}
+			>
+				➕
+			</div>
 		</section>
 	);
 };

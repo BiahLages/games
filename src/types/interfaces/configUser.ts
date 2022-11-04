@@ -2,16 +2,16 @@ import React from "react";
 
 export interface IConfigUserProviderData {
 	name: {
-		name: string|undefined;
-		setName: React.Dispatch<React.SetStateAction<string|undefined>>;
+		name: string | undefined;
+		setName: React.Dispatch<React.SetStateAction<string | undefined>>;
 	};
 	email: {
-		email: string|undefined;
-		setEmail: React.Dispatch<React.SetStateAction<string|undefined>>;
+		email: string | undefined;
+		setEmail: React.Dispatch<React.SetStateAction<string | undefined>>;
 	};
 	cpf: {
-		cpf: string|undefined;
-		setCpf: React.Dispatch<React.SetStateAction<string|undefined>>;
+		cpf: string | undefined;
+		setCpf: React.Dispatch<React.SetStateAction<string | undefined>>;
 	};
 
 	password: {
