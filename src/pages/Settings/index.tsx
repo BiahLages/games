@@ -9,6 +9,8 @@ const Settings = (): JSX.Element => {
 			<ContentContainer>
 				<SettingsContent>
 					<div>Aqui irão os componentes de settings da página e do usuário</div>
+					<button>Update profile</button>
+					<button>Check all profiles</button>
 				</SettingsContent>
 			</ContentContainer>
 		</Container>
