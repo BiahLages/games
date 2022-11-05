@@ -68,7 +68,7 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 									deleteProfile(profile.id);
 									getAllProfiles();
 									setEditingThis(!editingThis);
-							}}
+								}}
 							>
 								<ImgEditDelete
 									src={trash}

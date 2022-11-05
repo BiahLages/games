@@ -7,4 +7,3 @@ export declare type MenuProps = {
 export declare type TDataUser = IDataUser[] | null;
 
 export declare type TDataUserForId = CurrentUser | null;
-
