@@ -5,7 +5,7 @@ interface ProfileContentSelectorProps {
 }
 
 export const ProfileContentCards = styled.main`
-	width: 100%;
+	width: 98vw;
 	height: 100%;
 	overflow-y: auto;
 	display: flex;
