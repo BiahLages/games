@@ -40,7 +40,9 @@ export const SImage = styled.img`
 `;
 
 export const SVideo = styled.iframe`
-	width: 24.5em;
-	height: 13.6875em;
+	width: 100rem;
+	aspect-ratio: 1.77;
+	max-width: 560px;
+	max-height: 315px;
 `;
 

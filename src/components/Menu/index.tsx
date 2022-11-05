@@ -7,10 +7,12 @@ import logo from "../../assets/images/gamedevs.png";
 import { MenuProps } from "../../types/types";
 import { useState } from "react";
 import Input from "../Input";
+import { useConfigUser } from "src/contexts/ConfigUserContext";
 
 const Menu = ({ path }: MenuProps): JSX.Element => {
 	const { logged, logout } = useAuth();
 	const { currentProfile } = useProfiles();
+	const { functions } = useConfigUser();
 	const navigate: NavigateFunction = useNavigate();
 	const [active, setActive] = useState(false);
 	const [search, setSearch] = useState("");
@@ -65,6 +67,7 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 						<li
 							onClick={() => {
 								navigate("/settings");
+								functions.handdleConfigMenus();
 								setActive(!active);
 							}}
 						>
