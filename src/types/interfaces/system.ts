@@ -46,8 +46,8 @@ export interface MenuItemButtonProps {
 	active?: boolean;
 }
 
-export interface MenuProps {
-	path: "home" | "settings" | "profile" | "login";
+export interface ProfileItemProps {
+	backgroundImage?: string;
 }
 
 export interface IMixings {

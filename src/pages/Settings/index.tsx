@@ -6,8 +6,6 @@ import profiles from "../../assets/icons/profiles.png";
 import editprofile from "../../assets/icons/editProfile.png"
 
 const Settings = (): JSX.Element => {
-	const { name, email } = useConfigUser();
-	console.log(name.name, email);
 	return (
 		<>
 			<Menu path="settings" />
