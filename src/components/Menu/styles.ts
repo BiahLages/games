@@ -86,7 +86,6 @@ export const MenuOptions = styled.nav<MenuItemButtonProps>`
 		text-align: center;
 		font-size: 2.5rem;
 		cursor: pointer;
-		
 
 		:hover {
 			background-color: ${mixings.colors.primaryColorOpacity};

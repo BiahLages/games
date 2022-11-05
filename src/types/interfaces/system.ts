@@ -46,12 +46,7 @@ export interface MenuItemButtonProps {
 	active?: boolean;
 }
 
-export interface MenuProps {
-	path: "home" | "settings" | "profile" | "login";
-}
-
 export interface IMixings {
 	colors: CssColors;
 	constants: CssConstants;
 }
-
