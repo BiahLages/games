@@ -1,5 +1,6 @@
 import { LogoContainer, MenuContainer, MenuContent, MenuOptions, Profile } from "./styles";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { useProfiles } from "../../contexts/ProfilesContext";
 import triangule from "../../assets/icons/triangulo.png";
 import { useAuth } from "../../contexts/AccountContext";
 import logo from "../../assets/images/gamedevs.png";
@@ -9,6 +10,7 @@ import Input from "../Input";
 
 const Menu = ({ path }: MenuProps): JSX.Element => {
 	const { logged, logout } = useAuth();
+	const { currentProfile } = useProfiles();
 	const navigate: NavigateFunction = useNavigate();
 	const [active, setActive] = useState(false);
 	const [search, setSearch] = useState("");
@@ -33,8 +35,8 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 						value={setSearch}
 					/>
 				)}
-				{logged && (
-					<Profile>
+				{currentProfile && logged && (
+					<Profile backgroundImage={currentProfile.imageUrl}>
 						<div
 							id="profileMenu"
 							onClick={() => {
