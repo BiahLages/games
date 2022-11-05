@@ -5,6 +5,7 @@ import { useAuth } from "../contexts/AccountContext";
 import Profile from "../pages/Profile";
 import Settings from "../pages/Settings";
 import { useProfiles } from "src/contexts/ProfilesContext";
+import Recover from "src/pages/Recover";
 
 const Router = (): JSX.Element => {
 	const { logged } = useAuth();
@@ -38,10 +39,17 @@ const Router = (): JSX.Element => {
 					)}
 				</>
 			) : (
-				<Route
-					path="/login"
-					element={<Login />}
-				/>
+				<>
+					<Route
+						path="/login"
+						element={<Login />}
+					/>
+
+					<Route
+						path="/recover/:id/:token"
+						element={<Recover />}
+					/>
+				</>
 			)}
 			<Route
 				path="*"
