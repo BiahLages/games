@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createContext, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { api } from "src/helpers/Api";
 import { IConfigUserProviderData } from "src/types/interfaces/configUser";
 import { AllProvidersProps } from "src/types/interfaces/system";
@@ -56,7 +55,30 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 
 	return (
 		<>
-			<ConfigUserContext.Provider value={{ name: { name, setName }, email: { email, setEmail }, cpf: { cpf, setCpf }, password: { setPassword }, functions: { handdleUpdateUser, handdleDeleteUser } }}>{children}</ConfigUserContext.Provider>;
+			<ConfigUserContext.Provider
+				value={{
+					states: {
+						name,
+						email,
+						cpf,
+						currentUser,
+					},
+					setStates: {
+						setName,
+						setEmail,
+						setCpf,
+						setPassword,
+					},
+
+					functions: {
+						handdleUpdateUser,
+						handdleDeleteUser,
+					},
+				}}
+			>
+				{children}
+			</ConfigUserContext.Provider>
+			;
 		</>
 	);
 };
