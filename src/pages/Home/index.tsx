@@ -13,7 +13,10 @@ const Home = (): JSX.Element => {
 				<ContentContainer>
 					<HomeContentCards>
 						<div>aqui aparecerão os cards dos jogos</div>
-						<Card game={games[0]} currentKey={1}></Card>
+						<Card
+							game={games[0]}
+							currentKey={1}
+						></Card>
 					</HomeContentCards>
 				</ContentContainer>
 			</Container>

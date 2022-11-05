@@ -1,5 +1,6 @@
-import styled, { keyframes } from "styled-components";
-import mixings from "src/assets/styles/mixins";
+import styled, { css, Interpolation, keyframes } from "styled-components";
+import mixings from "../../assets/styles/mixins";
+import { ProfileItemProps } from "../../types/interfaces/system";
 
 /*first initial state(case false)*/
 export const ContainerProfile = styled.div`
@@ -18,7 +19,7 @@ export const ContentProfile = styled.div`
 	height: 45em;
 `;
 
-export const ContainerImgProfile = styled.div`
+export const ContainerImgProfile = styled.div<ProfileItemProps>`
 	width: 30em;
 	height: 30em;
 	display: flex;
@@ -26,11 +27,16 @@ export const ContainerImgProfile = styled.div`
 	align-items: center;
 	border-radius: 50%;
 	box-shadow: 1px 1px 3px 1px ${mixings.colors.primaryColor};
-`;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
 
-export const ImgProfile = styled.img`
-	width: 25em;
-	height: 25em;
+	${({ backgroundImage }): Interpolation<ProfileItemProps> => {
+		return css`
+			background-image: url(${backgroundImage});
+		`;
+	}}
 `;
 
 export const NameUser = styled.div`
@@ -42,10 +48,12 @@ export const NameUser = styled.div`
 
 export const DivImgEdit = styled.div`
 	height: 6em;
+	cursor: pointer;
 `;
 
 export const ImgEditDelete = styled.img`
-	width: 6em;
+	width: 8em;
+	cursor: pointer;
 `;
 
 /* second page state*/
@@ -91,6 +99,7 @@ export const FormEditProfile = styled.div`
 export const HeaderForm = styled.div`
 	width: 100%;
 	text-align: center;
+	cursor: default;
 	div {
 		position: relative;
 		right: calc(2em - 50%);
@@ -100,6 +109,7 @@ export const HeaderForm = styled.div`
 		position: relative;
 		top: -2em;
 		font-size: 3em;
+		cursor: default;
 	}
 `;
 
@@ -107,8 +117,14 @@ export const OptionsEditDelete = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	gap: 5rem;
+
 	div {
-		width: 7em;
+		width: 10em;
+		aspect-ratio: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		cursor: pointer;
 	}
 `;

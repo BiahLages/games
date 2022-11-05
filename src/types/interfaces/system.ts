@@ -46,6 +46,10 @@ export interface MenuItemButtonProps {
 	active?: boolean;
 }
 
+export interface ProfileItemProps {
+	backgroundImage?: string;
+}
+
 export interface IMixings {
 	colors: CssColors;
 	constants: CssConstants;

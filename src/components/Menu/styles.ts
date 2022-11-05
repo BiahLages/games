@@ -1,5 +1,5 @@
-import { MenuItemButtonProps } from "../../types/interfaces/system";
-import styled from "styled-components";
+import { MenuItemButtonProps, ProfileItemProps } from "../../types/interfaces/system";
+import styled, { css, Interpolation } from "styled-components";
 import mixings from "../../assets/styles/mixins";
 
 export const MenuContainer = styled.header`
@@ -93,7 +93,7 @@ export const MenuOptions = styled.nav<MenuItemButtonProps>`
 	}
 `;
 
-export const Profile = styled.article`
+export const Profile = styled.article<ProfileItemProps>`
 	width: 20%;
 	display: flex;
 	justify-content: flex-end;
@@ -102,8 +102,15 @@ export const Profile = styled.article`
 		width: 7rem;
 		height: 7rem;
 		border-radius: 3.5rem;
-		background-color: black;
 		cursor: pointer;
+		${({ backgroundImage }): Interpolation<ProfileItemProps> => {
+			return css`
+				background-image: url(${backgroundImage});
+			`;
+		}}
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
 	}
 
 	img {
