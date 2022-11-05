@@ -22,13 +22,12 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 			return (
 				<Overlay>
 					<FormEditProfile key={`form${currentKey}`}>
-						<HeaderForm>
-							<div
-								key={`formEditBtn${currentKey}`}
-								onClick={(): void => {
-									setEditingThis(!editingThis);
-								}}
-							>
+						<HeaderForm
+							onClick={(): void => {
+								setEditingThis(!editingThis);
+							}}
+						>
+							<div key={`formEditBtn${currentKey}`}>
 								<ImgEditDelete
 									src={formEdit}
 									alt="Delete profile button"
@@ -83,7 +82,7 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 				<ContainerProfile key={`profile${currentKey}`}>
 					<ContentProfile
 						key={`profileContent${currentKey}`}
-						onDoubleClick={(): void => {
+						onClick={(): void => {
 							setCurrentProfileId(profile.id);
 							navigate("/");
 						}}
