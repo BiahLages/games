@@ -15,7 +15,7 @@ const Router = (): JSX.Element => {
 			{logged ? (
 				<>
 					{/* colocar o currentProfileId ao clicar no perfil e mudar para !currentProfileId */}
-					{currentProfileId ? (
+					{!currentProfileId ? (
 						<Route
 							path="/profile"
 							element={<Profile />}
@@ -47,7 +47,7 @@ const Router = (): JSX.Element => {
 				path="*"
 				element={
 					<Navigate
-						to={logged ? "/profile" : "/login"}
+						to={logged ? "/" : "/login"}
 						replace
 					/>
 				}

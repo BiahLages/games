@@ -1,37 +1,40 @@
-import { MenuContainer /*, MenuItem, MenuItemButton*/ } from "./styles";
 import { NavigateFunction, useNavigate } from "react-router-dom";
+import { LogoContainer, MenuContainer, MenuContent, MenuOptions, Profile } from "./styles";
 import type { MenuProps } from "../../types/interfaces/system";
-import { useAuth } from "../../contexts/AccountContext";
 import triangule from "../../assets/icons/triangulo.png";
+import { useAuth } from "../../contexts/AccountContext";
+import logo from "../../assets/images/gamedevs.png";
 import { useState } from "react";
+import Input from "../Input";
 
 const Menu = ({ path }: MenuProps): JSX.Element => {
 	const { logged, logout } = useAuth();
 	const navigate: NavigateFunction = useNavigate();
 	const [active, setActive] = useState(false);
+	const [search, setSearch] = useState("");
 
 	return (
 		<MenuContainer>
-			<div className="menuContainer">
-				<h1
-					onClick={() => {
-						navigate("/");
-					}}
-				>
-					Logo
-				</h1>
-				{path === "home" ? (
-					<input
-						type="text"
-						name="search"
-						id="search"
-						placeholder="Pesquisa"
+			<MenuContent>
+				<LogoContainer>
+					<img
+						onClick={() => {
+							navigate("/");
+						}}
+						src={logo}
+						alt="GameDevs Logo"
 					/>
-				) : (
-					<></>
+				</LogoContainer>
+				{path === "home" && (
+					<Input
+						label="search"
+						type="text"
+						placeholder="Pesquisa"
+						value={setSearch}
+					/>
 				)}
 				{logged && (
-					<article>
+					<Profile>
 						<div
 							id="profileMenu"
 							onClick={() => {
@@ -45,10 +48,10 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 								setActive(!active);
 							}}
 						/>
-					</article>
+					</Profile>
 				)}
 				{active ? (
-					<div id="menuOptions">
+					<MenuOptions>
 						<li
 							onClick={() => {
 								navigate("/profile");
@@ -73,11 +76,11 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 						>
 							Logout
 						</li>
-					</div>
+					</MenuOptions>
 				) : (
 					<></>
 				)}
-			</div>
+			</MenuContent>
 		</MenuContainer>
 	);
 };
