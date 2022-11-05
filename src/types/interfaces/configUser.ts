@@ -1,22 +1,20 @@
 import React from "react";
+import { Auth } from "./users";
 
 export interface IConfigUserProviderData {
-	name: {
+	states: {
 		name: string | undefined;
-		setName: React.Dispatch<React.SetStateAction<string | undefined>>;
-	};
-	email: {
 		email: string | undefined;
-		setEmail: React.Dispatch<React.SetStateAction<string | undefined>>;
-	};
-	cpf: {
 		cpf: string | undefined;
-		setCpf: React.Dispatch<React.SetStateAction<string | undefined>>;
+		currentUser: Auth | undefined;
 	};
-
-	password: {
+	setStates: {
+		setName: React.Dispatch<React.SetStateAction<string | undefined>>;
+		setEmail: React.Dispatch<React.SetStateAction<string | undefined>>;
+		setCpf: React.Dispatch<React.SetStateAction<string | undefined>>;
 		setPassword: React.Dispatch<React.SetStateAction<string | undefined>>;
 	};
+
 	functions: {
 		handdleUpdateUser: () => void;
 		handdleDeleteUser: () => void;
