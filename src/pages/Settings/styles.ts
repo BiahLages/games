@@ -60,3 +60,12 @@ export const FormContent = styled.div`
 		color: ${mixings.colors.textColor};
 	}
 `;
+
+
+export const CheckProfiles = styled.img`
+width: 26em;
+`
+
+export const EditProfile = styled.img`
+width: 26em;
+`
