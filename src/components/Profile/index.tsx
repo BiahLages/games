@@ -1,4 +1,4 @@
-import { ContainerProfile, ContentProfile, ContainerImgProfile, NameUser, DivImgEdit, ImgEditDelete, ImgProfile, Overlay, FormEditProfile, HeaderForm, OptionsEditDelete } from "./style";
+import { ContainerProfile, ContentProfile, ContainerImgProfile, NameUser, DivImgEdit, ImgEditDelete, Overlay, FormEditProfile, HeaderForm, OptionsEditDelete } from "./style";
 import { useProfiles } from "src/contexts/ProfilesContext";
 import { ApiProfiles } from "../../types/interfaces/api";
 import trash from "../../assets/icons/trash.png";
@@ -54,6 +54,7 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 								onClick={(): void => {
 									editProfile(profile.id, title, imageUrl);
 									getAllProfiles();
+									setEditingThis(!editingThis);
 								}}
 							>
 								<ImgEditDelete
@@ -66,7 +67,8 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 								onClick={(): void => {
 									deleteProfile(profile.id);
 									getAllProfiles();
-								}}
+									setEditingThis(!editingThis);
+							}}
 							>
 								<ImgEditDelete
 									src={trash}
@@ -87,13 +89,7 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 							navigate("/");
 						}}
 					>
-						<ContainerImgProfile>
-							<ImgProfile
-								key={`profileImage${currentKey}`}
-								src={profile.imageUrl}
-								alt={`${profile.title}'s profile`}
-							/>
-						</ContainerImgProfile>
+						<ContainerImgProfile backgroundImage={profile.imageUrl} />
 						<NameUser key={`profileContentTitle${currentKey}`}>
 							<h2 key={`profileTitle${currentKey}`}>{profile.title}</h2>
 						</NameUser>
