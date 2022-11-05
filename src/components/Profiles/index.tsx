@@ -1,13 +1,12 @@
 import * as S from "./style";
 import { useState, useEffect } from "react";
-import { ContainerProfiles, DivAdd } from "./style";
 import { useProfiles } from "src/contexts/ProfilesContext";
 import Profile from "../Profile";
 import Input from "../Input";
 
 const Profiles = () => {
 	const { getAllProfiles, userProfiles, createProfile } = useProfiles();
-	const [addProfile, setAddProfile] = useState(true);
+	const [addProfile, setAddProfile] = useState(false);
 	const [nameProfile, setNameProfile] = useState("");
 	const [imgProfile, setImgProfile] = useState("");
 
@@ -32,20 +31,21 @@ const Profiles = () => {
 						</S.HeaderForm>
 						<Input
 							label="Name"
-							placeholder="new User"
+							placeholder="Profile title"
 							type="text"
 							value={setNameProfile}
 						/>
 						<Input
 							label="Image"
-							placeholder="https://linkimage"
+							placeholder="https://linkimage.com/image.png"
 							type="text"
 							value={setImgProfile}
 						/>
 						<S.Button
 							onClick={(): void => {
 								createProfile(nameProfile, imgProfile);
-								setAddProfile(false);
+								getAllProfiles();
+								setAddProfile(!addProfile);
 							}}
 						>
 							Create
@@ -69,7 +69,7 @@ const Profiles = () => {
 					<S.DivAdd>
 						<div
 							onClick={(): void => {
-								setAddProfile(true);
+								setAddProfile(!addProfile);
 							}}
 						>
 							➕
@@ -79,29 +79,6 @@ const Profiles = () => {
 			);
 		}
 	}
-	return (
-		<ContainerProfiles>
-			{userProfiles.map((profile, i) => {
-				return (
-					<Profile
-						profile={profile}
-						currentKey={i}
-						key={i}
-					/>
-				);
-			})}
-			<DivAdd>
-				<div
-					onDoubleClick={() => {
-						createProfile("title", "imageUrl");
-					}}
-				>
-					➕
-				</div>
-			</DivAdd>
-			
-		</ContainerProfiles>
-	);
 };
 
 export default Profiles;

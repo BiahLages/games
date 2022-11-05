@@ -20,7 +20,7 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 					Authorization: `Bearer ${currentUser.token}`,
 				},
 			};
-			api.get(`/users/${currentUser.user.id}`, headers).then(res => {
+			api.get(`/users/${currentUser.user.id}`, headers).then((res): void => {
 				if (res.status === 200) {
 					setUserProfiles(res.data.profile);
 				}
@@ -34,10 +34,16 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 		if (title) data.title = title;
 		if (imageUrl) data.imageUrl = imageUrl;
 		if (logged && currentUser) {
+			const headers = {
+				headers: {
+					Authorization: `Bearer ${currentUser.token}`,
+				},
+			};
 			data.userId = currentUser.user.id;
 
-			api.post(`/profiles`, data).then(res => {
-				console.log(res);
+			console.log(data);
+			api.post(`/profiles`, data, headers).then((): void => {
+				getAllProfiles();
 			});
 		}
 	};
@@ -47,17 +53,26 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 		if (logged && currentUser) {
 			if (title) data.title = title;
 			if (imageUrl) data.imageUrl = imageUrl;
-
-			api.patch(`/profiles/${id}`, data).then(res => {
-				console.log(res);
+			const headers = {
+				headers: {
+					Authorization: `Bearer ${currentUser.token}`,
+				},
+			};
+			api.patch(`/profiles/${id}`, data, headers).then((): void => {
+				getAllProfiles();
 			});
 		}
 	};
 
 	const deleteProfile = (id: string): void => {
 		if (logged && currentUser) {
-			api.delete(`/profiles/${id}`).then(res => {
-				console.log(res);
+			const headers = {
+				headers: {
+					Authorization: `Bearer ${currentUser.token}`,
+				},
+			};
+			api.delete(`/profiles/${id}`, headers).then((): void => {
+				getAllProfiles();
 			});
 		}
 	};
