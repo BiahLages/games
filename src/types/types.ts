@@ -1,4 +1,3 @@
-export declare type Skill = {
-	skill: string;
-	value: number;
-};
+export declare type MenuProps = {
+	path: "home" | "settings" | "profile" | "login";
+}

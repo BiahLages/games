@@ -1,5 +1,6 @@
 import * as S from "./style";
 import { useState, useEffect } from "react";
+import { ContainerProfiles, DivAdd } from "./style";
 import { useProfiles } from "src/contexts/ProfilesContext";
 import Profile from "../Profile";
 import Input from "../Input";
@@ -78,6 +79,29 @@ const Profiles = () => {
 			);
 		}
 	}
+	return (
+		<ContainerProfiles>
+			{userProfiles.map((profile, i) => {
+				return (
+					<Profile
+						profile={profile}
+						currentKey={i}
+						key={i}
+					/>
+				);
+			})}
+			<DivAdd>
+				<div
+					onDoubleClick={() => {
+						createProfile("title", "imageUrl");
+					}}
+				>
+					➕
+				</div>
+			</DivAdd>
+			
+		</ContainerProfiles>
+	);
 };
 
 export default Profiles;
