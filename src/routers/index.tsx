@@ -3,7 +3,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import { useAuth } from "../contexts/AccountContext";
 import Profile from "../pages/Profile";
-import Settings from "../pages/Settings";
+import Setting from "../pages/Setting";
 import { useProfiles } from "src/contexts/ProfilesContext";
 import GamePage from "src/pages/GamePage";
 import Recover from "src/pages/Recover";
@@ -33,7 +33,7 @@ const Router = (): JSX.Element => {
 							/>
 							<Route
 								path="/settings"
-								element={<Settings />}
+								element={<Setting />}
 							/>
 							<Route
 								path="/game/:id"
