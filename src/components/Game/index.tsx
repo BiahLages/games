@@ -1,18 +1,22 @@
 import { ApiGames, ApiGenres } from "../../types/interfaces/api";
-import { SGame } from "./styles";
+import { SGame, SVideo, SImage, STitle, SText, SRatingContent, SMediaContent, SVideosContent } from "./styles";
 
-const Game = ({ game }: { game: ApiGames }): JSX.Element => {
+const Game = ({ game}: { game: ApiGames }): JSX.Element => {
 	return (
-		<SGame>
-			<span>{game.id}</span>
-			<span>{game.title}</span>
-			<span>{game.description}</span>
-			<span>{game.year}</span>
-			<span>{game.score}</span>
-			<span>{game.image}</span>
-			<span>{game.gameplay}</span>
-			<span>{game.trailer}</span>
-
+		<SGame>			
+			<STitle>{game.title}</STitle>
+			<SRatingContent>
+			<SText>{game.year}</SText>
+			<SText>{game.score}</SText>	
+			</SRatingContent>
+			<SMediaContent>
+			<SImage src={game.image} alt={`${game.title} picture`}/>
+			<SVideosContent>
+			<SVideo src={game.gameplay}/>
+			<SVideo src={game.trailer}/>
+			</SVideosContent>
+			</SMediaContent>
+			<SText>{game.description}</SText>
 			{game.genres && (
 				<div>
 					{game.genres.map((genre: ApiGenres, i: number) => {
