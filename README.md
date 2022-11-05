@@ -2,7 +2,7 @@
 
 ##### [GamingDevs API](https://gamingdevs.up.railway.app/)
 
-#### REACT APP created for students purpose
+#### REACT APP created for studying purpose
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -72,13 +72,14 @@ In the project directory, you can run:
 
 ## Authors
 
+> -   [Alexandre Pereira](https://github.com/Malkavianson)
 > -   [Beatriz Lages](https://github.com/BiahLages)
 > -   [Bianca Aguiar](https://github.com/SraSidle/)
 > -   [Dener Batista](https://github.com/denerbatista/games)
+> -   [Luiz Miguel](https://github.com/manopassaro)
 > -   [Matheus Santos](https://github.com/santos95mat)
 > -   [Max Cleiton](https://github.com/maxxcleiton)
 > -   [Thabata Campos](https://github.com/ThabataGCampos)
-> -   [Alexandre Pereira](https://github.com/Malkavianson)
 
 ---
 
