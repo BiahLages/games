@@ -5,6 +5,7 @@ export interface GameProviderData {
 	setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 	status: boolean;
 	games: ApiGames[];
+	handleGetGameById: (id: string) => Promise<ApiGames | undefined>;
 	handleGetServerStatus: () => void;
 }
 

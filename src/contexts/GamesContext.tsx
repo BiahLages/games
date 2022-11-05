@@ -3,12 +3,14 @@ import { AllProvidersProps } from "../types/interfaces/system";
 import { GameProviderData } from "../types/interfaces/games";
 import { useOrderSettings } from "./OrderSettingsContext";
 import { ApiGames } from "../types/interfaces/api";
+import { useAuth } from "./AccountContext";
 import { api } from "../helpers/Api";
 
 const GameContext = createContext({} as GameProviderData);
 
 export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	const { orderBy, orderDirection, category, pageLength } = useOrderSettings();
+	const { logged, currentUser } = useAuth();
 
 	const [allGames, setAllGames] = useState<ApiGames[]>([]);
 	const [games, setGames] = useState<ApiGames[]>([]);
@@ -59,6 +61,18 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 			});
 		}
 	};
+	const handleGetGameById = async (id: string): Promise<ApiGames | undefined> => {
+		if (logged && currentUser) {
+			return await api
+				.get(`/games/${id}`, headers)
+				.then(res => {
+					return res.data;
+				})
+				.catch(err => {
+					return undefined;
+				});
+		}
+	};
 	const handleGetAllGames = async (): Promise<void> => {
 		if (status) {
 			await api.get("/games", headers).then(res => {
@@ -98,6 +112,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 				setCurrentPage,
 				status,
 				games,
+				handleGetGameById,
 				handleGetServerStatus,
 			}}
 		>

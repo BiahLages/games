@@ -42,7 +42,7 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 				cpf,
 				password,
 			};
-			
+
 			await api
 				.patch(`/user${currentUser.user.id}`, data, headers)
 				.then(res => {

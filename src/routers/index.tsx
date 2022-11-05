@@ -5,6 +5,7 @@ import { useAuth } from "../contexts/AccountContext";
 import Profile from "../pages/Profile";
 import Settings from "../pages/Settings";
 import { useProfiles } from "src/contexts/ProfilesContext";
+import GamePage from "src/pages/GamePage";
 
 const Router = (): JSX.Element => {
 	const { logged } = useAuth();
@@ -14,7 +15,6 @@ const Router = (): JSX.Element => {
 		<Routes>
 			{logged ? (
 				<>
-					{/* colocar o currentProfileId ao clicar no perfil e mudar para !currentProfileId */}
 					{!currentProfileId ? (
 						<Route
 							path="/profile"
@@ -33,6 +33,10 @@ const Router = (): JSX.Element => {
 							<Route
 								path="/settings"
 								element={<Settings />}
+							/>
+							<Route
+								path="/game/:id"
+								element={<GamePage />}
 							/>
 						</>
 					)}

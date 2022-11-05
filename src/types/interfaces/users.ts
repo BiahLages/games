@@ -20,7 +20,7 @@ export interface CurrentUser {
 	updatedAt?: string;
 }
 
-export interface IDataUser{
+export interface IDataUser {
 	id: string;
 	name: string;
 	email: string;
