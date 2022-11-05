@@ -12,11 +12,11 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 	const { logged, currentUser, logout } = useAuth();
 
 	//States para config do usuário logado.
-	const [name, setName] = useState(currentUser?.user.name);
-	const [email, setEmail] = useState(currentUser?.user.email);
-	const [cpf, setCpf] = useState(currentUser?.user.cpf);
+	const [name, setName] = useState<string>();
+	const [email, setEmail] = useState<string>();
+	const [cpf, setCpf] = useState<string>();
 	const [password, setPassword] = useState<undefined | string>(undefined);
-	const [isAdmin] = useState(currentUser?.user.isAdmin);
+	const [isAdmin, setIsadmin] = useState<boolean>();
 
 	//States para config de outros usuários.
 	const [dataUsers, setDataUsers] = useState<TDataUser>(null);
@@ -26,6 +26,11 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 	const [cpfUser, setCpfUser] = useState<null | string>(null);
 	const [passwordUser, setPasswordUser] = useState<undefined | string>(undefined);
 	const [isAdminUser, setIsAdminUser] = useState<null | boolean>(null);
+
+	// States para troca de menus.
+	const [switchMenuUpdateChoice, setSwitchMenuUpdateChoice] = useState<boolean>();
+	const [switchMenuUpdateUSer, setSwitchMenuUpdateUser] = useState<boolean>();
+	const [switchMenuUpdateAdmin, setSwitchMenuUpdateAdmin] = useState<boolean>();
 
 	const headers = {
 		headers: {
@@ -44,7 +49,7 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 			};
 
 			await api
-				.patch(`/user${currentUser.user.id}`, data, headers)
+				.patch(`/users/${currentUser.user.id}`, data, headers)
 				.then(res => {
 					localStorage.setItem("user", JSON.stringify({ ...res.data, isAdmin, cpf }));
 					console.log("handdleUpdateUser", "Usuário Atualizado");
@@ -57,7 +62,7 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 	const handdleDeleteUser = async (): Promise<void> => {
 		if (logged && currentUser)
 			await api
-				.delete(`/user${currentUser.user.id}`, headers)
+				.delete(`/users/${currentUser.user.id}`, headers)
 				.then(() => {
 					logout();
 					console.log("handdleDeleteUser", "Usuário Deletado");
@@ -68,7 +73,7 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 	const handdleGetUsers = async (): Promise<void> => {
 		if (logged && currentUser)
 			await api
-				.get(`/user`, headers)
+				.get(`/users`, headers)
 				.then(res => {
 					setDataUsers(res.data);
 					console.log("handdleGetUsers", "Lista de usuários carregada");
@@ -79,7 +84,7 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 	const handdleGetUserForId = async (id: string) => {
 		if (logged && currentUser) {
 			await api
-				.get(`/user/${id}`, headers)
+				.get(`/users/${id}`, headers)
 				.then(res => {
 					console.log("handdleGetUsers", "Lista de usuários carregada");
 					setDataUserForId(res.data);
@@ -98,7 +103,7 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 			const dataAdmin = { name: nameUser, email: emailUser, cpf: cpfUser, password: passwordUser, isAdmin: isAdminUser };
 
 			await api
-				.patch(`/user${dataUserForId.id}`, dataAdmin, headers)
+				.patch(`/users${dataUserForId.id}`, dataAdmin, headers)
 				.then(() => {
 					console.log("handdleUpdateUser", `Usuário ${dataUserForId.name} atualizado`);
 					handdleGetUsers();
@@ -113,7 +118,7 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 	const handdleDeleteUserAdmin = async (): Promise<void> => {
 		if (logged && currentUser && dataUserForId)
 			await api
-				.delete(`/user${dataUserForId.id}`, headers)
+				.delete(`/users${dataUserForId.id}`, headers)
 				.then(() => {
 					console.log("handdleDeleteUserAdmin", `Usuário ${dataUserForId.name} Deletado`);
 					handdleGetUsers();
@@ -121,10 +126,46 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 				.catch(error => console.log("handdleDeleteUser", `Erro ${error.status}, usuário ${dataUserForId.name} não deletado`));
 	};
 
+	const handdleStateUSer = () => {
+		if (currentUser && logged) {
+			setCpf(currentUser.user.name);
+			setEmail(currentUser.user.email);
+			setName(currentUser.user.cpf);
+			setIsadmin(currentUser.user.isAdmin);
+		}
+	};
+
+	const handdleChangeConfigUser = () => {
+		setSwitchMenuUpdateChoice(false);
+		setSwitchMenuUpdateUser(true);
+		setSwitchMenuUpdateAdmin(false);
+	};
+
+	const handdleChangeConfigAdmin = () => {
+		setSwitchMenuUpdateChoice(false);
+		setSwitchMenuUpdateUser(false);
+		setSwitchMenuUpdateAdmin(true);
+	};
+
+	const handdleConfigMenus = () => {
+		if (isAdmin) {
+			setSwitchMenuUpdateChoice(true);
+			setSwitchMenuUpdateUser(false);
+			setSwitchMenuUpdateAdmin(false);
+		} else {
+			handdleChangeConfigUser();
+		}
+	};
+
 	useEffect(() => {
-		if (isAdmin) handdleGetUsers();
+		if (isAdmin) {
+			handdleGetUsers();
+			handdleConfigMenus();
+		}
+
+		handdleStateUSer();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [currentUser]);
 
 	return (
 		<>
@@ -141,6 +182,9 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 						emailUser,
 						cpfUser,
 						isAdminUser,
+						switchMenuUpdateChoice,
+						switchMenuUpdateUSer,
+						switchMenuUpdateAdmin,
 					},
 					setStates: {
 						setName,
@@ -160,6 +204,9 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 						handdleGetUserForId,
 						handdleDeleteUserAdmin,
 						handdleUpdateUserAdmin,
+						handdleChangeConfigUser,
+						handdleChangeConfigAdmin,
+						handdleConfigMenus,
 					},
 				}}
 			>

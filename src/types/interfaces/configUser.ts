@@ -13,6 +13,9 @@ export interface IConfigUserProviderData {
 		emailUser: string | null;
 		cpfUser: string | null;
 		isAdminUser: boolean | null;
+		switchMenuUpdateChoice: boolean | undefined;
+		switchMenuUpdateUSer: boolean | undefined;
+		switchMenuUpdateAdmin: boolean | undefined;
 	};
 
 	setStates: {
@@ -33,5 +36,8 @@ export interface IConfigUserProviderData {
 		handdleGetUserForId: (id: string) => void;
 		handdleUpdateUserAdmin: () => void;
 		handdleDeleteUserAdmin: () => void;
+		handdleChangeConfigUser: () => void;
+		handdleChangeConfigAdmin: () => void;
+		handdleConfigMenus: () => void;
 	};
 }
