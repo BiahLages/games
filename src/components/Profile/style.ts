@@ -91,6 +91,7 @@ export const FormEditProfile = styled.div`
 export const HeaderForm = styled.div`
 	width: 100%;
 	text-align: center;
+	cursor: default;
 	div {
 		position: relative;
 		right: calc(2em - 50%);
@@ -100,6 +101,7 @@ export const HeaderForm = styled.div`
 		position: relative;
 		top: -2em;
 		font-size: 3em;
+		cursor: default;
 	}
 `;
 
