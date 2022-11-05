@@ -1,5 +1,11 @@
 import styled from "styled-components";
 
+export const SCard = styled.div`
+	margin-top: 300px;
+	border: solid 1px #fff;
+	cursor: pointer;
+`;
+
 export const STitle = styled.h2`
 	color: #fff;
 	font-weight: 300;
