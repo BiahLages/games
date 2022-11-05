@@ -6,7 +6,7 @@ const OrderContext = createContext({} as OrderSettingsProviderData);
 
 export const OrderSettingsProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	const [orderBy, setOrderBy] = useState("score");
-	const [orderDirection, setOrderDirection] = useState("asc");
+	const [orderDirection, setOrderDirection] = useState("desc");
 	const [category, setCategory] = useState("all");
 	const [pageLength, setPageLenght] = useState(5);
 
