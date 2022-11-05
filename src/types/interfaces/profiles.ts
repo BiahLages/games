@@ -2,6 +2,7 @@ import { ApiProfiles } from "./api";
 
 export interface IProfiles {
 	userProfiles: ApiProfiles[];
+	currentProfile: ApiProfiles | undefined;
 	currentProfileId: string;
 	setCurrentProfileId: React.Dispatch<React.SetStateAction<string>>;
 	getAllProfiles: () => void;
