@@ -19,6 +19,6 @@ const Home = (): JSX.Element => {
 			</Container>
 		</>
 	);
-};
+}; 
 
 export default Home;
