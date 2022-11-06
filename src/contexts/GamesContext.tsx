@@ -15,7 +15,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	const [allGames, setAllGames] = useState<ApiGames[]>([]);
 	const [games, setGames] = useState<ApiGames[]>([]);
 	const [lastValidPage, setLastValidPage] = useState(false);
-	const [shownCards, setShownCards] = useState(0);
+	const [shownCards, setShownCards] = useState(1);
 	const [status, getStatus] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [lastPage, setLastPage] = useState(0);
@@ -49,24 +49,25 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	const handleGetGames = async (): Promise<void> => {
 		
 		if (category === "all" && !headers.headers.Authorization.includes("null")) {
-
+			console.log("VALOR INICIAL", allGames.length);
 		switch (lastPage < currentPage) {
 			case true:
 				await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
 					if (shownCards === allGames.length) {
 						setShownCards(shownCards + res.data.length);
-						console.log("TESTE");
+						console.log("TRUE > SHOWN=ALL");
 						console.log(res.data);
 						console.log(res.data.length);
 						console.log(allGames.length);
 						console.log(shownCards);
-						setLastValidPage(true);
+						setLastValidPage(false);
 						setGames(res.data);
 					} else if (shownCards !== allGames.length) {
+						console.log("TRUE > SHOWN!=ALL");
 						console.log(res.data.length);
 						console.log(allGames.length);
 						console.log(shownCards);
-						setShownCards(shownCards + res.data.length);
+						// setShownCards(shownCards + res.data.length);
 						setGames(res.data);
 						setLastValidPage(false);
 						setLastPage(currentPage);
@@ -80,7 +81,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 				await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
 					if (shownCards === 0) {
 						setShownCards(shownCards - res.data.length);
-						console.log("TESTE");
+						console.log("FALSE > SHOWN = 0 ");
 						console.log(res.data);
 						console.log(res.data.length);
 						console.log(allGames.length);
@@ -88,6 +89,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 						setLastValidPage(true);
 						setGames(res.data);
 					} else if (shownCards !== allGames.length) {
+						console.log("FALSE > SHOWN!=ALL ");
 						console.log(res.data.length);
 						console.log(allGames.length);
 						console.log(shownCards);
