@@ -1,6 +1,6 @@
 import Input from "../Input";
-import { /* error,*/ isPw /* validateEmail, validateName, validatePassword*/ } from "../../utils/validation.tools";
-import { BackgroundForm, SubmitButton, /*SwicherContainer, SwicherButtom, */ ContainerVerification, VerificationResponse } from "./styles";
+import { error, isPw, validateEmail, validateName, validatePassword } from "../../utils/validation.tools";
+import { BackgroundForm, SubmitButton, ContainerVerification, VerificationResponse } from "./styles";
 // import { DataType } from "../../types/interfaces/users";
 // import { useAuth } from "../../contexts/AccountContext";
 import { useEffect, useState } from "react";
@@ -66,7 +66,6 @@ import { useEffect, useState } from "react";
 // };
 
 const MenuUpdateUser = () => {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [valueName, setValueName] = useState("");
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [valueEmail, setValueEmail] = useState("");

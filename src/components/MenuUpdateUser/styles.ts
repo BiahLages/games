@@ -1,9 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import mixings from "../../assets/styles/mixins";
 
-export const ContainerVerification = styled.div``;
-export const VerificationResponse = styled.div``;
-
 const toRight = keyframes`
   0% {
     position: relative;
@@ -52,4 +49,16 @@ export const SubmitButton = styled.button`
 	&:hover {
 		transform: scale(0.98);
 	}
+`;
+
+export const ContainerVerification = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+
+export const VerificationResponse = styled.span`
+	font-size: 2.5em;
+	font-style: italic;
+	margin: 0 1em 1em 1.5em;
 `;
