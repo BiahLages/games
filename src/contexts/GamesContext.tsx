@@ -49,62 +49,60 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	const handleGetGames = async (): Promise<void> => {
 		if (category === "all" && !headers.headers.Authorization.includes("null")) {
 			console.log("VALOR INICIAL", allGames.length);
-		switch (lastPage < currentPage) {
-			case true:
-				await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
-					if (shownCards === allGames.length) {
-						setShownCards(shownCards + res.data.length);
-						console.log("TRUE > SHOWN=ALL");
-						console.log(res.data);
-						console.log(res.data.length);
-						console.log(allGames.length);
-						console.log(shownCards);
-						setLastValidPage(false);
-						setGames(res.data);
-					} else if (shownCards !== allGames.length) {
-						console.log("TRUE > SHOWN!=ALL");
-						console.log(res.data.length);
-						console.log(allGames.length);
-						console.log(shownCards);
-						// setShownCards(shownCards + res.data.length);
-						setGames(res.data);
-						setLastValidPage(false);
-						setLastPage(currentPage);
-					} 
-				});
+			switch (lastPage < currentPage) {
+				case true:
+					await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
+						if (shownCards === allGames.length) {
+							setShownCards(shownCards + res.data.length);
+							console.log("TRUE > SHOWN=ALL");
+							console.log(res.data);
+							console.log(res.data.length);
+							console.log(allGames.length);
+							console.log(shownCards);
+							setLastValidPage(false);
+							setGames(res.data);
+						} else if (shownCards !== allGames.length) {
+							console.log("TRUE > SHOWN!=ALL");
+							console.log(res.data.length);
+							console.log(allGames.length);
+							console.log(shownCards);
+							// setShownCards(shownCards + res.data.length);
+							setGames(res.data);
+							setLastValidPage(false);
+							setLastPage(currentPage);
+						}
+					});
 
-				break;
-		
-			case false:
-			
-				await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
-					if (shownCards === 0) {
-						setShownCards(shownCards - res.data.length);
-						console.log("FALSE > SHOWN = 0 ");
-						console.log(res.data);
-						console.log(res.data.length);
-						console.log(allGames.length);
-						console.log(shownCards);
-						setLastValidPage(true);
-						setGames(res.data);
-					} else if (shownCards !== allGames.length) {
-						console.log("FALSE > SHOWN!=ALL ");
-						console.log(res.data.length);
-						console.log(allGames.length);
-						console.log(shownCards);
-						setShownCards(shownCards - res.data.length);
-						setGames(res.data);
-						setLastValidPage(false);
-						setLastPage(currentPage);
-					} 
-				});
+					break;
 
-				break;
+				case false:
+					await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
+						if (shownCards === 0) {
+							setShownCards(shownCards - res.data.length);
+							console.log("FALSE > SHOWN = 0 ");
+							console.log(res.data);
+							console.log(res.data.length);
+							console.log(allGames.length);
+							console.log(shownCards);
+							setLastValidPage(true);
+							setGames(res.data);
+						} else if (shownCards !== allGames.length) {
+							console.log("FALSE > SHOWN!=ALL ");
+							console.log(res.data.length);
+							console.log(allGames.length);
+							console.log(shownCards);
+							setShownCards(shownCards - res.data.length);
+							setGames(res.data);
+							setLastValidPage(false);
+							setLastPage(currentPage);
+						}
+					});
 
-			default:
-				break;
-		}
-			
+					break;
+
+				default:
+					break;
+			}
 		}
 	};
 	const handleGetGameById = async (id: string): Promise<ApiGames | undefined> => {
