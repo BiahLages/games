@@ -36,10 +36,6 @@ const Router = (): JSX.Element => {
 								path="/settings"
 								element={<Setting />}
 							/>
-							<Route
-								path="/game/:id"
-								element={<GamePage />}
-							/>
 						</>
 					)}
 				</>
@@ -49,27 +45,29 @@ const Router = (): JSX.Element => {
 						path="/login"
 						element={<Login />}
 					/>
-
-					<Route
-						path="/recover/:id/:token"
-						element={<Recover />}
-					/>
-
-					<Route
-						path="/forgotpassword"
-						element={<Forgot />}
-					/>
 				</>
 			)}
 			<Route
 				path="*"
 				element={
 					<Navigate
-						to={logged ? "/" : "/login"}
+						to={logged ? "/profile" : "/login"}
 						replace
 					/>
 				}
 			/>
+			<Route
+				path="/recover/:id/:token"
+				element={<Recover />}
+			/>
+			<Route
+				path="/game/:id"
+				element={<GamePage />}
+			/>
+      <Route
+						path="/forgotpassword"
+						element={<Forgot />}
+					/>
 		</Routes>
 	);
 };
