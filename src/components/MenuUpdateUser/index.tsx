@@ -4,7 +4,7 @@ import { BackgroundForm, SubmitButton, ContainerVerification, VerificationRespon
 import { DataType } from "../../types/interfaces/users";
 import { useAuth } from "../../contexts/AccountContext";
 import { useEffect, useState } from "react";
-import { api } from "../../helpers/Api";
+// import { api } from "../../helpers/Api";
 
 // const Gate = (): JSX.Element => {
 // 	const { login } = useAuth();
@@ -67,8 +67,10 @@ import { api } from "../../helpers/Api";
 
 const MenuUpdateUser = () => {
 	const [valueName, setValueName] = useState("");
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [valueEmail, setValueEmail] = useState("");
 	const [valuePassword, setValuePassword] = useState("");
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [valueCPF, setValueCPF] = useState("");
 	const [validPasswordCharacters, setValidPasswordCharacters] = useState(false);
 	const [validPasswordLength, setValidPasswordLength] = useState(false);

@@ -6,11 +6,7 @@ import { Row, Column, Div } from "./styles";
 const Genres = (): JSX.Element => {
 	const { allGames } = useGame();
 	return (
-<<<<<<< HEAD
-		<div>
-=======
 		<Column>
->>>>>>> 8302bc39f56dc516e43529144735c561e2e69299
 			<select name="GENERO">
 				<option>TIRO</option>
 				<option>LUTA</option>
