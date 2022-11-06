@@ -49,34 +49,6 @@ function Recover() {
 
 	return (
 		<>
-			{/* <fieldset>
-				<fieldset>
-					<label htmlFor="">Nova Senha</label>
-					<input
-						type="password"
-						onChange={e => {
-							setpassword(e.target.value);
-						}}
-					/>
-				</fieldset>
-
-				<br />
-
-				<fieldset>
-					<label htmlFor="">Confirme a nova senha</label>
-					<input
-						type="password"
-						onChange={e => {
-							setConfirmPassword(e.target.value);
-						}}
-					/>
-				</fieldset>
-
-				<br />
-
-				<button onClick={() => changePassword()}>Enviar</button>
-			</fieldset> */}
-
 			<Container>
 				<LoginContainer>
 					<BackgroundForm>
@@ -84,7 +56,7 @@ function Recover() {
 						<>
 							<Input
 								label="new password"
-								placeholder="username2022@email.com"
+								placeholder="********"
 								type="password"
 								value={setpassword}
 							/>
