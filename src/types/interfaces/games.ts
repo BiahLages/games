@@ -1,6 +1,10 @@
+import React from "react";
 import { ApiGames, ApiGenres } from "./api";
 
 export interface GameProviderData {
+	allGames: ApiGames[];
+	lastValidPage: boolean;
+	setLastValidPage: React.Dispatch<React.SetStateAction<boolean>>;
 	currentPage: number;
 	setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 	status: boolean;
