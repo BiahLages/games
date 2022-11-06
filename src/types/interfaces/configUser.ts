@@ -8,6 +8,7 @@ export interface IConfigUserProviderData {
 		cpf: string | undefined;
 		currentUser: Auth | undefined;
 		isAdmin: boolean | undefined;
+		password: string;
 		dataUsers: any;
 		nameUser: string | null;
 		emailUser: string | null;
@@ -22,7 +23,7 @@ export interface IConfigUserProviderData {
 		setName: Dispatch<SetStateAction<string | undefined>>;
 		setEmail: Dispatch<SetStateAction<string | undefined>>;
 		setCpf: Dispatch<SetStateAction<string | undefined>>;
-		setPassword: Dispatch<SetStateAction<string | undefined>>;
+		setPassword: Dispatch<SetStateAction<string>>;
 		setNameUser: Dispatch<SetStateAction<string | null>>;
 		setEmailUser: Dispatch<SetStateAction<string | null>>;
 		setCpfUser: Dispatch<SetStateAction<string | null>>;

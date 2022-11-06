@@ -15,7 +15,7 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 	const [name, setName] = useState<string>();
 	const [email, setEmail] = useState<string>();
 	const [cpf, setCpf] = useState<string>();
-	const [password, setPassword] = useState<undefined | string>(undefined);
+	const [password, setPassword] = useState<string>("");
 	const [isAdmin, setIsadmin] = useState<boolean>();
 
 	//States para config de outros usuários.
@@ -47,7 +47,7 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 				cpf,
 				password,
 			};
-
+			console.log(data);
 			await api
 				.patch(`/users/${currentUser.user.id}`, data, headers)
 				.then(res => {
@@ -128,9 +128,9 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 
 	const handdleStateUSer = () => {
 		if (currentUser && logged) {
-			setCpf(currentUser.user.name);
+			setName(currentUser.user.name);
 			setEmail(currentUser.user.email);
-			setName(currentUser.user.cpf);
+			setCpf(currentUser.user.cpf);
 			setIsadmin(currentUser.user.isAdmin);
 		}
 	};
@@ -176,6 +176,7 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 						cpf,
 						currentUser,
 						isAdmin,
+						password,
 						dataUsers,
 						nameUser,
 						emailUser,

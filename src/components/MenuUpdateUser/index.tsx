@@ -1,6 +1,6 @@
 import Input from "../Input";
 import { error, isPw, validateEmail, validateName, validatePassword } from "../../utils/validation.tools";
-import { BackgroundForm, SubmitButton, ContainerVerification, VerificationResponse } from "./styles";
+import { BackgroundForm, SubmitButton, ContainerVerification, VerificationResponse, FormEdit } from "./styles";
 // import { DataType } from "../../types/interfaces/users";
 // import { useAuth } from "../../contexts/AccountContext";
 import { useEffect, useState } from "react";
@@ -18,47 +18,48 @@ const MenuUpdateUser = () => {
 	return (
 		<BackgroundForm>
 			<h1>Edit Info</h1>
-			<form name="Edit">
+			<FormEdit>
 				<div>
+					<label>Name</label>
 					<input
 						placeholder="User Name"
 						type="text"
 						value={states.name}
 						onChange={(e: any) => setStates.setName(e.target.value)}
 					/>
+					<label>CPF</label>
 					<input
-						// label="CPF"
 						placeholder="01234567890"
 						type="text"
 						value={states.cpf}
 						onChange={(e: any) => setStates.setCpf(e.target.value)}
 					/>
-
+					<label>Email</label>
 					<input
-						// label="email"
 						placeholder="username2022@email.com"
 						type="email"
 						value={states.email}
 						onChange={(e: any) => setStates.setEmail(e.target.value)}
 					/>
+					<label>Password</label>
 					<input
-						// label="password"
 						placeholder="********"
 						type="password"
-						value=""
 						onChange={(e: any) => setStates.setPassword(e.target.value)}
 					/>
-					{/* <ContainerVerification>
-						<VerificationResponse>{validPasswordLength ? "✅" : "⛔️"} 8 characters</VerificationResponse>
-						<VerificationResponse>{validPasswordCharacters ? "✅" : "⛔️"} Uppercase | Lowercase | Symbol | Number</VerificationResponse>
-					</ContainerVerification> */}
+					<ContainerVerification>
+						<VerificationResponse>{states.password.length > 7 ? "✅" : "⛔️"} 8 characters</VerificationResponse>
+						<VerificationResponse>{isPw.test(states.password) ? "✅" : "⛔️"} Uppercase | Lowercase | Symbol | Number</VerificationResponse>
+					</ContainerVerification>
 				</div>
 				<SubmitButton
 					onClick={(): void => {
 						functions.handdleUpdateUser();
 					}}
-				/>
-			</form>
+				>
+					Save
+				</SubmitButton>
+			</FormEdit>
 		</BackgroundForm>
 	);
 };
