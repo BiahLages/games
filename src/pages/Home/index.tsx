@@ -1,8 +1,11 @@
 import { Container, ContentContainer } from "../styles";
 import { HomeContentCards } from "./styles";
 import Menu from "../../components/Menu";
-import Card from "src/components/Card";
+// import Card from "src/components/Card";
 import { useGame } from "src/contexts/GamesContext";
+import Favorites from "src/components/Favorites";
+import TopRated from "src/components/TopRated";
+import Genres from "src/components/Genres";
 
 const Home = (): JSX.Element => {
 	const { games } = useGame();
@@ -12,16 +15,14 @@ const Home = (): JSX.Element => {
 			<Container>
 				<ContentContainer>
 					<HomeContentCards>
-						<div>aqui aparecerão os cards dos jogos</div>
-						<Card
-							game={games[0]}
-							currentKey={1}
-						></Card>
+						<Favorites />
+						<TopRated />
+						<Genres />
 					</HomeContentCards>
 				</ContentContainer>
 			</Container>
 		</>
 	);
-}; 
+};
 
 export default Home;

@@ -25,7 +25,7 @@ export const SVideosContent = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 1em;
-`
+`;
 
 export const STitle = styled.h2`
 	font-size: 2em;
@@ -45,4 +45,3 @@ export const SVideo = styled.iframe`
 	max-width: 560px;
 	max-height: 315px;
 `;
-
