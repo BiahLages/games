@@ -3,6 +3,8 @@ import { ApiGames, ApiGenres } from "./api";
 
 export interface GameProviderData {
 	allGames: ApiGames[];
+	submit: boolean;
+	setSubmit: React.Dispatch<React.SetStateAction<boolean>>;
 	lastValidPage: boolean;
 	setLastValidPage: React.Dispatch<React.SetStateAction<boolean>>;
 	currentPage: number;

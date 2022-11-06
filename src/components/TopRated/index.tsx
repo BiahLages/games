@@ -4,7 +4,7 @@ import { useGame } from "../../contexts/GamesContext";
 import { Row, Column, Div, ArrowBack } from "./styles";
 
 const TopRated = (): JSX.Element => {
-	const { games, currentPage, setCurrentPage, lastValidPage } = useGame();
+	const { games, currentPage, setCurrentPage, lastValidPage, setSubmit } = useGame();
 	return (
 		<Div>
 			<Column>
@@ -16,6 +16,7 @@ const TopRated = (): JSX.Element => {
 								console.log("ArrowBack");
 								console.log(currentPage);
 								setCurrentPage(currentPage - 1);
+								setSubmit(true);
 							}}
 						>
 							◀
@@ -35,6 +36,7 @@ const TopRated = (): JSX.Element => {
 								console.log(lastValidPage);
 								console.log(currentPage);
 								setCurrentPage(currentPage + 1);
+								setSubmit(true);
 							}}
 						>
 							▶
