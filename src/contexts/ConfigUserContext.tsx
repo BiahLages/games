@@ -41,13 +41,18 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 	// Implentar um modal de confirmação.
 	const handdleUpdateUser = async (): Promise<void> => {
 		if (logged && currentUser) {
-			const data = {
-				name,
-				email,
-				cpf,
-				password,
-			};
+			const data =
+				password !== ""
+					? {
+							name,
+							email,
+							cpf,
+							password,
+					  }
+					: { name, email, cpf };
+
 			console.log(data);
+
 			await api
 				.patch(`/users/${currentUser.user.id}`, data, headers)
 				.then(res => {
