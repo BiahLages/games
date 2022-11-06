@@ -50,3 +50,15 @@ export const SubmitButton = styled.button`
 		transform: scale(0.98);
 	}
 `;
+
+export const ContainerVerification = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+
+export const VerificationResponse = styled.span`
+	font-size: 2.5em;
+	font-style: italic;
+	margin: 0 1em 1em 1.5em;
+`;
