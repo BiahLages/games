@@ -64,10 +64,10 @@ const Router = (): JSX.Element => {
 				path="/game/:id"
 				element={<GamePage />}
 			/>
-      <Route
-						path="/forgotpassword"
-						element={<Forgot />}
-					/>
+			<Route
+				path="/forgotpassword"
+				element={<Forgot />}
+			/>
 		</Routes>
 	);
 };
