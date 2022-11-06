@@ -47,63 +47,59 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	// };
 
 	const handleGetGames = async (): Promise<void> => {
-		
 		if (category === "all" && !headers.headers.Authorization.includes("null")) {
+			switch (lastPage < currentPage) {
+				case true:
+					await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
+						if (shownCards === allGames.length) {
+							setShownCards(shownCards + res.data.length);
+							console.log("TESTE");
+							console.log(res.data);
+							console.log(res.data.length);
+							console.log(allGames.length);
+							console.log(shownCards);
+							setLastValidPage(true);
+							setGames(res.data);
+						} else if (shownCards !== allGames.length) {
+							console.log(res.data.length);
+							console.log(allGames.length);
+							console.log(shownCards);
+							setShownCards(shownCards + res.data.length);
+							setGames(res.data);
+							setLastValidPage(false);
+							setLastPage(currentPage);
+						}
+					});
 
-		switch (lastPage < currentPage) {
-			case true:
-				await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
-					if (shownCards === allGames.length) {
-						setShownCards(shownCards + res.data.length);
-						console.log("TESTE");
-						console.log(res.data);
-						console.log(res.data.length);
-						console.log(allGames.length);
-						console.log(shownCards);
-						setLastValidPage(true);
-						setGames(res.data);
-					} else if (shownCards !== allGames.length) {
-						console.log(res.data.length);
-						console.log(allGames.length);
-						console.log(shownCards);
-						setShownCards(shownCards + res.data.length);
-						setGames(res.data);
-						setLastValidPage(false);
-						setLastPage(currentPage);
-					} 
-				});
+					break;
 
-				break;
-		
-			case false:
-			
-				await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
-					if (shownCards === 0) {
-						setShownCards(shownCards - res.data.length);
-						console.log("TESTE");
-						console.log(res.data);
-						console.log(res.data.length);
-						console.log(allGames.length);
-						console.log(shownCards);
-						setLastValidPage(true);
-						setGames(res.data);
-					} else if (shownCards !== allGames.length) {
-						console.log(res.data.length);
-						console.log(allGames.length);
-						console.log(shownCards);
-						setShownCards(shownCards - res.data.length);
-						setGames(res.data);
-						setLastValidPage(false);
-						setLastPage(currentPage);
-					} 
-				});
+				case false:
+					await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
+						if (shownCards === 0) {
+							setShownCards(shownCards - res.data.length);
+							console.log("TESTE");
+							console.log(res.data);
+							console.log(res.data.length);
+							console.log(allGames.length);
+							console.log(shownCards);
+							setLastValidPage(true);
+							setGames(res.data);
+						} else if (shownCards !== allGames.length) {
+							console.log(res.data.length);
+							console.log(allGames.length);
+							console.log(shownCards);
+							setShownCards(shownCards - res.data.length);
+							setGames(res.data);
+							setLastValidPage(false);
+							setLastPage(currentPage);
+						}
+					});
 
-				break;
+					break;
 
-			default:
-				break;
-		}
-			
+				default:
+					break;
+			}
 		}
 	};
 	const handleGetGameById = async (id: string): Promise<ApiGames | undefined> => {
@@ -114,6 +110,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 					return res.data;
 				})
 				.catch(err => {
+					console.log(err);
 					return undefined;
 				});
 		}
@@ -139,7 +136,6 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	useEffect(() => {
 		handleGetGames();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status, allGames]);
 
 	useEffect(() => {
@@ -147,7 +143,6 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	}, [status]);
 
 	useEffect(() => {
-
 		handleGetGames();
 	}, [status]);
 
