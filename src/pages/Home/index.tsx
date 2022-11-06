@@ -15,14 +15,14 @@ const Home = (): JSX.Element => {
 			<Container>
 				<ContentContainer>
 					<HomeContentCards>
-						<Favorites/>
-						<TopRated/>
-						<Genres/>
+						<Favorites />
+						<TopRated />
+						<Genres />
 					</HomeContentCards>
 				</ContentContainer>
 			</Container>
 		</>
 	);
-}; 
+};
 
 export default Home;

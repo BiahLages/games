@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: AllProvidersProps): JSX.Element => {
 						user,
 					});
 				}
-				navigate("/profile");
+				// navigate("/profile");
 			})
 			.catch(() => {
 				logout();
@@ -54,7 +54,6 @@ export const AuthProvider = ({ children }: AllProvidersProps): JSX.Element => {
 		const token = localStorage.getItem("token");
 
 		if (token) checkTokenExpiration();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return <AuthContext.Provider value={{ logged, login, logout, currentUser }}>{children}</AuthContext.Provider>;

@@ -47,59 +47,63 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	// 	}
 	// };
 
-	useEffect(() => {
-		
-		if (submit) {
-			console.log(shownCards)
-			setShownCards(shownCards - 3);
-			setLastValidPage(false);
-			console.log(shownCards)
-			if (shownCards >= allGames.length) {
-				console.log("EFFECT SHOW=ALL");
-				console.log(shownCards);
-				console.log(allGames.length);
-				// setLastValidPage(true);
-			} else if (shownCards !== allGames.length) {
-				console.log("EFFECT SHOWN!=ALL");
-				console.log(shownCards);
-				console.log(allGames.length);
-				setShownCards(shownCards + 3);
-				setLastValidPage(false);
-				setLastPage(currentPage);
-			}
-		}
-		setSubmit(false);
-	}, [submit]);
-
 	const handleGetGames = async (): Promise<void> => {
 		if (category === "all" && !headers.headers.Authorization.includes("null")) {
-			// console.log("lastPage", lastPage)
-			// console.log("currentPage", currentPage)
-			await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
-				setGames(res.data);
-			
-			if (allGames.length !== 0) {
+			console.log("VALOR INICIAL", allGames.length);
+			switch (lastPage < currentPage) {
+				case true:
+					await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
+						if (shownCards === allGames.length) {
+							setShownCards(shownCards + res.data.length);
+							console.log("TRUE > SHOWN=ALL");
+							console.log(res.data);
+							console.log(res.data.length);
+							console.log(allGames.length);
+							console.log(shownCards);
+							setLastValidPage(false);
+							setGames(res.data);
+						} else if (shownCards !== allGames.length) {
+							console.log("TRUE > SHOWN!=ALL");
+							console.log(res.data.length);
+							console.log(allGames.length);
+							console.log(shownCards);
+							// setShownCards(shownCards + res.data.length);
+							setGames(res.data);
+							setLastValidPage(false);
+							setLastPage(currentPage);
+						}
+					});
 
-				if(lastPage < currentPage) {
-				if (shownCards >= allGames.length) {
-					console.log("AWAIT SHOW=ALL");
-					console.log(shownCards);
-					console.log(allGames.length);
-					setLastValidPage(true);
-				} else if (shownCards !== allGames.length) {
-					console.log("AWAIT SHOWN!=ALL");
-					console.log(shownCards);
-					console.log(allGames.length);
-					setShownCards(shownCards + res.data.length);
-					setLastValidPage(false);
-					setLastPage(currentPage);
-				}
+					break;
+
+				case false:
+					await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
+						if (shownCards === 0) {
+							setShownCards(shownCards - res.data.length);
+							console.log("FALSE > SHOWN = 0 ");
+							console.log(res.data);
+							console.log(res.data.length);
+							console.log(allGames.length);
+							console.log(shownCards);
+							setLastValidPage(true);
+							setGames(res.data);
+						} else if (shownCards !== allGames.length) {
+							console.log("FALSE > SHOWN!=ALL ");
+							console.log(res.data.length);
+							console.log(allGames.length);
+							console.log(shownCards);
+							setShownCards(shownCards - res.data.length);
+							setGames(res.data);
+							setLastValidPage(false);
+							setLastPage(currentPage);
+						}
+					});
+
+					break;
+
+				default:
+					break;
 			}
-
-			}
-		});
-
-		
 		}
 	};
 	const handleGetGameById = async (id: string): Promise<ApiGames | undefined> => {
@@ -110,6 +114,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 					return res.data;
 				})
 				.catch(err => {
+					console.log(err);
 					return undefined;
 				});
 		}
@@ -131,23 +136,19 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	useEffect(() => {
 		handleGetGames();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentPage]);
 
 	useEffect(() => {
 		handleGetGames();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status, allGames]);
 
 	useEffect(() => {
 		handleGetAllGames();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status]);
 
 	useEffect(() => {
-		handleGetServerStatus();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		handleGetGames();
+	}, [status]);
 
 	return (
 		<GameContext.Provider

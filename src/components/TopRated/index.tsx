@@ -13,12 +13,14 @@ const TopRated = (): JSX.Element => {
 					{currentPage !== 1 && (
 						<ArrowBack
 							onClick={(): void => {
-								console.log("ArrowBack")
-								console.log(currentPage)
+								console.log("ArrowBack");
+								console.log(currentPage);
 								setCurrentPage(currentPage - 1);
 								setSubmit(true);
 							}}
-						>◀</ArrowBack>
+						>
+							◀
+						</ArrowBack>
 					)}
 					{games.map((game, key) => (
 						<Card
@@ -27,16 +29,18 @@ const TopRated = (): JSX.Element => {
 							currentKey={key}
 						/>
 					))}
-					{ !lastValidPage && (
+					{!lastValidPage && (
 						<ArrowBack
 							onClick={(): void => {
-								console.log("ArrowForward")
-								console.log(lastValidPage)
-								console.log(currentPage)
+								console.log("ArrowForward");
+								console.log(lastValidPage);
+								console.log(currentPage);
 								setCurrentPage(currentPage + 1);
 								setSubmit(true);
 							}}
-						>▶</ArrowBack>
+						>
+							▶
+						</ArrowBack>
 					)}
 				</Row>
 			</Column>

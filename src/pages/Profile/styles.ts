@@ -1,8 +1,4 @@
-import styled, { css, Interpolation } from "styled-components";
-
-interface ProfileContentSelectorProps {
-	profile: string;
-}
+import styled from "styled-components";
 
 export const ProfileContentCards = styled.main`
 	width: 98vw;
