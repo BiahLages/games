@@ -57,9 +57,9 @@ export const LogoContainer = styled.header`
 	align-items: center;
 
 	img {
-		margin-top: 10rem;
+		margin-top: 0.8rem;
 		max-height: 100%;
-		max-width: 40rem;
+		max-width: 20rem;
 		cursor: pointer;
 		transition: 0.42s;
 	}
