@@ -1,3 +1,6 @@
+import toast from "react-hot-toast";
+import mixings from "src/assets/styles/mixins";
+
 export const isEmail = /\S+@\S+\.\S+/;
 
 export const isPw = /((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/;
@@ -6,6 +9,17 @@ export const error = (message: string): string => {
 	//Aqui devemos colocar o tipo de mensagem que vai aparecer quando a validação for errada
 	//Por enquanto está assim mas acho válido tornar isso um retorno visual
 	throw new Error(message);
+};
+
+export const success = (message: string): string => {
+	return toast.success(message, {
+		style: {
+			borderRadius: "1rem",
+			fontSize: "3rem",
+			backgroundColor: "#dedede",
+			fontFamily: `${mixings.constants.FontFamily}`,
+		},
+	});
 };
 
 export const validateName = (name: string): boolean | void => {
