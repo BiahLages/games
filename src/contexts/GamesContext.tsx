@@ -14,10 +14,11 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	const [allGames, setAllGames] = useState<ApiGames[]>([]);
 	const [games, setGames] = useState<ApiGames[]>([]);
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [lastValidPage, setLastValidPage] = useState(1);
-	const [currentPage, setCurrentPage] = useState(1);
+	const [lastValidPage, setLastValidPage] = useState(false);
+	const [shownCards, setShownCards] = useState(0);
 	const [status, getStatus] = useState(false);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [lastPage, setLastPage] = useState(0);
 
 	const token = localStorage.getItem("token");
 
@@ -46,19 +47,63 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	// };
 
 	const handleGetGames = async (): Promise<void> => {
+		
 		if (category === "all" && !headers.headers.Authorization.includes("null")) {
-			await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
-				if (games.length <= 1) {
-					setGames(res.data);
-				} else if (games.length < allGames.length) {
-					const data: ApiGames[] = [...games, ...res.data];
-					setLastValidPage(currentPage);
-					setGames(data);
-				} else {
-					setGames([]);
-					setCurrentPage(1);
-				}
-			});
+
+		switch (lastPage < currentPage) {
+			case true:
+				await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
+					if (shownCards === allGames.length) {
+						setShownCards(shownCards + res.data.length);
+						console.log("TESTE");
+						console.log(res.data);
+						console.log(res.data.length);
+						console.log(allGames.length);
+						console.log(shownCards);
+						setLastValidPage(true);
+						setGames(res.data);
+					} else if (shownCards !== allGames.length) {
+						console.log(res.data.length);
+						console.log(allGames.length);
+						console.log(shownCards);
+						setShownCards(shownCards + res.data.length);
+						setGames(res.data);
+						setLastValidPage(false);
+						setLastPage(currentPage);
+					} 
+				});
+
+				break;
+		
+			case false:
+			
+				await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
+					if (shownCards === 0) {
+						setShownCards(shownCards - res.data.length);
+						console.log("TESTE");
+						console.log(res.data);
+						console.log(res.data.length);
+						console.log(allGames.length);
+						console.log(shownCards);
+						setLastValidPage(true);
+						setGames(res.data);
+					} else if (shownCards !== allGames.length) {
+						console.log(res.data.length);
+						console.log(allGames.length);
+						console.log(shownCards);
+						setShownCards(shownCards - res.data.length);
+						setGames(res.data);
+						setLastValidPage(false);
+						setLastPage(currentPage);
+					} 
+				});
+
+				break;
+
+			default:
+				break;
+		}
+			
 		}
 	};
 	const handleGetGameById = async (id: string): Promise<ApiGames | undefined> => {
@@ -81,8 +126,6 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 		}
 	};
 	const handleGetServerStatus = (): void => {
-		setGames([]);
-		setCurrentPage(1);
 		api.get("/status").then(res => {
 			if (res.status === 200) {
 				getStatus(true);
@@ -96,18 +139,26 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	}, [currentPage]);
 
 	useEffect(() => {
+		handleGetGames();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [status, allGames]);
+
+	useEffect(() => {
 		handleGetAllGames();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status]);
 
 	useEffect(() => {
-		handleGetGames();
+		handleGetServerStatus();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [status]);
+	}, []);
 
 	return (
 		<GameContext.Provider
 			value={{
+				allGames,
+				lastValidPage,
+				setLastValidPage,
 				currentPage,
 				setCurrentPage,
 				status,
