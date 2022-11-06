@@ -36,6 +36,12 @@ export const SwicherContainer = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	#forgot {
+		cursor: pointer;
+		&:hover {
+			transform: scale(0.98);
+		}
+	}
 
 	p {
 		font-size: 2.5em;
