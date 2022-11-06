@@ -8,13 +8,14 @@ const Favorites = (): JSX.Element => {
 		<div>
 			<h2>FAVORITES</h2>
 			<div>
-				{favorites.map((game, key) => (
+				<p>CARDS DOS FAVORITES</p>
+			{/* {favorites.map((game, key) => (		
 					<Card
 						key={key}
 						game={game}
 						currentKey={key}
-					/>
-				))}
+					/>			
+			))} */}
 			</div>
 		</div>
 	);
