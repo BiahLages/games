@@ -7,6 +7,7 @@ import Setting from "../pages/Setting";
 import { useProfiles } from "src/contexts/ProfilesContext";
 import GamePage from "src/pages/GamePage";
 import Recover from "src/pages/Recover";
+import Forgot from "src/pages/Forgot";
 
 const Router = (): JSX.Element => {
 	const { logged } = useAuth();
@@ -62,6 +63,10 @@ const Router = (): JSX.Element => {
 			<Route
 				path="/game/:id"
 				element={<GamePage />}
+			/>
+			<Route
+				path="/forgotpassword"
+				element={<Forgot />}
 			/>
 		</Routes>
 	);
