@@ -34,7 +34,17 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 			return profile.id === currentProfileId;
 		});
 
-		if (selected) setCurrentProfile(selected);
+		if (selected) {
+			localStorage.setItem("currentProfileId", selected.id);
+			setCurrentProfile(selected);
+		}
+	};
+
+	const verifyProfile = (): void => {
+		const localProfile = localStorage.getItem("currentProfileId");
+		if (localProfile) {
+			setCurrentProfileId(localProfile);
+		}
 	};
 
 	const createProfile = (title: string, imageUrl: string): void => {
@@ -89,6 +99,11 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 	useEffect(() => {
 		selectProfile();
 	}, [currentProfileId]);
+
+	useEffect(() => {
+		verifyProfile();
+		selectProfile();
+	}, [logged, currentUser]);
 
 	return (
 		<ProfilesContext.Provider

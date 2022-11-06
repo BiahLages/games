@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }: AllProvidersProps): JSX.Element => {
 						user,
 					});
 				}
-				navigate("/profile");
+				// navigate("/profile");
 			})
 			.catch(() => {
 				logout();
