@@ -47,7 +47,6 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	// };
 
 	const handleGetGames = async (): Promise<void> => {
-		
 		if (category === "all" && !headers.headers.Authorization.includes("null")) {
 			console.log("VALOR INICIAL", allGames.length);
 		switch (lastPage < currentPage) {
@@ -116,6 +115,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 					return res.data;
 				})
 				.catch(err => {
+					console.log(err);
 					return undefined;
 				});
 		}
@@ -137,23 +137,19 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	useEffect(() => {
 		handleGetGames();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentPage]);
 
 	useEffect(() => {
 		handleGetGames();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status, allGames]);
 
 	useEffect(() => {
 		handleGetAllGames();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status]);
 
 	useEffect(() => {
-		handleGetServerStatus();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		handleGetGames();
+	}, [status]);
 
 	return (
 		<GameContext.Provider

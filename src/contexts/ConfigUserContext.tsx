@@ -164,7 +164,6 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 		}
 
 		handdleStateUSer();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentUser]);
 
 	return (

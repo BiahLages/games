@@ -88,7 +88,6 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 
 	useEffect(() => {
 		selectProfile();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentProfileId]);
 
 	return (
