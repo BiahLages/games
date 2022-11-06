@@ -27,7 +27,6 @@ const GamePage = (): JSX.Element => {
 
 	useEffect(() => {
 		showGame();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (

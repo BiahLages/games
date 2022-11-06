@@ -92,17 +92,14 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	useEffect(() => {
 		handleGetGames();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentPage]);
 
 	useEffect(() => {
 		handleGetAllGames();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status]);
 
 	useEffect(() => {
 		handleGetGames();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status]);
 
 	return (
