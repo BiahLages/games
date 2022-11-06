@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { TDataUser } from "../types";
 import { Auth } from "./users";
 
 export interface IConfigUserProviderData {
@@ -9,7 +10,7 @@ export interface IConfigUserProviderData {
 		currentUser: Auth | undefined;
 		isAdmin: boolean | undefined;
 		password: string;
-		dataUsers: any;
+		dataUsers: TDataUser;
 		nameUser: string | null;
 		emailUser: string | null;
 		cpfUser: string | null;
