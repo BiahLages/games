@@ -2,6 +2,7 @@ import { isPw } from "../../utils/validation.tools";
 import { BackgroundForm, SaveButton, ContainerVerification, VerificationResponse } from "./styles";
 // import { useEffect, useState } from "react";
 import { useConfigUser } from "src/contexts/ConfigUserContext";
+import { success } from "../../utils/validation.tools";
 
 const MenuUpdateUser = (): JSX.Element => {
 	const { states, setStates, functions } = useConfigUser();
@@ -48,6 +49,7 @@ const MenuUpdateUser = (): JSX.Element => {
 				<SaveButton
 					onClick={(): void => {
 						functions.handdleUpdateUser();
+						success("Saved Successfuly");
 					}}
 				>
 					Save
