@@ -1,6 +1,7 @@
 import { Container, ContentContainer } from "../styles";
 import Menu from "../../components/Menu";
 import Settings from "src/components/Settings";
+import { SContainerSettings } from "./styles";
 
 const Setting = (): JSX.Element => {
 	return (
@@ -8,7 +9,9 @@ const Setting = (): JSX.Element => {
 			<Menu path="settings" />
 			<Container>
 				<ContentContainer>
-					<Settings />
+					<SContainerSettings>
+						<Settings />
+					</SContainerSettings>
 				</ContentContainer>
 			</Container>
 		</>
