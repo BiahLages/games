@@ -15,6 +15,7 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 	const { functions } = useConfigUser();
 	const navigate: NavigateFunction = useNavigate();
 	const [active, setActive] = useState(false);
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [search, setSearch] = useState("");
 
 	return (
