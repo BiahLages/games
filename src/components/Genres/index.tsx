@@ -7,8 +7,7 @@ const Genres = (): JSX.Element => {
 	const { allGames } = useGame();
 	return (
 		<Column>
-			<select
-			name="GENERO">
+			<select name="GENERO">
 				<option>TIRO</option>
 				<option>LUTA</option>
 				<option>RPG</option>
