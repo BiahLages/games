@@ -1,9 +1,6 @@
 import styled, { keyframes } from "styled-components";
 import mixings from "../../assets/styles/mixins";
 
-export const ContainerVerification = styled.div``;
-export const VerificationResponse = styled.div``;
-
 const toRight = keyframes`
   0% {
     position: relative;

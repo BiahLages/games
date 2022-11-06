@@ -1,8 +1,8 @@
 import Input from "../Input";
 import { error, isPw, validateEmail, validateName, validatePassword } from "../../utils/validation.tools";
 import { BackgroundForm, SubmitButton, ContainerVerification, VerificationResponse } from "./styles";
-import { DataType } from "../../types/interfaces/users";
-import { useAuth } from "../../contexts/AccountContext";
+// import { DataType } from "../../types/interfaces/users";
+// import { useAuth } from "../../contexts/AccountContext";
 import { useEffect, useState } from "react";
 // import { api } from "../../helpers/Api";
 
