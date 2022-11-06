@@ -15,10 +15,11 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	const [allGames, setAllGames] = useState<ApiGames[]>([]);
 	const [games, setGames] = useState<ApiGames[]>([]);
 	const [lastValidPage, setLastValidPage] = useState(false);
-	const [shownCards, setShownCards] = useState(1);
+	const [shownCards, setShownCards] = useState(3);
 	const [status, getStatus] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [lastPage, setLastPage] = useState(0);
+	const [submit, setSubmit] = useState(false);
 
 	const token = localStorage.getItem("token");
 
@@ -152,6 +153,8 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	return (
 		<GameContext.Provider
 			value={{
+				submit,
+				setSubmit,
 				allGames,
 				lastValidPage,
 				setLastValidPage,
