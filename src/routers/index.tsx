@@ -8,6 +8,7 @@ import { useProfiles } from "src/contexts/ProfilesContext";
 import GamePage from "src/pages/GamePage";
 import Recover from "src/pages/Recover";
 import Forgot from "src/pages/Forgot";
+import LoadingUser from "./../pages/LoadingUser/index";
 
 const Router = (): JSX.Element => {
 	const { logged } = useAuth();
@@ -51,11 +52,17 @@ const Router = (): JSX.Element => {
 				path="*"
 				element={
 					<Navigate
-						to={logged ? "/profile" : "/login"}
+						to={"/loading"}
 						replace
 					/>
 				}
 			/>
+			<>
+				<Route
+					path="/loading"
+					element={<LoadingUser />}
+				/>
+			</>
 			<Route
 				path="/recover/:id/:token"
 				element={<Recover />}
