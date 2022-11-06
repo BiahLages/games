@@ -23,7 +23,7 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 			<MenuContent>
 				<LogoContainer>
 					<img
-						onClick={() => {
+						onClick={(): void => {
 							navigate("/");
 						}}
 						src={logo}
@@ -42,14 +42,14 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 					<Profile backgroundImage={currentProfile.imageUrl}>
 						<div
 							id="profileMenu"
-							onClick={() => {
+							onClick={(): void => {
 								setActive(!active);
 							}}
 						></div>
 						<img
 							src={triangule}
 							alt="triangule"
-							onClick={() => {
+							onClick={(): void => {
 								setActive(!active);
 							}}
 						/>
@@ -58,7 +58,7 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 				{active ? (
 					<MenuOptions>
 						<li
-							onClick={() => {
+							onClick={(): void => {
 								navigate("/profile");
 								setActive(!active);
 							}}
@@ -66,7 +66,7 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 							Profiles
 						</li>
 						<li
-							onClick={() => {
+							onClick={(): void => {
 								navigate("/settings");
 								functions.handdleConfigMenus();
 								setActive(!active);
@@ -75,7 +75,7 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 							Settings
 						</li>
 						<li
-							onClick={() => {
+							onClick={(): void => {
 								logout();
 								setActive(!active);
 							}}
