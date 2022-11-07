@@ -1,6 +1,6 @@
-import React, { createContext, useContext } from "react";
-import { IAdminGames, ICardGames } from "src/types/interfaces/games";
 import { AllProvidersProps } from "../types/interfaces/system";
+import { IAdminGames, ICardGames } from "../types/interfaces/games";
+import { createContext, useContext } from "react";
 import { useAuth } from "./AccountContext";
 import { api } from "../helpers/Api";
 
@@ -67,7 +67,13 @@ export const AdminGamesProvider = ({ children }: AllProvidersProps): JSX.Element
 					Authorization: `Bearer ${currentUser.token}`,
 				},
 			};
-			api.delete(`/games/${id}`, headers).then((): void => {});
+			api.delete(`/games/${id}`, headers)
+				.then((res): void => {
+					console.log(res);
+				})
+				.catch(err => {
+					console.log(err);
+				});
 		}
 	};
 
