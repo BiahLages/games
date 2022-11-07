@@ -3,8 +3,8 @@ import MenuUpdateAdmin from "../MenuUpdateAdmin";
 import MenuUpdateChoice from "../MenuUpdateChoice";
 import MenuUpdateUser from "../MenuUpdateUser";
 
-const Settings = () => {
-	const { states, functions } = useConfigUser();
+const Settings = (): JSX.Element => {
+	const { states } = useConfigUser();
 
 	return (
 		<>
