@@ -1,8 +1,8 @@
-import { UseAdminGames } from "../../contexts/AdminGamesContext";
-import { ICardGames } from "../../types/interfaces/games";
-import { useState } from "react";
 import * as S from "./style";
+import { useState } from "react";
+import { ICardGames } from "../../types/interfaces/games";
 import Input from "../Input";
+import { UseAdminGames } from "../../contexts/AdminGamesContext";
 
 const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; close: () => void }): JSX.Element => {
 	const { createGame, editGame } = UseAdminGames();
@@ -38,16 +38,13 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 	};
 
 	return (
-		<S.Overlay>
+		<S.Overlay
+			onClick={(): void => {
+				close();
+			}}
+		>
 			<S.FormUpCreate>
 				<h1> {!mode ? `To Edit Game` : `Add Game`}</h1>
-				<span
-					onClick={(): void => {
-						close();
-					}}
-				>
-					✖️
-				</span>
 				<Input
 					label="Game Name"
 					placeholder={valueTitle}
