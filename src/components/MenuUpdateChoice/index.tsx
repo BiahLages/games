@@ -1,9 +1,9 @@
 import { CheckProfiles, EditProfile, SettingsContent } from "./style";
-import profiles from "../../assets/icons/profiles.png";
+import trash from "../../assets/icons/trash.png";
 import editprofile from "../../assets/icons/editProfile.png";
 import { useConfigUser } from "src/contexts/ConfigUserContext";
 
-function MenuUpdateChoice() {
+function MenuUpdateChoice(): JSX.Element {
 	const { functions } = useConfigUser();
 	return (
 		<>
@@ -13,17 +13,17 @@ function MenuUpdateChoice() {
 						<EditProfile
 							src={editprofile}
 							alt="Edit my profile"
-							onClick={() => functions.handdleChangeConfigUser()}
+							onClick={(): void => functions.handdleChangeConfigUser()}
 						/>
 						<span>Edit profile</span>
 					</div>
 					<div>
 						<CheckProfiles
-							src={profiles}
-							alt="Check all profiles"
-							onClick={() => functions.handdleChangeConfigAdmin()}
+							src={trash}
+							alt="Delete Account"
+							onClick={(): void => functions.handdleChangeDeleteAccount()}
 						/>
-						<span>Check all profiles</span>
+						<span>Delete account</span>
 					</div>
 				</article>
 			</SettingsContent>

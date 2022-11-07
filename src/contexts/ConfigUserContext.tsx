@@ -86,7 +86,7 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 				.catch(error => console.log("handdleGetUsers", `Error ${error.status}`));
 	};
 
-	const handdleGetUserForId = async (id: string) => {
+	const handdleGetUserForId = async (id: string): Promise<void> => {
 		if (logged && currentUser) {
 			await api
 				.get(`/users/${id}`, headers)
@@ -131,7 +131,7 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 				.catch(error => console.log("handdleDeleteUser", `Erro ${error.status}, usuário ${dataUserForId.name} não deletado`));
 	};
 
-	const handdleStateUSer = () => {
+	const handdleStateUSer = (): void => {
 		if (currentUser && logged) {
 			setName(currentUser.user.name);
 			setEmail(currentUser.user.email);
@@ -140,26 +140,22 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 		}
 	};
 
-	const handdleChangeConfigUser = () => {
+	const handdleChangeConfigUser = (): void => {
 		setSwitchMenuUpdateChoice(false);
 		setSwitchMenuUpdateUser(true);
 		setSwitchMenuUpdateAdmin(false);
 	};
 
-	const handdleChangeConfigAdmin = () => {
+	const handdleChangeDeleteAccount = (): void => {
 		setSwitchMenuUpdateChoice(false);
 		setSwitchMenuUpdateUser(false);
 		setSwitchMenuUpdateAdmin(true);
 	};
 
-	const handdleConfigMenus = () => {
-		if (isAdmin) {
-			setSwitchMenuUpdateChoice(true);
-			setSwitchMenuUpdateUser(false);
-			setSwitchMenuUpdateAdmin(false);
-		} else {
-			handdleChangeConfigUser();
-		}
+	const handdleConfigMenus = (): void => {
+		setSwitchMenuUpdateChoice(true);
+		setSwitchMenuUpdateUser(false);
+		setSwitchMenuUpdateAdmin(false);
 	};
 
 	useEffect(() => {
@@ -210,7 +206,7 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 						handdleDeleteUserAdmin,
 						handdleUpdateUserAdmin,
 						handdleChangeConfigUser,
-						handdleChangeConfigAdmin,
+						handdleChangeDeleteAccount,
 						handdleConfigMenus,
 					},
 				}}

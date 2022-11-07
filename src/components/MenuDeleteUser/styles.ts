@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import mixings from "../../assets/styles/mixins";
 
-interface ICancelOrSaveButton {
+interface IYesOrNoButton {
 	answer: string;
 }
 
 export const BackgroundForm = styled.div`
-	height: auto;
+	height: 50rem;
 	width: 75rem;
 	padding: 1em;
 	background: #252525;
@@ -20,16 +20,13 @@ export const BackgroundForm = styled.div`
 
 	div {
 		display: flex;
-		flex-direction: column;
-	}
-	#buttons {
-		display: flex;
 		flex-direction: row;
-		justify-content: space-evenly;
+		gap: 20rem;
+		align-items: center;
 	}
-
 	h1 {
 		font-size: 4em;
+		text-align: center;
 	}
 	label {
 		text-transform: capitalize;
@@ -50,10 +47,10 @@ export const BackgroundForm = styled.div`
 	}
 `;
 
-export const SCancelOrSaveButton = styled.button`
+export const SYesOrNoButton = styled.button`
 	height: 2em;
 	width: 6em;
-	background: ${(props: ICancelOrSaveButton): string => (props.answer === "save" ? "green" : "red")};
+	background: ${(props: IYesOrNoButton): string => (props.answer === "yes" ? "green" : "red")};
 	color: ${mixings.colors.contrast1};
 	border: none;
 	border-radius: 2em;
