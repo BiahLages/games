@@ -27,3 +27,7 @@ export interface ICardGames {
 	gameplay?: string;
 	genres?: ApiGenres[];
 }
+
+export interface IStyleScore {
+	score: number;
+}

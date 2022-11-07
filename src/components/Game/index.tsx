@@ -1,5 +1,5 @@
 import { ApiGames, ApiGenres } from "../../types/interfaces/api";
-import { SGame, SImage, STitle, SText, SRatingContent, SMediaContent, SVideosContent, SGameplay, STrailer, SInfoContent, SGenre, SButton, SButtonsContainer, SHeart, STitleHeart } from "./styles";
+import { SGame, SImage, STitle, SText, SRatingContent, SMediaContent, SVideosContent, SGameplay, STrailer, SInfoContent, SGenre, SButton, SButtonsContainer, SHeart, STitleHeart, SStars, SScore } from "./styles";
 import heartBlank from "src/assets/icons/heartBlank.png";
 
 const Game = ({ game }: { game: ApiGames }): JSX.Element => {
@@ -11,7 +11,15 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 			</STitleHeart>
 			<SRatingContent>
 				<SText>{game.year}</SText>
-				<SText>{game.score}</SText>
+				<SScore>
+					<SStars score={Number(game.score)}>
+						<img
+							src="https://media.discordapp.net/attachments/985645895779508254/1039019480359112775/stars.png"
+							alt="stars imdb"
+						/>
+					</SStars>
+					<SText>{game.score}</SText>
+				</SScore>
 			</SRatingContent>
 			<SMediaContent>
 				<SImage
