@@ -20,19 +20,16 @@ const LoadingUser = (): JSX.Element => {
 		if (user && token && profile) {
 			getAllProfiles();
 			return setTimeout(() => {
-				console.log("home");
 				beforeLoad("/");
 			}, 750);
 		} else if (user && token) {
 			getAllProfiles();
 			return setTimeout(() => {
-				console.log("profile");
 				beforeLoad("/profile");
 			}, 750);
 		} else {
 			getAllProfiles();
 			return setTimeout(() => {
-				console.log("login");
 				beforeLoad("/login");
 			}, 750);
 		}

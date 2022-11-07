@@ -16,7 +16,6 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 
 	const getAllProfiles = (): void => {
 		if (logged && currentUser) {
-			console.log(currentUser.user.profile);
 			const data = currentUser.user.profile;
 			setUserProfiles(data);
 		}
@@ -24,14 +23,8 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 
 	const selectProfile = (): void => {
 		const selected = userProfiles.find(profile => {
-			console.log("selected inside");
-			console.log(profile);
-			console.log(currentProfileId);
 			return profile.id === currentProfileId;
 		});
-		console.log("selected");
-		console.log(selected);
-
 		if (selected) {
 			localStorage.setItem("currentProfileId", selected.id);
 			setCurrentProfile(selected);
@@ -61,7 +54,6 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 			};
 			data.userId = currentUser.user.id;
 
-			console.log(data);
 			api.post(`/profiles`, data, headers).then((): void => {
 				getAllProfiles();
 			});
@@ -104,6 +96,7 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 	useEffect(() => {
 		verifyProfile();
 		selectProfile();
+		getAllProfiles();
 	}, [logged, currentUser]);
 
 	return (
