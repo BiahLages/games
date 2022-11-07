@@ -3,18 +3,40 @@ import Card from "../Card";
 import { useGame } from "../../contexts/GamesContext";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Row, Column, Div } from "./styles";
+// import { useState } from "react";
 
 const Genres = (): JSX.Element => {
-	const { allGames, allGenres } = useGame();
+	const { gamesByGender, allGenres, handleGetGamesByGenre } = useGame();
+
 	return (
 		<Column>
-			<select name="GENERO">
-				{allGenres.map((genre, key) => (
-					<option>{genre.name}</option>
-				))}
+			<select
+				// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+				onChange={e => {
+					console.log("ENTROU");
+					console.log(e.target.value);
+					handleGetGamesByGenre(e.target.value);
+					console.log(gamesByGender);
+					// setShowGamesByGender(true);
+				}}
+				name="GENERO"
+			>
+				{allGenres.map((genre, key) => {
+					return (
+						<>
+							<option
+								value={genre.id}
+								key={key}
+							>
+								{genre.name}
+							</option>
+						</>
+					);
+				})}
 			</select>
+
 			<Row>
-				{allGames.map((game, key) => (
+				{gamesByGender.map((game, key) => (
 					<Card
 						key={key}
 						game={game}
