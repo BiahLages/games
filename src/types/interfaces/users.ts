@@ -1,3 +1,5 @@
+import { ApiProfiles } from "./api";
+
 export interface AuthProviderData {
 	logged: boolean;
 	login: (params: Auth) => void;
@@ -16,6 +18,7 @@ export interface CurrentUser {
 	email?: string;
 	cpf?: string;
 	isAdmin?: boolean;
+	profile: ApiProfiles[];
 	createdAt?: string;
 	updatedAt?: string;
 }
