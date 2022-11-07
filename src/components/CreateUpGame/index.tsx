@@ -1,8 +1,8 @@
-import { UseAdminGames } from "../../contexts/AdminGamesContext";
-import { ICardGames } from "../../types/interfaces/games";
-import { useState } from "react";
 import * as S from "./style";
+import { useState } from "react";
+import { ICardGames } from "../../types/interfaces/games";
 import Input from "../Input";
+import { UseAdminGames } from "../../contexts/AdminGamesContext";
 
 const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; close: () => void }): JSX.Element => {
 	const { createGame, editGame } = UseAdminGames();
@@ -16,7 +16,6 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 	const [valueGamePlay, setValueGamePlay] = useState(game.gameplay || "");
 	const [valueGenre, setValueGenre] = useState("");
 
-	/*setMode(modeUporCreate);*/
 	const actionCUpGames = async (): Promise<void> => {
 		const data: ICardGames = {
 			title: valueTitle,
@@ -41,14 +40,15 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 	return (
 		<S.Overlay>
 			<S.FormUpCreate>
-				<h1> {!mode ? `To Edit Game` : `Add Game`}</h1>
-				<span
-					onClick={(): void => {
+				<S.HeaderForm
+					onClick={(e): void => {
 						close();
+						e.stopPropagation();
 					}}
 				>
-					✖️
-				</span>
+					<h1> {!mode ? `To Edit Game` : `Add Game`}</h1>
+					<span>➕</span>
+				</S.HeaderForm>
 				<Input
 					label="Game Name"
 					placeholder={valueTitle}
@@ -104,7 +104,7 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 						e.stopPropagation();
 					}}
 				>
-					{!mode ? `To Edit` : `Add`}
+					Save
 				</S.ButtonSubmit>
 			</S.FormUpCreate>
 		</S.Overlay>
