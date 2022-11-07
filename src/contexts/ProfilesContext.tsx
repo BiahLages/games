@@ -16,8 +16,6 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 
 	const getAllProfiles = (): void => {
 		if (logged && currentUser) {
-			console.log(currentUser);
-			console.log(currentUser.user.profile);
 			const data = currentUser.user.profile;
 			setUserProfiles(data);
 		}
@@ -27,7 +25,6 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 		const selected = userProfiles.find(profile => {
 			return profile.id === currentProfileId;
 		});
-
 		if (selected) {
 			localStorage.setItem("currentProfileId", selected.id);
 			setCurrentProfile(selected);
@@ -35,9 +32,12 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 	};
 
 	const verifyProfile = (): void => {
-		const localProfile = localStorage.getItem("currentProfileId");
-		if (localProfile) {
-			setCurrentProfileId(localProfile);
+		const localUser = localStorage.getItem("currentProfileId");
+		if (localUser) {
+			const localProfile = localStorage.getItem("currentProfileId");
+			if (localProfile) {
+				setCurrentProfileId(localProfile);
+			}
 		}
 	};
 
@@ -54,7 +54,6 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 			};
 			data.userId = currentUser.user.id;
 
-			console.log(data);
 			api.post(`/profiles`, data, headers).then((): void => {
 				getAllProfiles();
 			});
@@ -97,6 +96,7 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 	useEffect(() => {
 		verifyProfile();
 		selectProfile();
+		getAllProfiles();
 	}, [logged, currentUser]);
 
 	return (
@@ -110,6 +110,7 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 				getAllProfiles,
 				setCurrentProfileId,
 				userProfiles,
+				verifyProfile,
 			}}
 		>
 			{children}

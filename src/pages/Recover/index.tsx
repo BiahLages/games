@@ -48,37 +48,35 @@ function Recover() {
 	}, [password]);
 
 	return (
-		<>
-			<Container>
-				<LoginContainer>
-					<BackgroundForm>
-						<h1>Recovery</h1>
-						<>
-							<Input
-								label="new password"
-								placeholder="********"
-								type="password"
-								value={setpassword}
-							/>
-							<Input
-								label="password"
-								placeholder="********"
-								type="password"
-								value={setConfirmPassword}
-							/>
-							<ContainerVerification>
-								<VerificationResponse>{password === confirmPassword ? "✅" : "⛔️"} passwords match</VerificationResponse>
-								<VerificationResponse>{validPasswordLength ? "✅" : "⛔️"} 8 characters</VerificationResponse>
-								<VerificationResponse>{validPasswordCharacters ? "✅" : "⛔️"} Uppercase | Lowercase | Symbol | Number</VerificationResponse>
-							</ContainerVerification>
-							<div>
-								<SubmitButtom onClick={(): Promise<void> => changePassword()}>Send</SubmitButtom>
-							</div>
-						</>
-					</BackgroundForm>
-				</LoginContainer>
-			</Container>
-		</>
+		<Container>
+			<LoginContainer>
+				<BackgroundForm>
+					<h1>Recovery</h1>
+					<>
+						<Input
+							label="new password"
+							placeholder="********"
+							type="password"
+							value={setpassword}
+						/>
+						<Input
+							label="password"
+							placeholder="********"
+							type="password"
+							value={setConfirmPassword}
+						/>
+						<ContainerVerification>
+							<VerificationResponse>{password === confirmPassword ? "✅" : "⛔️"} passwords match</VerificationResponse>
+							<VerificationResponse>{validPasswordLength ? "✅" : "⛔️"} 8 characters</VerificationResponse>
+							<VerificationResponse>{validPasswordCharacters ? "✅" : "⛔️"} Uppercase | Lowercase | Symbol | Number</VerificationResponse>
+						</ContainerVerification>
+						<div>
+							<SubmitButtom onClick={(): Promise<void> => changePassword()}>Send</SubmitButtom>
+						</div>
+					</>
+				</BackgroundForm>
+			</LoginContainer>
+		</Container>
 	);
 }
 

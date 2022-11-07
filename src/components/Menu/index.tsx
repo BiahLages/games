@@ -10,21 +10,17 @@ import Input from "../Input";
 import { useConfigUser } from "src/contexts/ConfigUserContext";
 
 const Menu = ({ path }: MenuProps): JSX.Element => {
-	const { logged, logout } = useAuth();
-	const { currentProfile } = useProfiles();
+	const { logout } = useAuth();
+	const { currentProfile, verifyProfile } = useProfiles();
 	const { functions } = useConfigUser();
 	const navigate: NavigateFunction = useNavigate();
 	const [active, setActive] = useState(false);
-	const [displayed, setDisplayed] = useState(false);
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [search, setSearch] = useState("");
 
 	useEffect(() => {
-		console.log("Menu effect");
-		console.log(currentProfile);
-		console.log(logged);
-		setDisplayed(true);
-	}, [currentProfile, logged]);
+		verifyProfile();
+	}, []);
 
 	return (
 		<MenuContainer>
@@ -46,7 +42,7 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 						value={setSearch}
 					/>
 				)}
-				{displayed && currentProfile && logged && (
+				{Boolean(path === "home" || path === "/game/:id") && currentProfile && (
 					<Profile backgroundImage={currentProfile.imageUrl}>
 						<div
 							id="profileMenu"
