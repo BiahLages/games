@@ -27,12 +27,7 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 								setEditingThis(!editingThis);
 							}}
 						>
-							<div key={`formEditBtn${currentKey}`}>
-								<ImgEditDelete
-									src={formEdit}
-									alt="Delete profile button"
-								/>
-							</div>
+							<span>➕</span>
 							<h2>Edit your Profile!</h2>
 						</HeaderForm>
 						<Input
@@ -61,6 +56,7 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 									src={edit}
 									alt="Edit profile button"
 								/>
+								<span>Edit</span>
 							</div>
 							<div
 								key={`formDel${currentKey}`}
@@ -74,6 +70,7 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 									src={trash}
 									alt="Delete profile button"
 								/>
+								<span>Delete</span>
 							</div>
 						</OptionsEditDelete>
 					</FormEditProfile>
@@ -104,6 +101,7 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 							src={formEdit}
 							alt="Delete profile button"
 						/>
+						<span>Edit</span>
 					</DivImgEdit>
 				</ContainerProfile>
 			);
