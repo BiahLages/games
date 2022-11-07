@@ -4,6 +4,7 @@ export const SCard = styled.div`
 	margin-top: 300px;
 	border: solid 1px #fff;
 	cursor: pointer;
+	max-width: 250px;
 `;
 
 export const STitle = styled.h2`
