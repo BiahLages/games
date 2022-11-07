@@ -1,31 +1,24 @@
 import { useAuth } from "src/contexts/AccountContext";
 import LoaderImageDark1 from "../../assets/images/loaderI.gif";
-import LoaderImageLight1 from "../../assets/images/loaderII.gif";
-import LoaderImageDark2 from "../../assets/images/loaderIII.gif";
-import LoaderImageLight2 from "../../assets/images/loaderIV.gif";
+import { useNavigate } from "react-router-dom";
+import { LoadingUserStyle } from "./styles";
 
 const LoadingUser = () => {
-	const { logged, currentUser } = useAuth();
+	const { logged } = useAuth();
+	const navigate = useNavigate();
 
 	return (
-		<div>
-			<img
-				src={LoaderImageDark1}
-				alt=""
-			/>
-			<img
-				src={LoaderImageLight1}
-				alt=""
-			/>
-			<img
-				src={LoaderImageDark2}
-				alt=""
-			/>
-			<img
-				src={LoaderImageLight2}
-				alt=""
-			/>
-		</div>
+		<>
+			{logged ? navigate("/profile") : navigate("/login")}
+			<LoadingUserStyle>
+				<div>
+					<img
+						src={LoaderImageDark1}
+						alt=""
+					/>
+				</div>
+			</LoadingUserStyle>
+		</>
 	);
 };
 
