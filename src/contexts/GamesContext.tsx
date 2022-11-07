@@ -80,12 +80,53 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 			});
 		}
 	};
+
+	const handleFormatLink = (
+		paramGameplay: string,
+		paramTrailer: string,
+	): {
+		gameplay: string;
+		trailer: string;
+	} => {
+		let gameplay: string;
+		let trailer: string;
+		if (paramGameplay.includes("watch")) {
+			const gameplayTemp = paramGameplay.split("=");
+			gameplay = `https://www.youtube.com/embed/${gameplayTemp[1]}`;
+		} else {
+			gameplay = paramGameplay;
+		}
+
+		if (paramTrailer.includes("watch")) {
+			const trailerTemp = paramTrailer.split("=");
+			trailer = `https://www.youtube.com/embed/${trailerTemp[1]}`;
+		} else {
+			trailer = paramTrailer;
+		}
+
+		return { gameplay, trailer };
+	};
+
 	const handleGetGameById = async (id: string): Promise<ApiGames | undefined> => {
 		if (logged && currentUser) {
 			return await api
 				.get(`/games/${id}`, headers)
 				.then(res => {
-					return res.data;
+					const game: ApiGames = res.data;
+					const { id, title, image, description, year, score, trailer, gameplay, genres, createdAt, updatedAt } = game;
+					const linkEdited = handleFormatLink(gameplay, trailer);
+					return {
+						id,
+						title,
+						description,
+						image,
+						year,
+						score,
+						...linkEdited,
+						genres,
+						createdAt,
+						updatedAt,
+					};
 				})
 				.catch(err => {
 					console.log(err);
