@@ -12,11 +12,7 @@ const Genres = (): JSX.Element => {
 		<Column>
 			<select
 				onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => {
-					console.log("ENTROU");
-					console.log(e.target.value);
 					handleGetGamesByGenre(e.target.value);
-					console.log(gamesByGender);
-					// setShowGamesByGender(true);
 				}}
 				name="GENERO"
 			>

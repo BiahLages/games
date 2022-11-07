@@ -9,6 +9,7 @@ const FavoriteContext = createContext({} as FavoritesProviderData);
 
 export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	const { logged, currentUser } = useAuth();
+	const profile = localStorage.getItem("currentProfileId");
 
 	const [favorites, setFavorites] = useState<ApiFavorites[]>([]);
 
@@ -20,10 +21,11 @@ export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element 
 				Authorization: `Bearer ${token}`,
 			},
 		};
-		const user = JSON.parse(localStorage.getItem("user") || "");
-		api.get(`/favorites/profiles/${user.id}`, headers).then(res => {
-			if (res.status === 200) setFavorites(res.data);
-		});
+		if (profile) {
+			api.get(`/favorites/profiles/${profile}`, headers).then(res => {
+				if (res.status === 200) setFavorites(res.data);
+			});
+		}
 	};
 
 	const favThis = (id: string, isFav: boolean): void => {
