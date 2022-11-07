@@ -61,13 +61,13 @@ export const SImage = styled.img`
 `;
 
 export const SGameplay = styled.iframe`
-	width: 560px;
-	height: 315px;
+	max-width: 280px;
+	max-height: 157.5px;
 `;
 
 export const STrailer = styled.iframe`
-	max-width: 280px;
-	max-height: 157.5px;
+	width: 560px;
+	height: 315px;
 `;
 
 export const SGenre = styled.div`
