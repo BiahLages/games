@@ -4,21 +4,20 @@ import mixings from "../../assets/styles/mixins";
 
 export const MenuContainer = styled.header`
 	position: fixed;
-	box-sizing: border-box;
-	padding: 2rem;
 	width: 100%;
-	height: 8vh;
+	height: 10vh;
 	background-color: rgba(0, 0, 0, 0.2);
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	z-index: 5;
 `;
 
 export const MenuContent = styled.div`
 	position: relative;
-	width: 100%;
+	width: calc(100% - 10rem);
 	height: 8vh;
-	max-width: 1280px;
+	max-width: 1600px;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;

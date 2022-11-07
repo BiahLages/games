@@ -47,7 +47,7 @@ export const NameUser = styled.div`
 `;
 
 export const DivImgEdit = styled.div`
-	height: 6em;
+	height: 10em;
 	cursor: pointer;
 `;
 

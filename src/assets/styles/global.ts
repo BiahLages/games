@@ -7,7 +7,8 @@ const GlobalStyle: GlobalStyleComponent<ThemeProps<DefaultTheme>, DefaultTheme> 
 	padding: 0;
 }
 
-body {
+html, body {
+		height: 100vh;
 		box-sizing: border-box;
 		font-family: ${mixings.constants.FontFamily};
 		font-weight: 400;
