@@ -16,7 +16,6 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 
 	const getAllProfiles = (): void => {
 		if (logged && currentUser) {
-			console.log(currentUser);
 			console.log(currentUser.user.profile);
 			const data = currentUser.user.profile;
 			setUserProfiles(data);
@@ -25,8 +24,13 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 
 	const selectProfile = (): void => {
 		const selected = userProfiles.find(profile => {
+			console.log("selected inside");
+			console.log(profile);
+			console.log(currentProfileId);
 			return profile.id === currentProfileId;
 		});
+		console.log("selected");
+		console.log(selected);
 
 		if (selected) {
 			localStorage.setItem("currentProfileId", selected.id);
@@ -35,9 +39,12 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 	};
 
 	const verifyProfile = (): void => {
-		const localProfile = localStorage.getItem("currentProfileId");
-		if (localProfile) {
-			setCurrentProfileId(localProfile);
+		const localUser = localStorage.getItem("currentProfileId");
+		if (localUser) {
+			const localProfile = localStorage.getItem("currentProfileId");
+			if (localProfile) {
+				setCurrentProfileId(localProfile);
+			}
 		}
 	};
 
@@ -110,6 +117,7 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 				getAllProfiles,
 				setCurrentProfileId,
 				userProfiles,
+				verifyProfile,
 			}}
 		>
 			{children}

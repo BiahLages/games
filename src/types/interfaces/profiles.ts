@@ -9,6 +9,7 @@ export interface IProfiles {
 	createProfile: (title: string, imageUrl: string) => void;
 	editProfile: (id: string, title: string, imageUrl: string) => void;
 	deleteProfile: (id: string) => void;
+	verifyProfile: () => void;
 }
 
 export interface IProfilePatcher {
