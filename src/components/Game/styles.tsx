@@ -5,12 +5,10 @@ import mixings from "../../assets/styles/mixins";
 export const SGame = styled.div`
 	position: relative;
 	color: ${mixings.colors.contrast1};
-	margin-top: 3em;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
 	font-size: 3rem;
-	padding: 1em 1em 0 1em;
 `;
 
 export const SRatingContent = styled.div`

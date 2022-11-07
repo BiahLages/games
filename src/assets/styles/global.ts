@@ -6,6 +6,7 @@ const GlobalStyle: GlobalStyleComponent<ThemeProps<DefaultTheme>, DefaultTheme> 
 	margin: 0;
 	padding: 0;
 }
+
 body {
 		box-sizing: border-box;
 		font-family: ${mixings.constants.FontFamily};

@@ -9,16 +9,16 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 
 	return (
 		<>
+			{update && (
+				<CreateUpGame
+					game={game}
+					mode="update"
+					close={(): void => {
+						setUpdate(!update);
+					}}
+				/>
+			)}
 			<SGame>
-				{update && (
-					<CreateUpGame
-						game={game}
-						mode="update"
-						close={(): void => {
-							setUpdate(!update);
-						}}
-					/>
-				)}
 				<STitleHeart>
 					<STitle>{game.title}</STitle>
 					<SHeart src={heartBlank} />
@@ -50,8 +50,8 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 				</SMediaContent>
 				{game.genres && (
 					<SGenre>
-						{game.genres.map((genre: ApiGenres) => {
-							return <SText>{genre.name}</SText>;
+						{game.genres.map((genre: ApiGenres, i: number) => {
+							return <SText key={i}>{genre.name}</SText>;
 						})}
 					</SGenre>
 				)}
