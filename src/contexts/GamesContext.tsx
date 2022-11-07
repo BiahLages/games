@@ -56,9 +56,9 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	};
 
 	const handleGetGamesByGenre = async (id: string): Promise<void> => {
-		if (status && category !== "all") {
+		if (true) {
 			await api.get(`/genres/${id}`, headers).then(res => {
-				setGamesByGender(res.data);
+				setGamesByGender(res.data.games);
 			});
 		}
 	};
