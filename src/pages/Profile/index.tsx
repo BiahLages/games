@@ -7,6 +7,8 @@ import Menu from "../../components/Menu";
 const Profile = (): JSX.Element => {
 	const { logged, currentUser } = useAuth();
 
+	console.log(currentUser?.user.profile);
+
 	return (
 		<>
 			{logged && currentUser && <Menu path="profile" />}
