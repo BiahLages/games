@@ -16,7 +16,6 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 	const [valueGamePlay, setValueGamePlay] = useState(game.gameplay || "");
 	const [valueGenre, setValueGenre] = useState("");
 
-	/*setMode(modeUporCreate);*/
 	const actionCUpGames = async (): Promise<void> => {
 		const data: ICardGames = {
 			title: valueTitle,
