@@ -1,17 +1,5 @@
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import mixings from "../../assets/styles/mixins";
-
-const toRight = keyframes`
-  0% {
-    position: relative;
-    left: -50vw;
-    opacity: 0;
-  }
- 100% {
-  position: relative;
-  left: 0px;
-  opacity: 1;
- }`;
 
 export const BackgroundForm = styled.div`
 	height: auto;
@@ -25,46 +13,34 @@ export const BackgroundForm = styled.div`
 	justify-content: space-around;
 	align-content: center;
 	align-items: center;
-	animation: ${toRight} 2s normal;
 
+	div {
+		display: flex;
+		flex-direction: column;
+	}
 	h1 {
 		font-size: 4em;
 	}
-`;
-
-export const SwicherContainer = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	#forgot {
-		cursor: pointer;
-		&:hover {
-			transform: scale(0.98);
-		}
+	label {
+		text-transform: capitalize;
+		font-size: 1.5em;
+		margin-bottom: 0.7em;
+		color: ${mixings.colors.primaryColor};
 	}
 
-	p {
-		font-size: 2.5em;
-	}
-`;
-
-export const SwicherButtom = styled.button`
-	height: 2.5em;
-	width: 5.5em;
-	background: transparent;
-	color: ${mixings.colors.primaryColor};
-	border: none;
-	border-radius: 0.5em;
-	font-family: ${mixings.constants.FontFamily};
-	font-size: 2.5em;
-	cursor: pointer;
-
-	&:hover {
-		transform: scale(0.98);
+	input {
+		height: 2em;
+		margin-bottom: 0.7em;
+		background: ${mixings.colors.baseBg2Dark};
+		color: gray;
+		border: none;
+		border-radius: 0.5em;
+		padding-left: 1em;
+		outline: 0;
 	}
 `;
 
-export const SubmitButtom = styled.button`
+export const SaveButton = styled.button`
 	position: relative;
 	left: calc(50% - 3em);
 	height: 2em;

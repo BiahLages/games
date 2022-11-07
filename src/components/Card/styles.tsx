@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SCard = styled.div`
-	margin-top: 300px;
+	margin-top: 30px;
 	border: solid 1px #fff;
 	cursor: pointer;
 	max-width: 250px;

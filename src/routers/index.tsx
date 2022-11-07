@@ -7,6 +7,8 @@ import Setting from "../pages/Setting";
 import { useProfiles } from "src/contexts/ProfilesContext";
 import GamePage from "src/pages/GamePage";
 import Recover from "src/pages/Recover";
+import Forgot from "src/pages/Forgot";
+import LoadingUser from "./../pages/LoadingUser/index";
 
 const Router = (): JSX.Element => {
 	const { logged } = useAuth();
@@ -35,10 +37,6 @@ const Router = (): JSX.Element => {
 								path="/settings"
 								element={<Setting />}
 							/>
-							<Route
-								path="/game/:id"
-								element={<GamePage />}
-							/>
 						</>
 					)}
 				</>
@@ -48,21 +46,34 @@ const Router = (): JSX.Element => {
 						path="/login"
 						element={<Login />}
 					/>
-
-					<Route
-						path="/recover/:id/:token"
-						element={<Recover />}
-					/>
 				</>
 			)}
 			<Route
 				path="*"
 				element={
 					<Navigate
-						to={logged ? "/" : "/login"}
+						to={"/loading"}
 						replace
 					/>
 				}
+			/>
+			<>
+				<Route
+					path="/loading"
+					element={<LoadingUser />}
+				/>
+			</>
+			<Route
+				path="/recover/:id/:token"
+				element={<Recover />}
+			/>
+			<Route
+				path="/game/:id"
+				element={<GamePage />}
+			/>
+			<Route
+				path="/forgotpassword"
+				element={<Forgot />}
 			/>
 		</Routes>
 	);

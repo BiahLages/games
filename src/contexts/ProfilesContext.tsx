@@ -16,16 +16,8 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 
 	const getAllProfiles = (): void => {
 		if (logged && currentUser) {
-			const headers = {
-				headers: {
-					Authorization: `Bearer ${currentUser.token}`,
-				},
-			};
-			api.get(`/users/${currentUser.user.id}`, headers).then((res): void => {
-				if (res.status === 200) {
-					setUserProfiles(res.data.profile);
-				}
-			});
+			const data = currentUser.user.profile;
+			setUserProfiles(data);
 		}
 	};
 
@@ -34,7 +26,17 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 			return profile.id === currentProfileId;
 		});
 
-		if (selected) setCurrentProfile(selected);
+		if (selected) {
+			localStorage.setItem("currentProfileId", selected.id);
+			setCurrentProfile(selected);
+		}
+	};
+
+	const verifyProfile = (): void => {
+		const localProfile = localStorage.getItem("currentProfileId");
+		if (localProfile) {
+			setCurrentProfileId(localProfile);
+		}
 	};
 
 	const createProfile = (title: string, imageUrl: string): void => {
@@ -88,8 +90,12 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 
 	useEffect(() => {
 		selectProfile();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentProfileId]);
+
+	useEffect(() => {
+		verifyProfile();
+		selectProfile();
+	}, [logged, currentUser]);
 
 	return (
 		<ProfilesContext.Provider

@@ -8,7 +8,7 @@ export const OrderSettingsProvider = ({ children }: AllProvidersProps): JSX.Elem
 	const [orderBy, setOrderBy] = useState("score");
 	const [orderDirection, setOrderDirection] = useState("desc");
 	const [category, setCategory] = useState("all");
-	const [pageLength, setPageLenght] = useState(5);
+	const [pageLength, setPageLenght] = useState(3);
 
 	return (
 		<OrderContext.Provider

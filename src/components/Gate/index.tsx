@@ -5,6 +5,7 @@ import { useAuth } from "../../contexts/AccountContext";
 import { useEffect, useState } from "react";
 import { api } from "../../helpers/Api";
 import Input from "../Input";
+import { useNavigate } from "react-router-dom";
 
 const Gate = (): JSX.Element => {
 	const { login } = useAuth();
@@ -16,6 +17,8 @@ const Gate = (): JSX.Element => {
 	const [valueCPF, setValueCPF] = useState("");
 	const [validPasswordCharacters, setValidPasswordCharacters] = useState(false);
 	const [validPasswordLength, setValidPasswordLength] = useState(false);
+
+	const navigate = useNavigate();
 
 	const action = async (): Promise<void> => {
 		const isValidEmail = validateEmail(valueEmail);
@@ -130,6 +133,14 @@ const Gate = (): JSX.Element => {
 					{!mode ? `Register` : `SignIn`}
 				</SubmitButtom>
 			</form>
+			<SwicherContainer>
+				<p
+					id="forgot"
+					onClick={() => navigate("/forgotpassword")}
+				>
+					{"Forgot the password ?"}{" "}
+				</p>
+			</SwicherContainer>
 			<SwicherContainer>
 				<p>{mode ? `Don't have an account?` : `Alread have an account?`}</p>
 

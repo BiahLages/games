@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { AllProvidersProps } from "../types/interfaces/system";
 import { GameProviderData } from "../types/interfaces/games";
 import { useOrderSettings } from "./OrderSettingsContext";
-import { ApiGames } from "../types/interfaces/api";
+import { ApiGames, ApiGenres } from "../types/interfaces/api";
 import { useAuth } from "./AccountContext";
 import { api } from "../helpers/Api";
 
@@ -14,10 +14,14 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	const [allGames, setAllGames] = useState<ApiGames[]>([]);
 	const [games, setGames] = useState<ApiGames[]>([]);
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [lastValidPage, setLastValidPage] = useState(1);
-	const [currentPage, setCurrentPage] = useState(1);
+	const [allGenres, setGenres] = useState<ApiGenres[]>([]);
+	const [gamesByGender, setGamesByGender] = useState<ApiGames[]>([]);
+	const [lastValidPage, setLastValidPage] = useState(false);
+	const [shownCards, setShownCards] = useState(3);
 	const [status, getStatus] = useState(false);
+	const [currentPage, setCurrentPage] = useState(1);
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const [lastPage, setLastPage] = useState(0);
 
 	const token = localStorage.getItem("token");
 
@@ -45,30 +49,87 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	// 	}
 	// };
 
+	const handleGetAllGenres = async (): Promise<void> => {
+		await api.get(`/genres`).then(res => {
+			setGenres(res.data);
+		});
+	};
+
+	const handleGetGamesByGenre = async (id: string): Promise<void> => {
+		if (true) {
+			await api.get(`/genres/${id}`, headers).then(res => {
+				setGamesByGender(res.data.games);
+			});
+		}
+	};
+
 	const handleGetGames = async (): Promise<void> => {
 		if (category === "all" && !headers.headers.Authorization.includes("null")) {
 			await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
-				if (games.length <= 1) {
-					setGames(res.data);
-				} else if (games.length < allGames.length) {
-					const data: ApiGames[] = [...games, ...res.data];
-					setLastValidPage(currentPage);
-					setGames(data);
-				} else {
-					setGames([]);
-					setCurrentPage(1);
+				setGames(res.data);
+				if (allGames.length !== 0) {
+					setShownCards(shownCards + res.data.length);
+					if (shownCards >= allGames.length) {
+						setLastValidPage(true);
+					} else if (shownCards !== allGames.length) {
+						setShownCards(shownCards + res.data.length);
+						setLastValidPage(false);
+						setLastPage(currentPage);
+					}
 				}
 			});
 		}
 	};
+
+	const handleFormatLink = (
+		paramGameplay: string,
+		paramTrailer: string,
+	): {
+		gameplay: string;
+		trailer: string;
+	} => {
+		let gameplay: string;
+		let trailer: string;
+		if (paramGameplay.includes("watch")) {
+			const gameplayTemp = paramGameplay.split("=");
+			gameplay = `https://www.youtube.com/embed/${gameplayTemp[1]}`;
+		} else {
+			gameplay = paramGameplay;
+		}
+
+		if (paramTrailer.includes("watch")) {
+			const trailerTemp = paramTrailer.split("=");
+			trailer = `https://www.youtube.com/embed/${trailerTemp[1]}`;
+		} else {
+			trailer = paramTrailer;
+		}
+
+		return { gameplay, trailer };
+	};
+
 	const handleGetGameById = async (id: string): Promise<ApiGames | undefined> => {
 		if (logged && currentUser) {
 			return await api
 				.get(`/games/${id}`, headers)
 				.then(res => {
-					return res.data;
+					const game: ApiGames = res.data;
+					const { id, title, image, description, year, score, trailer, gameplay, genres, createdAt, updatedAt } = game;
+					const linkEdited = handleFormatLink(gameplay, trailer);
+					return {
+						id,
+						title,
+						description,
+						image,
+						year,
+						score,
+						...linkEdited,
+						genres,
+						createdAt,
+						updatedAt,
+					};
 				})
 				.catch(err => {
+					console.log(err);
 					return undefined;
 				});
 		}
@@ -81,8 +142,6 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 		}
 	};
 	const handleGetServerStatus = (): void => {
-		setGames([]);
-		setCurrentPage(1);
 		api.get("/status").then(res => {
 			if (res.status === 200) {
 				getStatus(true);
@@ -92,28 +151,39 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	useEffect(() => {
 		handleGetGames();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [currentPage]);
 
 	useEffect(() => {
+		handleGetGames();
+	}, [status, allGames]);
+
+	useEffect(() => {
 		handleGetAllGames();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [status]);
 
 	useEffect(() => {
 		handleGetGames();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [status]);
+
+	useEffect(() => {
+		handleGetAllGenres();
 	}, [status]);
 
 	return (
 		<GameContext.Provider
 			value={{
+				allGenres,
+				gamesByGender,
+				allGames,
+				lastValidPage,
+				setLastValidPage,
 				currentPage,
 				setCurrentPage,
 				status,
 				games,
 				handleGetGameById,
 				handleGetServerStatus,
+				handleGetGamesByGenre,
 			}}
 		>
 			{children}
