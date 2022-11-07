@@ -9,7 +9,7 @@ const AdminGameContext = createContext({} as IAdminGames);
 export const AdminGamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	const { logged, currentUser } = useAuth();
 
-	const createGame = (title: string, image: string, year: string, description: string, score: string, trailer: string, gameplay: string, genreId: string): void => {
+	const createGame = async ({ title, image, year, description, score, trailer, gameplay, genreId }: ICardGames): Promise<void> => {
 		const data: ICardGames = {
 			title,
 			image,
@@ -36,11 +36,11 @@ export const AdminGamesProvider = ({ children }: AllProvidersProps): JSX.Element
 		}
 	};
 
-	const editGame = (title: string, imageUrl: string, year: string, description: string, score: string, trailer: string, gameplay: string, genreId: string): void => {
+	const editGame = async (id: string, { title, image, year, description, score, trailer, gameplay, genreId }: ICardGames): Promise<void> => {
 		const data: ICardGames = {};
 		if (logged && currentUser) {
 			if (title) data.title = title;
-			if (imageUrl) data.image = imageUrl;
+			if (image) data.image = image;
 			if (year) data.year = year;
 			if (description) data.description = description;
 			if (score) data.score = score;
@@ -60,7 +60,7 @@ export const AdminGamesProvider = ({ children }: AllProvidersProps): JSX.Element
 		}
 	};
 
-	const deleteGame = (id: string): void => {
+	const deleteGame = async (id: string): Promise<void> => {
 		if (logged && currentUser) {
 			const headers = {
 				headers: {

@@ -136,7 +136,9 @@ const Gate = (): JSX.Element => {
 			<SwicherContainer>
 				<p
 					id="forgot"
-					onClick={() => navigate("/forgotpassword")}
+					onClick={(): void => {
+						navigate("/forgotpassword");
+					}}
 				>
 					{"Forgot the password ?"}{" "}
 				</p>
