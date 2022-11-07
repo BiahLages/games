@@ -4,6 +4,7 @@ import { ProfilesProvider } from "./ProfilesContext";
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "./AccountContext";
 import { GamesProvider } from "./GamesContext";
+import { AdminGamesProvider } from "./AdminGamesContext";
 import { ReactNode } from "react";
 import { ConfigUserProvider } from "./ConfigUserContext";
 interface ProvidersProps {
@@ -18,7 +19,9 @@ const Providers = ({ children }: ProvidersProps): JSX.Element => {
 					<ProfilesProvider>
 						<FavoritesProvider>
 							<OrderSettingsProvider>
-								<GamesProvider>{children}</GamesProvider>
+								<GamesProvider>
+									<AdminGamesProvider>{children}</AdminGamesProvider>
+								</GamesProvider>
 							</OrderSettingsProvider>
 						</FavoritesProvider>
 					</ProfilesProvider>

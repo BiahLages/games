@@ -26,4 +26,11 @@ export interface ICardGames {
 	trailer?: string;
 	gameplay?: string;
 	genres?: ApiGenres[];
+	genreId?: string;
+}
+
+export interface IAdminGames {
+	createGame: (title: string, imageUrl: string, year: string, description: string, score: string, trailer: string, gameplay: string, genreid: string) => void;
+	editGame: (title: string, imageUrl: string, year: string, description: string, score: string, trailer: string, gameplay: string, genreid: string) => void;
+	deleteGame: (id: string) => void;
 }

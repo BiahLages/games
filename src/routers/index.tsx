@@ -52,17 +52,15 @@ const Router = (): JSX.Element => {
 				path="*"
 				element={
 					<Navigate
-						to={"/loading"}
+						to="/loading"
 						replace
 					/>
 				}
 			/>
-			<>
-				<Route
-					path="/loading"
-					element={<LoadingUser />}
-				/>
-			</>
+			<Route
+				path="/loading"
+				element={<LoadingUser />}
+			/>
 			<Route
 				path="/recover/:id/:token"
 				element={<Recover />}
