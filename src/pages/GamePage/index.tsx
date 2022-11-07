@@ -15,7 +15,7 @@ const GamePage = (): JSX.Element => {
 	const { id } = useParams();
 	const [current, setCurrent] = useState<ApiGames | undefined>();
 
-	const showGame = async () => {
+	const showGame = async (): Promise<void> => {
 		console.log("gamepage itens");
 		console.log(id);
 		console.log(logged);

@@ -14,7 +14,7 @@ const Forgot = (): JSX.Element => {
 
 	const navigate = useNavigate();
 
-	const handleForgotPassword = async () => {
+	const handleForgotPassword = async (): Promise<void> => {
 		if (email !== "") {
 			await api
 				.get(`users/recover/${email}`)
