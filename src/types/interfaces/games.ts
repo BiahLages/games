@@ -30,9 +30,9 @@ export interface ICardGames {
 }
 
 export interface IAdminGames {
-	createGame: (title: string, imageUrl: string, year: string, description: string, score: string, trailer: string, gameplay: string, genreid: string) => void;
-	editGame: (title: string, imageUrl: string, year: string, description: string, score: string, trailer: string, gameplay: string, genreid: string) => void;
-	deleteGame: (id: string) => void;
+	createGame: (data: ICardGames) => Promise<void>;
+	editGame: (id: string, data: ICardGames) => Promise<void>;
+	deleteGame: (id: string) => Promise<void>;
 }
 
 export interface IStyleScore {
