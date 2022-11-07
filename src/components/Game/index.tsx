@@ -42,8 +42,8 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 					/>
 					<SInfoContent>
 						<SVideosContent>
-							<SGameplay src={game.gameplay} />
 							<STrailer src={game.trailer} />
+							<SGameplay src={game.gameplay} />
 						</SVideosContent>
 						<SText>{game.description}</SText>
 					</SInfoContent>
