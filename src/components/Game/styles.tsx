@@ -49,6 +49,11 @@ export const STitle = styled.h2`
 export const SHeart = styled.img`
 	width: 3em;
 	padding-right: 2em;
+	cursor: pointer;
+
+	&:hover {
+		transform: scale(0.98);
+	}
 `;
 
 export const SText = styled.p`
