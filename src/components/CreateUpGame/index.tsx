@@ -38,13 +38,17 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 	};
 
 	return (
-		<S.Overlay
-			onClick={(): void => {
-				close();
-			}}
-		>
+		<S.Overlay>
 			<S.FormUpCreate>
-				<h1> {!mode ? `To Edit Game` : `Add Game`}</h1>
+				<S.HeaderForm
+					onClick={(e): void => {
+						close();
+						e.stopPropagation();
+					}}
+				>
+					<h1> {!mode ? `To Edit Game` : `Add Game`}</h1>
+					<span>➕</span>
+				</S.HeaderForm>
 				<Input
 					label="Game Name"
 					placeholder={valueTitle}
@@ -100,7 +104,7 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 						e.stopPropagation();
 					}}
 				>
-					{!mode ? `To Edit` : `Add`}
+					Save
 				</S.ButtonSubmit>
 			</S.FormUpCreate>
 		</S.Overlay>
