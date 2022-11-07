@@ -7,8 +7,8 @@ const TopRated = (): JSX.Element => {
 	const { games, currentPage, setCurrentPage, lastValidPage } = useGame();
 	return (
 		<Div>
+			<TopRatedTitle>EM ALTA 🔥</TopRatedTitle>
 			<Column>
-				<TopRatedTitle>EM ALTA</TopRatedTitle>
 				<Row>
 					{currentPage !== 1 && (
 						<ArrowBack

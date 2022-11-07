@@ -15,13 +15,18 @@ const Column = styled.div`
 `;
 
 const Div = styled.div`
-	margin: 50px;
+	margin-top: 4rem;
 `;
 
 const ArrowBack = styled.div`
 	font-size: 65px;
-	border: solid 1px #fff;
-	background-color: cyan;
+	/* border: solid 1px #fff; */
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	margin: 5rem;
+	transition: 0.2;
+	/* background-color: cyan; */
 `;
 
 export { Row, Column, Div, ArrowBack, TopRatedTitle };

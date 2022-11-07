@@ -7,7 +7,7 @@ const Favorites = (): JSX.Element => {
 	// const { favorites } = useFavorites();
 	return (
 		<FavoritesConteiner>
-			<h2>FAVORITES</h2>
+			<h2>FAVORITOS ❤️</h2>
 			<div>
 				<p>CARDS DOS FAVORITES</p>
 				{/* {favorites.map((game, key) => (

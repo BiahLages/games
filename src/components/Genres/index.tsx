@@ -10,7 +10,7 @@ const Genres = (): JSX.Element => {
 
 	return (
 		<Column>
-			<GenresTitle>Escolha por gênero:</GenresTitle>
+			<GenresTitle>POR GÊNERO✨</GenresTitle>
 			<select
 				onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => {
 					console.log("ENTROU");
@@ -23,12 +23,14 @@ const Genres = (): JSX.Element => {
 			>
 				{allGenres.map((genre, key) => {
 					return (
-						<option
-							value={genre.id}
-							key={key}
-						>
-							{genre.name}
-						</option>
+						<>
+							<option
+								value={genre.id}
+								key={key}
+							>
+								{genre.name}
+							</option>
+						</>
 					);
 				})}
 			</select>
