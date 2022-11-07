@@ -74,7 +74,8 @@ export const HeaderForm = styled.div`
 	}
 	span {
 		position: relative;
-		right: -2em;
+		top: -0.6em;
+		right: -35%;
 		background: ${mixings.colors.primaryColorOpacity};
 		border-radius: 50%;
 		padding: 0.2em;

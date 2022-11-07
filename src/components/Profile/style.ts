@@ -43,16 +43,20 @@ export const NameUser = styled.div`
 	h2 {
 		font-size: 3em;
 		text-align: center;
+		margin-top: 1em;
 	}
 `;
 
 export const DivImgEdit = styled.div`
 	height: 6em;
 	cursor: pointer;
+	span {
+		font-size: 2em;
+	}
 `;
 
 export const ImgEditDelete = styled.img`
-	width: 8em;
+	width: 7em;
 	cursor: pointer;
 `;
 
@@ -100,16 +104,22 @@ export const HeaderForm = styled.div`
 	width: 100%;
 	text-align: center;
 	cursor: default;
-	div {
-		position: relative;
-		right: calc(2em - 50%);
-		cursor: pointer;
-	}
 	h2 {
 		position: relative;
 		top: -2em;
 		font-size: 3em;
 		cursor: default;
+	}
+	span {
+		position: relative;
+		right: -50%;
+		top: -0.5em;
+		font-size: 3em;
+		background: ${mixings.colors.primaryColorOpacity};
+		padding: 0.5em;
+		border-radius: 50%;
+		transform: rotate(45deg);
+		cursor: pointer;
 	}
 `;
 
@@ -120,11 +130,15 @@ export const OptionsEditDelete = styled.div`
 	gap: 5rem;
 
 	div {
-		width: 10em;
+		width: 50%;
 		aspect-ratio: 1;
+		gap: 0.5em;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		cursor: pointer;
+		span {
+			font-size: 2em;
+		}
 	}
 `;
