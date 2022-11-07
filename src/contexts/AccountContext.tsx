@@ -15,13 +15,13 @@ export const AuthProvider = ({ children }: AllProvidersProps): JSX.Element => {
 		localStorage.setItem("token", token);
 		localStorage.setItem("user", JSON.stringify(user));
 		setLogged(true);
-		navigate(0);
+		navigate("/loading");
 	};
 
 	const logout = (): void => {
 		localStorage.clear();
 		setLogged(false);
-		navigate(0);
+		navigate("/loading");
 	};
 
 	const checkTokenExpiration = (): void => {
