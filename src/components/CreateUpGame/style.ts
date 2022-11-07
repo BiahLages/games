@@ -44,6 +44,13 @@ export const FormUpCreate = styled.div`
 		text-align: center;
 		font-size: 3em;
 	}
+
+	span {
+		position: absolute;
+		right: 40rem;
+		top: 25rem;
+		cursor: pointer;
+	}
 `;
 
 export const ButtonSubmit = styled.button`

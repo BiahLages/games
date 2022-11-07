@@ -13,18 +13,6 @@ export const SGame = styled.div`
 	padding: 1em 1em 0 1em;
 `;
 
-export const SEditFrame = styled.div`
-	position: absolute;
-	z-index: 2;
-	left: 0;
-	top: 0;
-	height: 100vh;
-	width: 100vw;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-`;
-
 export const SRatingContent = styled.div`
 	display: flex;
 	flex-direction: column;
