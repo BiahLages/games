@@ -34,3 +34,7 @@ export interface IAdminGames {
 	editGame: (title: string, imageUrl: string, year: string, description: string, score: string, trailer: string, gameplay: string, genreid: string) => void;
 	deleteGame: (id: string) => void;
 }
+
+export interface IStyleScore {
+	score: number;
+}
