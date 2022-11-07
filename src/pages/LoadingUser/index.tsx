@@ -3,7 +3,7 @@ import LoaderImageDark1 from "../../assets/images/loaderI.gif";
 import { useNavigate } from "react-router-dom";
 import { LoadingUserStyle } from "./styles";
 
-const LoadingUser = () => {
+const LoadingUser = (): JSX.Element => {
 	const { logged } = useAuth();
 	const navigate = useNavigate();
 
