@@ -1,4 +1,4 @@
-import { SGame, SImage, STitle, SText, SRatingContent, SMediaContent, SVideosContent, SGameplay, STrailer, SInfoContent, SGenre, SButton, SButtonsContainer, SHeart, STitleHeart, SStars, SScore, SEditFrame } from "./styles";
+import { SGame, SImage, STitle, SText, SRatingContent, SMediaContent, SVideosContent, SGameplay, STrailer, SInfoContent, SGenre, SButton, SButtonsContainer, SHeart, STitleHeart, SStars, SScore } from "./styles";
 import { ApiGames, ApiGenres } from "../../types/interfaces/api";
 import heartBlank from "src/assets/icons/heartBlank.png";
 import CreateUpGame from "../CreateUpGame";
@@ -11,15 +11,13 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 		<>
 			<SGame>
 				{update && (
-					<SEditFrame>
-						<CreateUpGame
-							game={game}
-							mode="update"
-							close={(): void => {
-								setUpdate(!update);
-							}}
-						/>
-					</SEditFrame>
+					<CreateUpGame
+						game={game}
+						mode="update"
+						close={(): void => {
+							setUpdate(!update);
+						}}
+					/>
 				)}
 				<STitleHeart>
 					<STitle>{game.title}</STitle>
