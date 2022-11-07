@@ -16,16 +16,10 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 
 	const getAllProfiles = (): void => {
 		if (logged && currentUser) {
-			const headers = {
-				headers: {
-					Authorization: `Bearer ${currentUser.token}`,
-				},
-			};
-			api.get(`/users/${currentUser.user.id}`, headers).then((res): void => {
-				if (res.status === 200) {
-					setUserProfiles(res.data.profile);
-				}
-			});
+			console.log(currentUser);
+			console.log(currentUser.user.profile);
+			const data = currentUser.user.profile;
+			setUserProfiles(data);
 		}
 	};
 

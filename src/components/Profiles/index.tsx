@@ -4,7 +4,7 @@ import { useProfiles } from "src/contexts/ProfilesContext";
 import Profile from "../Profile";
 import Input from "../Input";
 
-const Profiles = () => {
+const Profiles = (): JSX.Element => {
 	const { getAllProfiles, userProfiles, createProfile } = useProfiles();
 	const [addProfile, setAddProfile] = useState(false);
 	const [nameProfile, setNameProfile] = useState("");
