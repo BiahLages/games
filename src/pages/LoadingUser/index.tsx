@@ -21,17 +21,17 @@ const LoadingUser = (): JSX.Element => {
 			getAllProfiles();
 			return setTimeout(() => {
 				beforeLoad("/");
-			}, 750);
+			}, 1420);
 		} else if (user && token) {
 			getAllProfiles();
 			return setTimeout(() => {
 				beforeLoad("/profile");
-			}, 750);
+			}, 1420);
 		} else {
 			getAllProfiles();
 			return setTimeout(() => {
 				beforeLoad("/login");
-			}, 750);
+			}, 250);
 		}
 	};
 
