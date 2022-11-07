@@ -50,7 +50,7 @@ export const BackgroundForm = styled.div`
 export const SYesOrNoButton = styled.button`
 	height: 2em;
 	width: 6em;
-	background: ${(props: IYesOrNoButton): string => (props.answer === "yes" ? "green" : "red")};
+	background: ${(props: IYesOrNoButton): string => (props.answer === "yes" ? "#6cea69" : "#ff5555")};
 	color: ${mixings.colors.contrast1};
 	border: none;
 	border-radius: 2em;
