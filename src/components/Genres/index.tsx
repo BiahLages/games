@@ -11,8 +11,7 @@ const Genres = (): JSX.Element => {
 	return (
 		<Column>
 			<select
-				// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-				onChange={e => {
+				onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => {
 					console.log("ENTROU");
 					console.log(e.target.value);
 					handleGetGamesByGenre(e.target.value);
@@ -23,14 +22,12 @@ const Genres = (): JSX.Element => {
 			>
 				{allGenres.map((genre, key) => {
 					return (
-						<>
-							<option
-								value={genre.id}
-								key={key}
-							>
-								{genre.name}
-							</option>
-						</>
+						<option
+							value={genre.id}
+							key={key}
+						>
+							{genre.name}
+						</option>
 					);
 				})}
 			</select>
