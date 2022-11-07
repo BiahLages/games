@@ -16,6 +16,8 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 
 	const getAllProfiles = (): void => {
 		if (logged && currentUser) {
+			console.log(currentUser);
+			console.log(currentUser.user.profile);
 			const data = currentUser.user.profile;
 			setUserProfiles(data);
 		}
