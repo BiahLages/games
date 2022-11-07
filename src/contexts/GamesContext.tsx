@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { AllProvidersProps } from "../types/interfaces/system";
 import { GameProviderData } from "../types/interfaces/games";
 import { useOrderSettings } from "./OrderSettingsContext";

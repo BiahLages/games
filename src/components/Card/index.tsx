@@ -1,6 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import { ICardGames } from "../../types/interfaces/games";
+import { Link } from "react-router-dom";
 
 import { STitle, SDate, /* SDescription, SActionButton,*/ SCard } from "./styles";
 
