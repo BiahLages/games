@@ -1,5 +1,5 @@
-import { CheckProfiles, EditProfile, SettingsContent } from "./style";
-import trash from "../../assets/icons/trash.png";
+import { DeleteAccount, EditProfile, SettingsContent } from "./style";
+import deleteAcc from "../../assets/icons/deleteAcc.png";
 import editprofile from "../../assets/icons/editProfile.png";
 import { useConfigUser } from "src/contexts/ConfigUserContext";
 
@@ -15,11 +15,11 @@ function MenuUpdateChoice(): JSX.Element {
 							alt="Edit my profile"
 							onClick={(): void => functions.handdleChangeConfigUser()}
 						/>
-						<span>Edit profile</span>
+						<span>Edit Info</span>
 					</div>
 					<div>
-						<CheckProfiles
-							src={trash}
+						<DeleteAccount
+							src={deleteAcc}
 							alt="Delete Account"
 							onClick={(): void => functions.handdleChangeDeleteAccount()}
 						/>

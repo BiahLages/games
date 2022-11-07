@@ -9,7 +9,7 @@ export const SettingsContent = styled.main`
 	justify-content: flex-start;
 	overflow-y: auto;
 	article {
-		padding-top: 20em;
+		padding-top: 10em;
 		display: flex;
 	}
 	div {
@@ -31,6 +31,6 @@ export const EditProfile = styled.img`
 	width: 36em;
 `;
 
-export const CheckProfiles = styled.img`
+export const DeleteAccount = styled.img`
 	width: 36em;
 `;
