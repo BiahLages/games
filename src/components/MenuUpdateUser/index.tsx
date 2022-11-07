@@ -1,5 +1,5 @@
 import { isPw } from "../../utils/validation.tools";
-import { BackgroundForm, SaveButton, ContainerVerification, VerificationResponse } from "./styles";
+import { BackgroundForm, SCancelOrSaveButton, ContainerVerification, VerificationResponse } from "./styles";
 import { useConfigUser } from "src/contexts/ConfigUserContext";
 import { success } from "../../utils/validation.tools";
 
@@ -16,7 +16,7 @@ const MenuUpdateUser = (): JSX.Element => {
 						placeholder="User Name"
 						type="text"
 						value={states.name}
-						onChange={(e: any) => setStates.setName(e.target.value)}
+						onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setStates.setName(e.target.value)}
 					/>
 
 					<label>CPF</label>
@@ -46,14 +46,25 @@ const MenuUpdateUser = (): JSX.Element => {
 						<VerificationResponse>{states.password.length > 7 ? "✅" : "⛔️"} 8 characters</VerificationResponse>
 						<VerificationResponse>{isPw.test(states.password) ? "✅" : "⛔️"} Uppercase | Lowercase | Symbol | Number</VerificationResponse>
 					</ContainerVerification>
-					<SaveButton
-						onClick={(): void => {
-							functions.handdleUpdateUser();
-							success("Saved Successfuly");
-						}}
-					>
-						Save
-					</SaveButton>
+					<div id="buttons">
+						<SCancelOrSaveButton
+							answer="save"
+							onClick={(): void => {
+								functions.handdleUpdateUser();
+								success("Saved Successfuly");
+							}}
+						>
+							Save
+						</SCancelOrSaveButton>
+						<SCancelOrSaveButton
+							answer="cancel"
+							onClick={(): void => {
+								functions.handdleConfigMenus();
+							}}
+						>
+							Cancel
+						</SCancelOrSaveButton>
+					</div>
 				</div>
 			</BackgroundForm>
 		</>
