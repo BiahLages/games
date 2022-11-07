@@ -39,7 +39,7 @@ export interface IConfigUserProviderData {
 		handdleUpdateUserAdmin: () => void;
 		handdleDeleteUserAdmin: () => void;
 		handdleChangeConfigUser: () => void;
-		handdleChangeConfigAdmin: () => void;
+		handdleChangeDeleteAccount: () => void;
 		handdleConfigMenus: () => void;
 	};
 }
