@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const TopRatedTitle = styled.h2`
-	font-size: 20px;
+	font-size: 40px;
 `;
 
 const Row = styled.div`

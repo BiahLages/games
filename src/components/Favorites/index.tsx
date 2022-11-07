@@ -1,13 +1,13 @@
 // import { useState, useEffect } from 'react';
 // import { useFavorites } from "../../contexts/FavoritesContext";
 // import Card from "../Card/index";
-import { FavoritesConteiner } from "./styles";
+import { FavoritesTitle } from "./styles";
 
 const Favorites = (): JSX.Element => {
 	// const { favorites } = useFavorites();
 	return (
-		<FavoritesConteiner>
-			<h2>FAVORITOS ❤️</h2>
+		<div>
+			<FavoritesTitle>FAVORITOS ❤️</FavoritesTitle>
 			<div>
 				<p>CARDS DOS FAVORITES</p>
 				{/* {favorites.map((game, key) => (
@@ -18,7 +18,7 @@ const Favorites = (): JSX.Element => {
 					/>
 			))} */}
 			</div>
-		</FavoritesConteiner>
+		</div>
 	);
 };
 

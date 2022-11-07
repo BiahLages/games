@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const GenresTitle = styled.h2`
-	font-size: 20px;
-	margin-top: 1rem;
+	font-size: 40px;
+	margin-top: 2rem;
 	margin-bottom: 2rem;
 `;
 
