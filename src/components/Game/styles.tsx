@@ -1,14 +1,15 @@
+import { IStyleScore } from "src/types/interfaces/games";
 import styled from "styled-components";
 import mixings from "../../assets/styles/mixins";
 
 export const SGame = styled.div`
 	color: #fff;
-	margin-top: 5em;
+	margin-top: 3em;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
 	font-size: 3rem;
-	padding: 1em;
+	padding: 1em 1em 0 1em;
 `;
 
 export const SRatingContent = styled.div`
@@ -97,5 +98,20 @@ export const SButton = styled.button`
 
 	&:hover {
 		transform: scale(0.98);
+	}
+`;
+
+export const SScore = styled.div`
+	display: flex;
+	flex-direction: row;
+`;
+
+export const SStars = styled.div`
+	width: 100rem;
+	height: 9rem;
+	background: ${(props: IStyleScore): string => `linear-gradient(90deg, rgba(241, 255, 0, 1) ${props.score * 10}%, rgba(255, 255, 255, 1) ${props.score * 10}%)`};
+	img {
+		width: 100%;
+		height: 100%;
 	}
 `;
