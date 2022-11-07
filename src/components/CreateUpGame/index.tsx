@@ -1,69 +1,49 @@
 import * as S from "./style";
 import { useState } from "react";
-import { api } from "../../helpers/Api";
 import { ICardGames } from "../../types/interfaces/games";
 import Input from "../Input";
+import { UseAdminGames } from "../../contexts/AdminGamesContext";
 
-const CreateUpGame = (/*modeUporCreate*/): JSX.Element => {
-	// const { createGame, editGame } = UseAdminGames();
+const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; close: () => void }): JSX.Element => {
+	const { createGame, editGame } = UseAdminGames();
 
-	const [mode, setMode] = useState(true /*modeUporCreate*/);
-	const [valueTitle, setValueTitle] = useState("");
-	const [valueImage, setValueImage] = useState("");
-	const [valueDescription, setValueDescription] = useState("");
-	const [valueYear, setValueYear] = useState("");
-	const [valueScore, setValueScore] = useState("");
-	const [valueTrailer, setValueTrailer] = useState("");
-	const [valueGamePlay, setValueGamePlay] = useState("");
+	const [valueTitle, setValueTitle] = useState(game.title || "");
+	const [valueImage, setValueImage] = useState(game.image || "");
+	const [valueDescription, setValueDescription] = useState(game.description || "");
+	const [valueYear, setValueYear] = useState(game.year || "");
+	const [valueScore, setValueScore] = useState(game.score || "");
+	const [valueTrailer, setValueTrailer] = useState(game.trailer || "");
+	const [valueGamePlay, setValueGamePlay] = useState(game.gameplay || "");
 	const [valueGenre, setValueGenre] = useState("");
 
 	/*setMode(modeUporCreate);*/
 	const actionCUpGames = async (): Promise<void> => {
+		const data: ICardGames = {
+			title: valueTitle,
+			image: valueImage,
+			description: valueDescription,
+			year: valueYear,
+			score: valueScore,
+			trailer: valueTrailer,
+			gameplay: valueGamePlay,
+			genreId: valueGenre,
+		};
 		switch (mode) {
-			case false: {
-				const data: ICardGames = {
-					title: valueTitle,
-					image: valueImage,
-					description: valueDescription,
-					year: valueYear,
-					score: valueScore,
-					trailer: valueTrailer,
-					gameplay: valueGamePlay,
-					genreId: valueGenre,
-				};
-				const updateGame = await api.patch("/games", data).then(res => res);
-				switch (updateGame.status) {
-					case 201: {
-						console.log(updateGame.data);
-					}
-				}
-			}
-		}
-		switch (mode) {
-			case true: {
-				const data: ICardGames = {
-					id: "",
-					title: valueTitle,
-					image: valueImage,
-					description: valueDescription,
-					year: valueYear,
-					score: valueScore,
-					trailer: valueTrailer,
-					gameplay: valueGamePlay,
-					genreId: valueGenre,
-				};
-				const createGame = await api.post("/games", data).then(res => res);
-				switch (createGame.status) {
-					case 201: {
-						console.log(createGame.data);
-					}
-				}
-			}
+			case "update":
+				if (game.id) editGame(game.id, data);
+				break;
+			case "create":
+				createGame(data);
+				break;
 		}
 	};
 
 	return (
-		<S.Overlay>
+		<S.Overlay
+			onClick={(): void => {
+				close();
+			}}
+		>
 			<S.FormUpCreate>
 				<h1> {!mode ? `To Edit Game` : `Add Game`}</h1>
 				<Input
@@ -103,7 +83,7 @@ const CreateUpGame = (/*modeUporCreate*/): JSX.Element => {
 					value={setValueTrailer}
 				/>
 				<Input
-					label="Link Game Play"
+					label="Link Gameplay"
 					placeholder={valueGamePlay}
 					type="text"
 					value={setValueGamePlay}

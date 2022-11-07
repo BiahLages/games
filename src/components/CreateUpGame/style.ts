@@ -15,7 +15,8 @@ const showForm = keyframes`
 export const Overlay = styled.div`
 	position: relative;
 	top: 0;
-	width: 100vw;
+	max-width: 100vw;
+	max-height: 100vh;
 	height: auto;
 	padding: 10em 0;
 	background: ${mixings.colors.primaryColorOpacity};
