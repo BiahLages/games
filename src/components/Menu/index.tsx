@@ -10,7 +10,7 @@ import Input from "../Input";
 import { useConfigUser } from "src/contexts/ConfigUserContext";
 
 const Menu = ({ path }: MenuProps): JSX.Element => {
-	const { logout, currentUser } = useAuth();
+	const { logout } = useAuth();
 	const { currentProfile, verifyProfile } = useProfiles();
 	const { functions } = useConfigUser();
 	const navigate: NavigateFunction = useNavigate();
@@ -20,8 +20,6 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 
 	useEffect(() => {
 		verifyProfile();
-		console.log(currentUser);
-		console.log(currentProfile);
 	}, []);
 
 	return (
