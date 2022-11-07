@@ -217,7 +217,6 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 			>
 				{children}
 			</ConfigUserContext.Provider>
-			;
 		</>
 	);
 };
