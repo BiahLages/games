@@ -32,37 +32,35 @@ const Forgot = (): JSX.Element => {
 	};
 
 	return (
-		<>
-			<Container>
-				<LoginContainer>
-					<BackgroundForm>
-						{!change && (
-							<>
-								<h1>Forgot the password</h1>
-								<Input
-									label="Email"
-									placeholder="username2022@email.com"
-									type="email"
-									value={setEmail}
-								/>
-								<ContainerVerification>
-									<VerificationResponse>{email ? "✅" : "⛔️"} Email valid</VerificationResponse>
-								</ContainerVerification>
-								<SContentButton>
-									<SubmitButtom onClick={(): Promise<void> => handleForgotPassword()}>Send</SubmitButtom>
-								</SContentButton>
-							</>
-						)}
-						{change && (
-							<>
-								<h1>Email sent ✅</h1>
-								<h1>Remember to check spam box</h1>
-							</>
-						)}
-					</BackgroundForm>
-				</LoginContainer>
-			</Container>
-		</>
+		<Container>
+			<LoginContainer>
+				<BackgroundForm>
+					{!change && (
+						<>
+							<h1>Forgot the password</h1>
+							<Input
+								label="Email"
+								placeholder="username2022@email.com"
+								type="email"
+								value={setEmail}
+							/>
+							<ContainerVerification>
+								<VerificationResponse>{email ? "✅" : "⛔️"} Email valid</VerificationResponse>
+							</ContainerVerification>
+							<SContentButton>
+								<SubmitButtom onClick={(): Promise<void> => handleForgotPassword()}>Send</SubmitButtom>
+							</SContentButton>
+						</>
+					)}
+					{change && (
+						<>
+							<h1>Email sent ✅</h1>
+							<h1>Remember to check spam box</h1>
+						</>
+					)}
+				</BackgroundForm>
+			</LoginContainer>
+		</Container>
 	);
 };
 

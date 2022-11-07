@@ -13,7 +13,7 @@ const showForm = keyframes`
 `;
 
 export const Overlay = styled.div`
-	position: relative;
+	position: fixed;
 	top: 0;
 	max-width: 100vw;
 	max-height: 100vh;
@@ -25,7 +25,6 @@ export const Overlay = styled.div`
 	justify-content: center;
 	align-items: center;
 	z-index: 4;
-	animation: ${showForm} 2s normal;
 `;
 
 export const FormUpCreate = styled.div`
@@ -39,6 +38,7 @@ export const FormUpCreate = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	animation: ${showForm} 2s normal;
 
 	h1 {
 		text-align: center;
@@ -49,6 +49,7 @@ export const FormUpCreate = styled.div`
 		position: absolute;
 		right: 40rem;
 		top: 25rem;
+		z-index: 4;
 		cursor: pointer;
 	}
 `;
