@@ -2,9 +2,9 @@ import React from "react";
 import { ApiGames, ApiGenres } from "./api";
 
 export interface GameProviderData {
+	allGenres: ApiGenres[];
+	gamesByGender: ApiGames[];
 	allGames: ApiGames[];
-	submit: boolean;
-	setSubmit: React.Dispatch<React.SetStateAction<boolean>>;
 	lastValidPage: boolean;
 	setLastValidPage: React.Dispatch<React.SetStateAction<boolean>>;
 	currentPage: number;
@@ -13,6 +13,7 @@ export interface GameProviderData {
 	games: ApiGames[];
 	handleGetGameById: (id: string) => Promise<ApiGames | undefined>;
 	handleGetServerStatus: () => void;
+	handleGetGamesByGenre: (id: string) => Promise<void>;
 }
 
 export interface ICardGames {
