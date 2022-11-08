@@ -26,6 +26,7 @@ export const AdminGamesProvider = ({ children }: AllProvidersProps): JSX.Element
 					Authorization: `Bearer ${currentUser.token}`,
 				},
 			};
+			console.log(data);
 			api.post(`/games`, data, headers)
 				.then((res): void => {
 					console.log(res);
