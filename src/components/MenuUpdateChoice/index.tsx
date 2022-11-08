@@ -6,9 +6,11 @@ import { useConfigUser } from "src/contexts/ConfigUserContext";
 import CreateUpGame from "../CreateUpGame";
 import { blankGame } from "src/utils/blankgame.tools";
 import { useState } from "react";
+import { useAuth } from "src/contexts/AccountContext";
 
 function MenuUpdateChoice(): JSX.Element {
 	const { functions } = useConfigUser();
+	const { currentUser } = useAuth();
 	const [openModal, setOpenModal] = useState(false);
 	return (
 		<>
@@ -39,14 +41,16 @@ function MenuUpdateChoice(): JSX.Element {
 						/>
 						<span>Delete account</span>
 					</div>
-					<div>
-						<AddGame
-							src={addGame}
-							alt="Add Game"
-							onClick={(): void => setOpenModal(!openModal)}
-						/>
-						<span>Add new game</span>
-					</div>
+					{currentUser && currentUser.user.isAdmin && (
+						<div>
+							<AddGame
+								src={addGame}
+								alt="Add Game"
+								onClick={(): void => setOpenModal(!openModal)}
+							/>
+							<span>Add new game</span>
+						</div>
+					)}
 				</article>
 			</SettingsContent>
 		</>

@@ -10,9 +10,11 @@ import { BackgroundForm } from "../Gate/styles";
 import { SYesOrNoButton } from "../MenuDeleteUser/styles";
 import { SContainerSettings } from "src/pages/Setting/styles";
 import { UseAdminGames } from "src/contexts/AdminGamesContext";
+import { useAuth } from "src/contexts/AccountContext";
 
 const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 	const { deleteGame } = UseAdminGames();
+	const { currentUser } = useAuth();
 	const [update, setUpdate] = useState(false);
 	const [deleteModal, setdeleteModal] = useState(false);
 	const [gamePages, setGamePage] = useState(true);
@@ -122,22 +124,26 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 								})}
 							</SGenre>
 						)}
-						<SButtonsContainer>
-							<SButton
-								onClick={(): void => {
-									handleDeleteModalOpen();
-								}}
-							>
-								Delete
-							</SButton>
-							<SButton
-								onClick={(): void => {
-									setUpdate(true);
-								}}
-							>
-								Update
-							</SButton>
-						</SButtonsContainer>
+						{currentUser && currentUser.user.isAdmin ? (
+							<SButtonsContainer>
+								<SButton
+									onClick={(): void => {
+										handleDeleteModalOpen();
+									}}
+								>
+									Delete
+								</SButton>
+								<SButton
+									onClick={(): void => {
+										setUpdate(true);
+									}}
+								>
+									Update
+								</SButton>
+							</SButtonsContainer>
+						) : (
+							<></>
+						)}
 					</SGame>
 				</>
 			)}
