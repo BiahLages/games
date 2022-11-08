@@ -38,9 +38,8 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 	const verificIsfavorite = (): void => {
 		if (favorites.length > 0) {
 			const test = favorites.some((e): boolean => {
-				if (e.games) {
-					console.log(e.games.id === game.id);
-					return e.games.id === game.id;
+				if (e.games.length > 0) {
+					return e.games[0].id === game.id;
 				} else {
 					return false;
 				}

@@ -40,19 +40,26 @@ export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element 
 			const token = localStorage.getItem("token");
 			switch (isFav) {
 				case true:
-					const favId = favorites.find(e => {
-						if (e.games) return e.games.id === id;
+					console.log("favorites", favorites);
+					const favId = favorites.find((e): boolean => {
+						if (e.games.length > 0) {
+							return e.games[0].id === id;
+						} else {
+							return false;
+						}
 					});
-					console.log(favId);
+
 					if (favId) {
+						console.log(favId.games[0].id);
 						const deleteData = {
 							headers: {
 								Authorization: `Bearer ${token}`,
 							},
 							data: {
-								favoriteId: favId[0].id,
+								favoriteId: favId.id,
 							},
 						};
+						console.log("deletedata", deleteData);
 						await api.delete(`/favorites`, deleteData).then((res: { status: number }) => {
 							if (res.status === 204) {
 								handleGetFavorites();
@@ -75,7 +82,6 @@ export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element 
 					};
 					await api.post(`/favorites`, body, headers).then((res: { status: number }) => {
 						if (res.status === 201) {
-							console.log("status favoritos", res.status);
 							handleGetFavorites();
 							success("Now it is your favorite");
 						}
