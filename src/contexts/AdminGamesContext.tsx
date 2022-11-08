@@ -52,7 +52,7 @@ export const AdminGamesProvider = ({ children }: AllProvidersProps): JSX.Element
 					Authorization: `Bearer ${currentUser.token}`,
 				},
 			};
-			api.patch(`/games/${data.genreId}`, data, headers)
+			api.patch(`/games/${id}`, data, headers)
 				.then((res): void => {
 					console.log(res);
 				})

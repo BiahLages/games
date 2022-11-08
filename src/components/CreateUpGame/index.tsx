@@ -1,11 +1,13 @@
-import * as S from "./style";
-import { useState } from "react";
 import { ICardGames } from "../../types/interfaces/games";
-import Input from "../Input";
 import { UseAdminGames } from "../../contexts/AdminGamesContext";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import * as S from "./style";
+import Input from "../Input";
 
 const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; close: () => void }): JSX.Element => {
 	const { createGame, editGame } = UseAdminGames();
+	const navigate = useNavigate();
 
 	const [valueTitle, setValueTitle] = useState(game.title || "");
 	const [valueImage, setValueImage] = useState(game.image || "");
@@ -29,10 +31,18 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 		};
 		switch (mode) {
 			case "update":
-				if (game.id) editGame(game.id, data);
+				if (game.id) {
+					editGame(game.id, data).then(() => {
+						close();
+						navigate(0);
+					});
+				}
 				break;
 			case "create":
-				createGame(data);
+				createGame(data).then(() => {
+					close();
+					navigate(0);
+				});
 				break;
 		}
 	};
@@ -98,10 +108,8 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 					value={setValueGenre}
 				/>
 				<S.ButtonSubmit
-					onClick={(e): void => {
+					onClick={(): void => {
 						actionCUpGames();
-						e.preventDefault();
-						e.stopPropagation();
 					}}
 				>
 					Save
