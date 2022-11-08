@@ -1,14 +1,14 @@
 // import { useState, useEffect } from 'react';
 import Card from "../Card";
 import { useGame } from "../../contexts/GamesContext";
-import { Row, Column, Div, ArrowBack } from "./styles";
+import { Row, Column, Div, ArrowBack, TopRatedTitle } from "./styles";
 
 const TopRated = (): JSX.Element => {
 	const { games, currentPage, setCurrentPage, lastValidPage } = useGame();
 	return (
 		<Div>
 			<Column>
-				<h2>EM ALTA</h2>
+				<TopRatedTitle>EM ALTA</TopRatedTitle>
 				<Row>
 					{currentPage !== 1 && (
 						<ArrowBack

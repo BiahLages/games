@@ -1,17 +1,16 @@
-// import { useConfigUser } from "src/contexts/ConfigUserContext";
-// import MenuUpdateAdmin from "../MenuUpdateAdmin";
-// import MenuUpdateChoice from "../MenuUpdateChoice";
+import { useConfigUser } from "src/contexts/ConfigUserContext";
+import MenuDeleteUser from "../MenuDeleteUser";
+import MenuUpdateChoice from "../MenuUpdateChoice";
 import MenuUpdateUser from "../MenuUpdateUser";
 
 const Settings = (): JSX.Element => {
-	// const { states } = useConfigUser();
+	const { states } = useConfigUser();
 
 	return (
 		<>
-			<MenuUpdateUser />
-			{/* {states.switchMenuUpdateChoice && <MenuUpdateChoice />} */}
-			{/* {states.switchMenuUpdateUSer && <MenuUpdateUser />} */}
-			{/* {states.switchMenuUpdateAdmin && <MenuUpdateAdmin />} */}
+			{states.switchMenuUpdateChoice && <MenuUpdateChoice />}
+			{states.switchMenuUpdateUSer && <MenuUpdateUser />}
+			{states.switchMenuUpdateAdmin && <MenuDeleteUser />}
 		</>
 	);
 };

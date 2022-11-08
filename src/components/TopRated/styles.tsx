@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+const TopRatedTitle = styled.h2`
+	font-size: 20px;
+`;
+
 const Row = styled.div`
 	display: flex;
 	flex-direction: row;
@@ -20,4 +24,4 @@ const ArrowBack = styled.div`
 	background-color: cyan;
 `;
 
-export { Row, Column, Div, ArrowBack };
+export { Row, Column, Div, ArrowBack, TopRatedTitle };
