@@ -108,7 +108,7 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 					value={setValueGamePlay}
 				/>
 				<select
-					onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+					onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => {
 						setValueGenre(e.target.value);
 					}}
 				>

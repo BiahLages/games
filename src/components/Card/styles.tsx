@@ -1,26 +1,30 @@
-import styled from "styled-components";
+import styled, { css, Interpolation } from "styled-components";
 import { IStyleScore } from "src/types/interfaces/games";
+import mixings from "src/assets/styles/mixins";
+import { ProfileItemProps } from "src/types/interfaces/system";
 
-export const SCard = styled.div`
-	border: solid 1px #fff;
-	cursor: pointer;
-	max-width: 31.25rem;
+export const SCard = styled.div<ProfileItemProps>`
+	box-shadow: 0 0 0.4rem 0.3rem ${mixings.colors.contrast1}33;
+	height: 40vh;
+	aspect-ratio: 0.706;
 	margin: 1rem;
 	position: relative;
-`;
-
-export const SGameImg = styled.img`
-	max-width: 28.75rem;
-	max-height: 35rem;
-	/* max-width: 300px;
-	max-height: 400px; */
+	cursor: pointer;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	${({ backgroundImage }): Interpolation<ProfileItemProps> => {
+		return css`
+			background-image: url(${backgroundImage});
+		`;
+	}}
 `;
 
 export const STitle = styled.h2`
 	color: #fff;
 	font-weight: 400;
 	position: absolute;
-	top: 80%;
+	bottom: 5rem;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background: rgb(2, 0, 36);
@@ -69,19 +73,23 @@ export const SStars = styled.div`
 		width: 100%;
 		height: 100%;
 	}
-	/* position: absolute;
-	top: 71%;
-	left: 50%;
-	transform: translate(-50%, -50%); */
 `;
 
 export const SScore = styled.div`
+	position: absolute;
+	bottom: 3rem;
+	width: calc(100% - 2px);
+	border-left: 1px solid #fff3;
+	border-right: 1px solid #fff3;
 	display: flex;
 	flex-direction: row;
+	gap: 1.5rem;
+	padding: 1rem 0;
+	color: ${mixings.colors.contrast1};
+	background-color: ${mixings.colors.baseBg1Dark};
 `;
 
 export const SText = styled.p`
-	font-size: 1.5em;
+	font-size: 2em;
 	padding-left: 0.3em;
-	margin: 0;
 `;
