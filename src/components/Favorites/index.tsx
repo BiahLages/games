@@ -1,4 +1,6 @@
 import { FavoritesTitle } from "./styles";
+import Card from "../Card";
+import { useFavorites } from "src/contexts/FavoritesContext";
 
 const Favorites = (): JSX.Element => {
 	const { favorites } = useFavorites();
