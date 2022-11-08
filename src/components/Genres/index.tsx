@@ -35,13 +35,15 @@ const Genres = (): JSX.Element => {
 				</CardsConteiner>
 
 				<Row>
-					{gamesByGender.map((game, key) => (
-						<Card
-							key={key}
-							game={game}
-							currentKey={key}
-						/>
-					))}
+					{gamesByGender
+						? gamesByGender.map((game, key) => (
+								<Card
+									key={key}
+									game={game}
+									currentKey={key}
+								/>
+						  ))
+						: []}
 				</Row>
 			</Column>
 		</GenresConteiner>

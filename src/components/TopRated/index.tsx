@@ -19,13 +19,15 @@ const TopRated = (): JSX.Element => {
 							◀
 						</ArrowBack>
 					)}
-					{games.map((game, key) => (
-						<Card
-							key={key}
-							game={game}
-							currentKey={key}
-						/>
-					))}
+					{games
+						? games.map((game, key) => (
+								<Card
+									key={key}
+									game={game}
+									currentKey={key}
+								/>
+						  ))
+						: []}
 					{!lastValidPage && (
 						<ArrowFoward
 							onClick={(): void => {

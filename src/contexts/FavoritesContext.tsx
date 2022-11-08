@@ -41,7 +41,7 @@ export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element 
 			switch (isFav) {
 				case true:
 					const favId = favorites.find(e => {
-						if (e.games) return e.games.id === id;
+						if (e.games) return e.games[0].id === id;
 					});
 					console.log(favId);
 					if (favId) {
