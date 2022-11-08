@@ -33,7 +33,7 @@ function Recover() {
 					.patch(`/users/${id}`, data, headers)
 					.then(() => {
 						success("changePassword - Senha atualizada");
-						setTimeout(()=>navigate("/login")3000);
+						setTimeout(() => navigate("/login"), 3000);
 					})
 					.catch(err => error(`"changePassword", Erro ${err.status} senha não atualizada`));
 			} else {
