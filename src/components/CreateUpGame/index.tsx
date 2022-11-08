@@ -18,7 +18,7 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 	const [valueScore, setValueScore] = useState(game.score || "");
 	const [valueTrailer, setValueTrailer] = useState(game.trailer || "");
 	const [valueGamePlay, setValueGamePlay] = useState(game.gameplay || "");
-	const [valueGenre, setValueGenre] = useState("");
+	const [valueGenre, setValueGenre] = useState("2a31d77e-683c-4d50-bb4f-776178a675b7");
 
 	const actionCUpGames = async (): Promise<void> => {
 		const data: ICardGames = {
@@ -31,19 +31,22 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 			gameplay: valueGamePlay,
 			genreId: valueGenre,
 		};
+		console.log(data);
 		switch (mode) {
 			case "update":
 				if (game.id) {
-					editGame(game.id, data).then(() => {
+					editGame(game.id, data).then((res): void => {
 						close();
 						navigate(0);
+						console.log(res);
 					});
 				}
 				break;
 			case "create":
-				createGame(data).then(() => {
+				createGame(data).then((res): void => {
 					close();
 					navigate(0);
+					console.log(res);
 				});
 				break;
 		}
@@ -106,10 +109,10 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 					value={setValueGamePlay}
 				/>
 				<select
-					// label="Genre"
-					// type="text"
-					// placeholder={valueGenre}
 					onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+						console.log("test");
+						console.log("valueGenre");
+						console.log(valueGenre);
 						setValueGenre(e.target.value);
 					}}
 				>
