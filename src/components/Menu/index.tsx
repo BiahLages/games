@@ -11,16 +11,12 @@ import { useConfigUser } from "src/contexts/ConfigUserContext";
 
 const Menu = ({ path }: MenuProps): JSX.Element => {
 	const { logout } = useAuth();
-	const { currentProfile, verifyProfile } = useProfiles();
+	const { currentProfile } = useProfiles();
 	const { functions } = useConfigUser();
 	const navigate: NavigateFunction = useNavigate();
 	const [active, setActive] = useState(false);
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [search, setSearch] = useState("");
-
-	useEffect(() => {
-		verifyProfile();
-	}, []);
 
 	return (
 		<MenuContainer>
