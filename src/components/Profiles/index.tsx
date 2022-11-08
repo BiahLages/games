@@ -1,18 +1,14 @@
 import * as S from "./style";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useProfiles } from "src/contexts/ProfilesContext";
 import Profile from "../Profile";
 import Input from "../Input";
 
 const Profiles = (): JSX.Element => {
-	const { getAllProfiles, userProfiles, createProfile } = useProfiles();
+	const { userProfiles, createProfile } = useProfiles();
 	const [addProfile, setAddProfile] = useState(false);
 	const [nameProfile, setNameProfile] = useState("");
 	const [imgProfile, setImgProfile] = useState("");
-
-	useEffect(() => {
-		getAllProfiles();
-	}, []);
 
 	switch (addProfile) {
 		case true: {
@@ -44,7 +40,6 @@ const Profiles = (): JSX.Element => {
 						<S.Button
 							onClick={(): void => {
 								createProfile(nameProfile, imgProfile);
-								getAllProfiles();
 								setAddProfile(!addProfile);
 							}}
 						>
