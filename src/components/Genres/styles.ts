@@ -16,8 +16,12 @@ export const GenresTitle = styled.h2`
 
 export const Row = styled.div`
 	display: flex;
+	width: 100%;
+	gap: 5rem;
+	justify-content: center;
 	flex-direction: row;
 	margin-top: 2rem;
+	flex-wrap: wrap;
 `;
 
 export const Column = styled.div`
