@@ -1,4 +1,4 @@
-// import { useState, useEffect } from 'react';
+import { useEffect } from "react";
 import Card from "../Card";
 import { useGame } from "../../contexts/GamesContext";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -7,6 +7,9 @@ import { Row, Column, Div } from "./styles";
 
 const Genres = (): JSX.Element => {
 	const { gamesByGender, allGenres, handleGetGamesByGenre } = useGame();
+	useEffect(() => {
+		handleGetGamesByGenre("b901bd71-40a2-4515-9154-7c73b29a253b");
+	}, []);
 
 	return (
 		<Column>
@@ -14,7 +17,6 @@ const Genres = (): JSX.Element => {
 				onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => {
 					handleGetGamesByGenre(e.target.value);
 				}}
-				name="GENERO"
 			>
 				{allGenres.map((genre, key) => {
 					return (
