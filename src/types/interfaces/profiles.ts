@@ -9,7 +9,7 @@ export interface IProfiles {
 	createProfile: (title: string, imageUrl: string) => void;
 	editProfile: (id: string, title: string, imageUrl: string) => void;
 	deleteProfile: (id: string) => void;
-	verifyProfile: () => void;
+	selectProfile: (profile: ApiProfiles) => void;
 }
 
 export interface IProfilePatcher {

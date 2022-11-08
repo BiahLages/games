@@ -1,26 +1,26 @@
 // import { useState, useEffect } from 'react';
 import Card from "../Card";
 import { useGame } from "../../contexts/GamesContext";
-import { Row, Column, Div, ArrowBack, TopRatedTitle } from "./styles";
+import { Row, Column, TopRatedConteiner, ArrowBack, ArrowFoward, TopRatedTitle } from "./styles";
 
 const TopRated = (): JSX.Element => {
 	const { games, currentPage, setCurrentPage, lastValidPage } = useGame();
 	return (
-		<Div>
-			<TopRatedTitle>EM ALTA 🔥</TopRatedTitle>
+		<TopRatedConteiner>
 			<Column>
+				<TopRatedTitle>EM ALTA 🔥</TopRatedTitle>
 				<Row>
-					{/* {currentPage !== 1 && ( */}
-					<ArrowBack
-						onClick={(): void => {
-							console.log("ArrowBack");
-							console.log(currentPage);
-							setCurrentPage(currentPage - 1);
-						}}
-					>
-						◀
-					</ArrowBack>
-					{/* )} */}
+					{true && (
+						<ArrowBack
+							onClick={(): void => {
+								console.log("ArrowBack");
+								console.log(currentPage);
+								setCurrentPage(currentPage - 1);
+							}}
+						>
+							◀
+						</ArrowBack>
+					)}
 					{games.map((game, key) => (
 						<Card
 							key={key}
@@ -28,21 +28,21 @@ const TopRated = (): JSX.Element => {
 							currentKey={key}
 						/>
 					))}
-					{/* {!lastValidPage && ( */}
-					<ArrowBack
-						onClick={(): void => {
-							console.log("ArrowForward");
-							console.log(lastValidPage);
-							console.log(currentPage);
-							setCurrentPage(currentPage + 1);
-						}}
-					>
-						▶
-					</ArrowBack>
-					{/* )} */}
+					{!lastValidPage && (
+						<ArrowFoward
+							onClick={(): void => {
+								console.log("ArrowForward");
+								console.log(lastValidPage);
+								console.log(currentPage);
+								setCurrentPage(currentPage + 1);
+							}}
+						>
+							▶
+						</ArrowFoward>
+					)}
 				</Row>
 			</Column>
-		</Div>
+		</TopRatedConteiner>
 	);
 };
 
