@@ -4,7 +4,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { ApiProfiles } from "../types/interfaces/api";
 import { useAuth } from "./AccountContext";
 import { api } from "../helpers/Api";
-import { useConfigUser } from "src/contexts/ConfigUserContext";
 
 const ProfilesContext = createContext({} as IProfiles);
 
