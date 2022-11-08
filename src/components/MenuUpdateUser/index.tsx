@@ -24,7 +24,9 @@ const MenuUpdateUser = (): JSX.Element => {
 						placeholder="01234567890"
 						type="text"
 						value={states.cpf}
-						onChange={(e: any) => setStates.setCpf(e.target.value)}
+						onChange={(e): void => {
+							setStates.setCpf(e.target.value);
+						}}
 					/>
 
 					<label>Email</label>
@@ -32,14 +34,18 @@ const MenuUpdateUser = (): JSX.Element => {
 						placeholder="username2022@email.com"
 						type="email"
 						value={states.email}
-						onChange={(e: any) => setStates.setEmail(e.target.value)}
+						onChange={(e): void => {
+							setStates.setEmail(e.target.value);
+						}}
 					/>
 
 					<label>Password</label>
 					<input
 						placeholder="********"
 						type="password"
-						onChange={(e: any) => setStates.setPassword(e.target.value)}
+						onChange={(e): void => {
+							setStates.setPassword(e.target.value);
+						}}
 					/>
 
 					<ContainerVerification>

@@ -3,11 +3,12 @@ import styled from "styled-components";
 
 export const GenresConteiner = styled.div`
 	box-shadow: inset 0 0 0.25rem 0.5rem ${mixings.colors.contrast0}22;
-	width: 1150px;
-	margin: 30px auto;
-	padding: 20px;
-	min-height: 398.59px;
+	width: 100%;
+	min-height: 50vh;
+	display: flex;
+	padding: 2rem;
 	border-radius: 8px;
+	margin-bottom: 1rem;
 `;
 
 export const GenresTitle = styled.h2`

@@ -25,12 +25,12 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 
 	const navigate = useNavigate();
 
-	const handleDeleteModalOpen = () => {
+	const handleDeleteModalOpen = (): void => {
 		setdeleteModal(true);
 		setGamePage(false);
 	};
 
-	const handleDeleModalClose = () => {
+	const handleDeleModalClose = (): void => {
 		setdeleteModal(false);
 		setGamePage(true);
 	};
@@ -101,7 +101,9 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 							<STitle>{game.title}</STitle>
 							<SHeart
 								src={isFavorite ? heartFull : heartBlank}
-								onClick={() => favThis(game.id, isFavorite)}
+								onClick={(): void => {
+									favThis(game.id, isFavorite);
+								}}
 							/>
 						</STitleHeart>
 						<SRatingContent>
