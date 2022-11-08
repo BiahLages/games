@@ -29,7 +29,9 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 		};
 		switch (mode) {
 			case "update":
-				if (game.id) editGame(game.id, data);
+				if (game.id) {
+					editGame(game.id, data);
+				}
 				break;
 			case "create":
 				createGame(data);
@@ -40,14 +42,16 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 	return (
 		<S.Overlay>
 			<S.FormUpCreate>
-				<S.HeaderForm
-					onClick={(e): void => {
-						close();
-						e.stopPropagation();
-					}}
-				>
-					<h1> {!mode ? `To Edit Game` : `Add Game`}</h1>
-					<span>➕</span>
+				<S.HeaderForm>
+					<h1> {Boolean(mode === "update") ? `Edit Game` : `Add Game`}</h1>
+					<span
+						onClick={(e): void => {
+							close();
+							e.stopPropagation();
+						}}
+					>
+						➕
+					</span>
 				</S.HeaderForm>
 				<Input
 					label="Game Name"
