@@ -83,7 +83,8 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 						key={`profileContent${currentKey}`}
 						onClick={(): void => {
 							selectProfile(profile);
-							navigate("/");
+							navigate("/loading");
+							navigate(0);
 						}}
 					>
 						<ContainerImgProfile backgroundImage={profile.imageUrl} />
