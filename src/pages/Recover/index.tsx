@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Input from "src/components/Input";
 import { api } from "src/helpers/Api";
 import { error, isPw, success } from "src/utils/validation.tools";
@@ -14,7 +14,6 @@ function Recover() {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [validPasswordCharacters, setValidPasswordCharacters] = useState(false);
 	const [validPasswordLength, setValidPasswordLength] = useState(false);
-	const navigate = useNavigate();
 
 	const changePassword = async () => {
 		if (validPasswordCharacters && validPasswordLength) {
@@ -33,7 +32,6 @@ function Recover() {
 					.patch(`/users/${id}`, data, headers)
 					.then(() => {
 						success("changePassword - Senha atualizada");
-						setTimeout(()=>navigate("/login")3000);
 					})
 					.catch(err => error(`"changePassword", Erro ${err.status} senha não atualizada`));
 			} else {
