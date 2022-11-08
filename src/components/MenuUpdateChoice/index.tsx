@@ -3,7 +3,6 @@ import deleteAcc from "../../assets/icons/deleteAcc.png";
 import editprofile from "../../assets/icons/editProfile.png";
 import addGame from "../../assets/icons/addGame.png";
 import { useConfigUser } from "src/contexts/ConfigUserContext";
-import { UseAdminGames } from "src/contexts/AdminGamesContext";
 import CreateUpGame from "../CreateUpGame";
 import { blankGame } from "src/utils/blankgame.tools";
 import { useState } from "react";
@@ -11,7 +10,6 @@ import { useState } from "react";
 function MenuUpdateChoice(): JSX.Element {
 	const { functions } = useConfigUser();
 	const [openModal, setOpenModal] = useState(false);
-
 	return (
 		<>
 			{openModal && (
