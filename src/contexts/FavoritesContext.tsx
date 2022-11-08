@@ -21,12 +21,17 @@ export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element 
 			},
 		};
 		const user = JSON.parse(localStorage.getItem("user") || "");
-		api.get(`/favorites/profiles/${user.id}`, headers).then(res => {
-			if (res.status === 200) setFavorites(res.data);
-		});
+		api.get(`/favorites/profiles/${user.id}`, headers)
+			.then(res => {
+				if (res.status === 200) {
+					setFavorites(res.data);
+					console.log("getFavorites", res);
+				}
+			})
+			.catch(error => console.log(error));
 	};
 
-	const favThis = (id: string, isFav: boolean): void => {
+	const favThis = async (id: string, isFav: boolean): Promise<void> => {
 		if (logged && currentUser) {
 			const token = localStorage.getItem("token");
 			switch (isFav) {
@@ -41,7 +46,7 @@ export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element 
 								favoriteId: favId.id,
 							},
 						};
-						api.delete(`/favorites`, deleteData).then((res: { status: number }) => {
+						await api.delete(`/favorites`, deleteData).then((res: { status: number }) => {
 							if (res.status === 204) {
 								handleGetFavorites();
 							}
@@ -54,12 +59,14 @@ export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element 
 							Authorization: `Bearer ${token}`,
 						},
 					};
+					const profileId = localStorage.getItem("currentProfileId");
 					const body = {
-						userId: currentUser.user.id,
-						genreId: id,
+						profileId,
+						games: id,
 					};
-					api.post(`/favorites`, body, headers).then((res: { status: number }) => {
+					await api.post(`/favorites`, body, headers).then((res: { status: number }) => {
 						if (res.status === 201) {
+							console.log("status favoritos", res.status);
 							handleGetFavorites();
 						}
 					});

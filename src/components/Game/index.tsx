@@ -1,11 +1,26 @@
 import { SGame, SImage, STitle, SText, SRatingContent, SMediaContent, SVideosContent, SGameplay, STrailer, SInfoContent, SGenre, SButton, SButtonsContainer, SHeart, STitleHeart, SStars, SScore } from "./styles";
 import { ApiGames, ApiGenres } from "../../types/interfaces/api";
 import heartBlank from "src/assets/icons/heartBlank.png";
+import heartFull from "src/assets/icons/heartFull.png";
 import CreateUpGame from "../CreateUpGame";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useFavorites } from "src/contexts/FavoritesContext";
 
 const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 	const [update, setUpdate] = useState(false);
+	const { favThis, favorites } = useFavorites();
+	const [isFavorite, setIsFavorite] = useState<boolean>(true);
+
+	const verificIsfavorite = (): void => {
+		console.log("valor de favoritos", favorites);
+		if (favorites.length > 0) {
+			favorites.forEach(e => (e.id === game.id ? setIsFavorite(true) : setIsFavorite(false)));
+		} else {
+			setIsFavorite(false);
+		}
+	};
+
+	useEffect(() => verificIsfavorite(), [favorites]);
 
 	return (
 		<>
@@ -21,7 +36,10 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 			<SGame>
 				<STitleHeart>
 					<STitle>{game.title}</STitle>
-					<SHeart src={heartBlank} />
+					<SHeart
+						src={isFavorite ? heartFull : heartBlank}
+						onClick={() => favThis(game.id, isFavorite)}
+					/>
 				</STitleHeart>
 				<SRatingContent>
 					<SText>{game.year}</SText>
