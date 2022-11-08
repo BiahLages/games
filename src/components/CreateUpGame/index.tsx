@@ -37,7 +37,7 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 				if (game.id) {
 					editGame(game.id, data).then((res): void => {
 						close();
-						navigate("/");
+						navigate(0);
 						console.log(res);
 					});
 				}
@@ -45,7 +45,7 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 			case "create":
 				createGame(data).then((res): void => {
 					close();
-					navigate("/");
+					navigate(0);
 					console.log(res);
 				});
 				break;
