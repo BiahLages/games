@@ -33,7 +33,6 @@ const Genres = (): JSX.Element => {
 						})}
 					</SelectGender>
 				</CardsConteiner>
-
 				<Row>
 					{gamesByGender
 						? gamesByGender.map((game, key) => (
