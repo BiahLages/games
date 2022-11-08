@@ -28,9 +28,16 @@ export const SettingsContent = styled.main`
 `;
 
 export const EditProfile = styled.img`
-	width: 36em;
+	width: 33em;
+	padding-top: 4em;
 `;
 
 export const DeleteAccount = styled.img`
-	width: 36em;
+	width: 37em;
+`;
+
+export const AddGame = styled.img`
+	width: 28em;
+	padding-top: 4em;
+	padding-bottom: 5em;
 `;
