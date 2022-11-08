@@ -1,14 +1,18 @@
 import * as S from "./style";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useProfiles } from "src/contexts/ProfilesContext";
 import Profile from "../Profile";
 import Input from "../Input";
 
 const Profiles = (): JSX.Element => {
+	const { getAllProfiles } = useProfiles();
+
 	const { userProfiles, createProfile } = useProfiles();
 	const [addProfile, setAddProfile] = useState(false);
 	const [nameProfile, setNameProfile] = useState("");
 	const [imgProfile, setImgProfile] = useState("");
+
+	useEffect(() => getAllProfiles());
 
 	switch (addProfile) {
 		case true: {
