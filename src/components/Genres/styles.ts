@@ -17,11 +17,14 @@ export const GenresTitle = styled.h2`
 export const Row = styled.div`
 	display: flex;
 	flex-direction: row;
+	margin-top: 2rem;
 `;
 
 export const Column = styled.div`
 	display: flex;
 	flex-direction: column;
+	/* margin: 4rem; */
+	margin-top: 4rem;
 `;
 
 export const SelectGender = styled.select`

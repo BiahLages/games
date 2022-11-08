@@ -8,7 +8,7 @@ const TopRated = (): JSX.Element => {
 	return (
 		<TopRatedConteiner>
 			<Column>
-				<TopRatedTitle>EM ALTA</TopRatedTitle>
+				<TopRatedTitle>EM ALTA 🔥</TopRatedTitle>
 				<Row>
 					{true && (
 						<ArrowBack
