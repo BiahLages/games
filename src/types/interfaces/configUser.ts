@@ -33,6 +33,7 @@ export interface IConfigUserProviderData {
 	};
 
 	functions: {
+		handdleChangeDeleteAccount(): void;
 		handdleUpdateUser: () => void;
 		handdleDeleteUser: () => void;
 		handdleGetUserForId: (id: string) => void;
