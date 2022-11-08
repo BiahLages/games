@@ -10,7 +10,7 @@ module.exports = {
 		tsconfigRootDir: __dirname,
 		sourceType: "module",
 	},
-	plugins: ["@typescript-eslint/eslint-plugin"],
+	plugins: ["@typescript-eslint/eslint-plugin", "react"],
 	extends: ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended", "plugin:react/recommended", "plugin:react/jsx-runtime"],
 	root: true,
 	env: {

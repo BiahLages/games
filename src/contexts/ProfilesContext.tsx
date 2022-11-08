@@ -86,6 +86,7 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 			api.delete(`/profiles/${id}`, headers)
 				.then((): void => {
 					success("Perfil apagado!");
+					localStorage.removeItem("profile");
 					setTimeout(() => navigate(0), 3000);
 				})
 				.catch(() => error("Error ao apagar perfil !"));
