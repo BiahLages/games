@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Card from "../Card";
 import { useGame } from "../../contexts/GamesContext";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Row, Column, Div, GenresTitle } from "./styles";
+import { Row, Column, GenresConteiner, GenresTitle, SelectGender, CardsConteiner } from "./styles";
 // import { useState } from "react";
 
 const Genres = (): JSX.Element => {
@@ -12,35 +12,39 @@ const Genres = (): JSX.Element => {
 	}, []);
 
 	return (
-		<Column>
-			<GenresTitle>Escolha por gênero:</GenresTitle>
-			<select
-				onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => {
-					handleGetGamesByGenre(e.target.value);
-				}}
-			>
-				{allGenres.map((genre, key) => {
-					return (
-						<option
-							value={genre.id}
-							key={key}
-						>
-							{genre.name}
-						</option>
-					);
-				})}
-			</select>
+		<GenresConteiner>
+			<Column>
+				<GenresTitle>Escolha por gênero:</GenresTitle>
+				<CardsConteiner>
+					<SelectGender
+						onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => {
+							handleGetGamesByGenre(e.target.value);
+						}}
+					>
+						{allGenres.map((genre, key) => {
+							return (
+								<option
+									value={genre.id}
+									key={key}
+								>
+									{genre.name}
+								</option>
+							);
+						})}
+					</SelectGender>
+				</CardsConteiner>
 
-			<Row>
-				{gamesByGender.map((game, key) => (
-					<Card
-						key={key}
-						game={game}
-						currentKey={key}
-					/>
-				))}
-			</Row>
-		</Column>
+				<Row>
+					{gamesByGender.map((game, key) => (
+						<Card
+							key={key}
+							game={game}
+							currentKey={key}
+						/>
+					))}
+				</Row>
+			</Column>
+		</GenresConteiner>
 	);
 };
 
