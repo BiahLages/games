@@ -15,7 +15,7 @@ const LoadingUser = (): JSX.Element => {
 	const logState = async (): Promise<NodeJS.Timeout> => {
 		const user = localStorage.getItem("user");
 		const token = localStorage.getItem("token");
-		const profile = localStorage.getItem("currentProfileId");
+		const profile = localStorage.getItem("profile");
 
 		if (user && token && profile) {
 			getAllProfiles();

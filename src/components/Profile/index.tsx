@@ -9,7 +9,7 @@ import Input from "../Input";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
 const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: number }): JSX.Element => {
-	const { getAllProfiles, setCurrentProfileId, editProfile, deleteProfile } = useProfiles();
+	const { getAllProfiles, editProfile, deleteProfile, selectProfile } = useProfiles();
 
 	const navigate: NavigateFunction = useNavigate();
 
@@ -82,7 +82,7 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 					<ContentProfile
 						key={`profileContent${currentKey}`}
 						onClick={(): void => {
-							setCurrentProfileId(profile.id);
+							selectProfile(profile);
 							navigate("/");
 						}}
 					>
