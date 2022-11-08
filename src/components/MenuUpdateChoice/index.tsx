@@ -18,7 +18,7 @@ function MenuUpdateChoice(): JSX.Element {
 				<CreateUpGame
 					game={blankGame}
 					mode={"create"}
-					close={() => {
+					close={(): void => {
 						setOpenModal(!openModal);
 					}}
 				/>
