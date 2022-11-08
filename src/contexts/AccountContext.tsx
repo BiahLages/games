@@ -35,13 +35,15 @@ export const AuthProvider = ({ children }: AllProvidersProps): JSX.Element => {
 		};
 
 		api.get(`/users/${user.id}`, headers)
-			.then(() => {
+			.then(res => {
+				const data = res.data;
 				setLogged(true);
 				if (token) {
 					setCurrentUser({
 						token,
-						user,
+						user: data,
 					});
+					localStorage.setItem("user", JSON.stringify(data));
 				}
 				// navigate("/profile");
 			})
@@ -56,7 +58,7 @@ export const AuthProvider = ({ children }: AllProvidersProps): JSX.Element => {
 		if (token) checkTokenExpiration();
 	}, []);
 
-	return <AuthContext.Provider value={{ logged, login, logout, currentUser }}>{children}</AuthContext.Provider>;
+	return <AuthContext.Provider value={{ logged, login, logout, currentUser, checkTokenExpiration }}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = (): AuthProviderData => useContext(AuthContext);

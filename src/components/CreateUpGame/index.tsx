@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import * as S from "./style";
 import Input from "../Input";
+import { useGame } from "src/contexts/GamesContext";
 
 const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; close: () => void }): JSX.Element => {
 	const { createGame, editGame } = UseAdminGames();
+	const { allGenres } = useGame();
 	const navigate = useNavigate();
 
 	const [valueTitle, setValueTitle] = useState(game.title || "");
@@ -103,12 +105,25 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 					type="text"
 					value={setValueGamePlay}
 				/>
-				<Input
-					label="Genre"
-					placeholder={valueGenre}
-					type="text"
-					value={setValueGenre}
-				/>
+				<select
+					// label="Genre"
+					// type="text"
+					// placeholder={valueGenre}
+					onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+						setValueGenre(e.target.value);
+					}}
+				>
+					{allGenres.map((genre, key) => {
+						return (
+							<option
+								value={genre.id}
+								key={key}
+							>
+								{genre.name}
+							</option>
+						);
+					})}
+				</select>
 				<S.ButtonSubmit
 					onClick={(): void => {
 						actionCUpGames();

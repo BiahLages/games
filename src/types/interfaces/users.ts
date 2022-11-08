@@ -5,6 +5,7 @@ export interface AuthProviderData {
 	login: (params: Auth) => void;
 	logout: () => void;
 	currentUser: Auth | undefined;
+	checkTokenExpiration: () => void;
 }
 
 export interface Auth {
