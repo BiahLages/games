@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { BackgroundForm, ContainerVerification, VerificationResponse } from "src/components/Gate/styles";
 import Input from "src/components/Input";
 import { api } from "src/helpers/Api";
+import { success } from "src/utils/validation.tools";
 import { LoginContainer } from "../Login/styles";
 import { SubmitButtom } from "../Setting/styles";
 import { Container } from "../styles";
@@ -19,12 +20,12 @@ const Forgot = (): JSX.Element => {
 			await api
 				.get(`users/recover/${email}`)
 				.then(res => {
-					console.log(res.data.message);
+					success(res.data.message);
 					setChange(true);
 					setTimeout(() => navigate("/"), 4000);
 				})
 				.catch(() => {
-					console.log("Email sent if it exists");
+					success("Email sent if it exists");
 					setChange(true);
 					setTimeout(() => navigate("/"), 4000);
 				});

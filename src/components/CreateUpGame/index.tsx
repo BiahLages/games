@@ -31,7 +31,6 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 			gameplay: valueGamePlay,
 			genreId: valueGenre,
 		};
-		console.log(data);
 		switch (mode) {
 			case "update":
 				if (game.id) {
@@ -110,9 +109,6 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 				/>
 				<select
 					onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
-						console.log("test");
-						console.log("valueGenre");
-						console.log(valueGenre);
 						setValueGenre(e.target.value);
 					}}
 				>

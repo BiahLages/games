@@ -36,9 +36,15 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 	};
 
 	const verificIsfavorite = (): void => {
-		console.log("valor de favoritos", favorites);
 		if (favorites.length > 0) {
-			const test = favorites.find(e => e.id === game.id);
+			const test = favorites.some((e): boolean => {
+				if (e.games) {
+					console.log(e.games.id === game.id);
+					return e.games.id === game.id;
+				} else {
+					return false;
+				}
+			});
 			test ? setIsFavorite(true) : setIsFavorite(false);
 		} else {
 			setIsFavorite(false);
@@ -96,7 +102,7 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 							<STitle>{game.title}</STitle>
 							<SHeart
 								src={isFavorite ? heartFull : heartBlank}
-								onClick={() => favThis(game.id, true)}
+								onClick={() => favThis(game.id, isFavorite)}
 							/>
 						</STitleHeart>
 						<SRatingContent>

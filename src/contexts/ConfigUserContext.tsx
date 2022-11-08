@@ -4,6 +4,7 @@ import { api } from "src/helpers/Api";
 import { IConfigUserProviderData } from "src/types/interfaces/configUser";
 import { AllProvidersProps } from "src/types/interfaces/system";
 import { TDataUser, TDataUserForId } from "src/types/types";
+import { error, success } from "src/utils/validation.tools";
 import { useAuth } from "./AccountContext";
 
 const ConfigUserContext = createContext({} as IConfigUserProviderData);
@@ -51,15 +52,13 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 					  }
 					: { name, email, cpf };
 
-			console.log(data);
-
 			await api
 				.patch(`/users/${currentUser.user.id}`, data, headers)
 				.then(res => {
 					localStorage.setItem("user", JSON.stringify({ ...res.data, isAdmin, cpf }));
-					console.log("handdleUpdateUser", "Usuário Atualizado");
+					success("handdleUpdateUser Usuário Atualizado");
 				})
-				.catch(error => console.log("handdleUpdateUser", `Erro ${error.status} Usuário não atualizado`));
+				.catch(err => error(`"handdleUpdateUser", Erro ${err.status} Usuário não atualizado`));
 		}
 	};
 
@@ -70,9 +69,9 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 				.delete(`/users/${currentUser.user.id}`, headers)
 				.then(() => {
 					logout();
-					console.log("handdleDeleteUser", "Usuário Deletado");
+					success("handdleDeleteUser, Usuário Deletado");
 				})
-				.catch(error => console.log("handdleDeleteUser", `Erro ${error.status} Usuário não deletado`));
+				.catch(err => console.log(`"handdleDeleteUser", Erro ${err.status} Usuário não deletado`));
 	};
 
 	const handdleGetUsers = async (): Promise<void> => {
@@ -81,9 +80,8 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 				.get(`/users`, headers)
 				.then(res => {
 					setDataUsers(res.data);
-					console.log("handdleGetUsers", "Lista de usuários carregada");
 				})
-				.catch(error => console.log("handdleGetUsers", `Error ${error.status}`));
+				.catch(err => error(`"handdleGetUsers", Error ${err.status}`));
 	};
 
 	const handdleGetUserForId = async (id: string): Promise<void> => {

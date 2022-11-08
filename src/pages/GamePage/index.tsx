@@ -16,11 +16,6 @@ const GamePage = (): JSX.Element => {
 	const [current, setCurrent] = useState<ApiGames | undefined>();
 
 	const showGame = async (): Promise<void> => {
-		console.log("gamepage itens");
-		console.log(id);
-		console.log(logged);
-		console.log(currentUser);
-		console.log(currentProfileId);
 		if (id && logged && currentUser && currentProfileId) {
 			const game = await handleGetGameById(id);
 			if (game) {
