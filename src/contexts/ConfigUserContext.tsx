@@ -87,12 +87,14 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 	};
 
 	const handdleGetUserForId = async (id: string) => {
+		let data;
 		if (logged && currentUser) {
 			await api
 				.get(`/users/${id}`, headers)
 				.then(res => {
 					console.log("handdleGetUsers", "Lista de usuários carregada");
 					setDataUserForId(res.data);
+					data = res.data;
 				})
 				.catch(error => {
 					console.log("handdleGetUsers", `Error ${error.status}`);
@@ -100,6 +102,8 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 		} else {
 			console.log("handdleGetUserForId", "Usuario não logado ou não Admin ");
 		}
+
+		return data;
 	};
 
 	// Implentar um modal de confirmação.

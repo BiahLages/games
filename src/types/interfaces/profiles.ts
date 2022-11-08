@@ -5,6 +5,7 @@ export interface IProfiles {
 	currentProfile: ApiProfiles | undefined;
 	currentProfileId: string;
 	setCurrentProfileId: React.Dispatch<React.SetStateAction<string>>;
+	setUserProfiles: React.Dispatch<React.SetStateAction<ApiProfiles[]>>;
 	getAllProfiles: () => void;
 	createProfile: (title: string, imageUrl: string) => void;
 	editProfile: (id: string, title: string, imageUrl: string) => void;
