@@ -7,20 +7,20 @@ const TopRated = (): JSX.Element => {
 	const { games, currentPage, setCurrentPage, lastValidPage } = useGame();
 	return (
 		<Div>
+			<TopRatedTitle>EM ALTA 🔥</TopRatedTitle>
 			<Column>
-				<TopRatedTitle>EM ALTA</TopRatedTitle>
 				<Row>
-					{currentPage !== 1 && (
-						<ArrowBack
-							onClick={(): void => {
-								console.log("ArrowBack");
-								console.log(currentPage);
-								setCurrentPage(currentPage - 1);
-							}}
-						>
-							◀
-						</ArrowBack>
-					)}
+					{/* {currentPage !== 1 && ( */}
+					<ArrowBack
+						onClick={(): void => {
+							console.log("ArrowBack");
+							console.log(currentPage);
+							setCurrentPage(currentPage - 1);
+						}}
+					>
+						◀
+					</ArrowBack>
+					{/* )} */}
 					{games.map((game, key) => (
 						<Card
 							key={key}
@@ -28,18 +28,18 @@ const TopRated = (): JSX.Element => {
 							currentKey={key}
 						/>
 					))}
-					{!lastValidPage && (
-						<ArrowBack
-							onClick={(): void => {
-								console.log("ArrowForward");
-								console.log(lastValidPage);
-								console.log(currentPage);
-								setCurrentPage(currentPage + 1);
-							}}
-						>
-							▶
-						</ArrowBack>
-					)}
+					{/* {!lastValidPage && ( */}
+					<ArrowBack
+						onClick={(): void => {
+							console.log("ArrowForward");
+							console.log(lastValidPage);
+							console.log(currentPage);
+							setCurrentPage(currentPage + 1);
+						}}
+					>
+						▶
+					</ArrowBack>
+					{/* )} */}
 				</Row>
 			</Column>
 		</Div>

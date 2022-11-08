@@ -3,14 +3,14 @@ import styled from "styled-components";
 export const SCard = styled.div`
 	border: solid 1px #fff;
 	cursor: pointer;
-	max-width: 250px;
+	max-width: 500px;
 	margin: 1rem;
 	position: relative;
 `;
 
 export const SGameImg = styled.img`
-	max-width: 250px;
-	max-height: 250px;
+	max-width: 300px;
+	max-height: 400px;
 `;
 
 export const STitle = styled.h2`

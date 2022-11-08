@@ -1,12 +1,10 @@
-import { useFavorites } from "../../contexts/FavoritesContext";
-import Card from "../Card/index";
-import { FavoritesConteiner } from "./styles";
+import { FavoritesTitle } from "./styles";
 
 const Favorites = (): JSX.Element => {
 	const { favorites } = useFavorites();
 	return (
-		<FavoritesConteiner>
-			<h2>FAVORITES</h2>
+		<div>
+			<FavoritesTitle>FAVORITOS ❤️</FavoritesTitle>
 			<div>
 				{favorites.length > 0 ? (
 					favorites.map((game, key) => (
@@ -22,7 +20,7 @@ const Favorites = (): JSX.Element => {
 					<h3>Adicione jogos aos favoritos</h3>
 				)}
 			</div>
-		</FavoritesConteiner>
+		</div>
 	);
 };
 
