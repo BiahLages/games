@@ -44,6 +44,6 @@ export interface ApiGames {
 export interface ApiFavorites {
 	id: string;
 	createdAt?: Date;
-	game?: ApiGames;
+	games?: ApiGames;
 	profile?: ApiProfiles;
 }
