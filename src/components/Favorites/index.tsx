@@ -10,13 +10,11 @@ const Favorites = (): JSX.Element => {
 			<div>
 				{favorites.length > 0 ? (
 					favorites.map((game, key) => (
-						<>
-							<Card
-								key={key}
-								game={game}
-								currentKey={key}
-							/>
-						</>
+						<Card
+							key={key}
+							game={game}
+							currentKey={key}
+						/>
 					))
 				) : (
 					<Msg>Adicione jogos aos favoritos...</Msg>
