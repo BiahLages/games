@@ -9,7 +9,7 @@ import { api } from "../helpers/Api";
 const GameContext = createContext({} as GameProviderData);
 
 export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
-	const { orderBy, orderDirection, category, pageLength } = useOrderSettings();
+	const { orderBy, orderDirection, pageLength } = useOrderSettings();
 	const { logged, currentUser } = useAuth();
 
 	const [allGames, setAllGames] = useState<ApiGames[]>([]);
@@ -31,24 +31,6 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 		},
 	};
 
-	// Tem que pensar como vai fazer
-
-	// const handleGetGamesByGenre = (id: string): void => {
-	// 	if (status && category !== "all") {
-	// 		api.get(`/genres/search/${id}/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`).then(res => {
-	// 			if (games.length <= 1) {
-	// 				setGames(res.data);
-	// 			} else if (games.length < allGames.length) {
-	// 				const data: ApiGames[] = [...games, ...res.data];
-	// 				setLastValidPage(currentPage);
-	// 				setGames(data);
-	// 			} else {
-	// 				setCurrentPage(1);
-	// 			}
-	// 		});
-	// 	}
-	// };
-
 	const handleGetAllGenres = async (): Promise<void> => {
 		await api.get(`/genres`).then(res => {
 			setGenres(res.data);
@@ -56,15 +38,13 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	};
 
 	const handleGetGamesByGenre = async (id: string): Promise<void> => {
-		if (true) {
-			await api.get(`/genres/${id}`, headers).then(res => {
-				setGamesByGender(res.data.games);
-			});
-		}
+		await api.get(`/genres/${id}`, headers).then(res => {
+			setGamesByGender(res.data.games);
+		});
 	};
 
 	const handleGetGames = async (): Promise<void> => {
-		if (category === "all" && !headers.headers.Authorization.includes("null")) {
+		if (!headers.headers.Authorization.includes("null")) {
 			await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
 				setGames(res.data);
 				if (allGames.length !== 0) {
