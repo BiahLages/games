@@ -8,6 +8,13 @@ export const FavoritesConteiner = styled.div`
 	padding: 20px;
 	min-height: 330.59px;
 	border-radius: 8px;
+	overflow-x: auto;
+
+	div#favorites {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 `;
 
 export const FavoritesTitle = styled.h2`

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Input from "src/components/Input";
 import { api } from "src/helpers/Api";
-import { isPw } from "src/utils/validation.tools";
+import { error, isPw, success } from "src/utils/validation.tools";
 import { BackgroundForm, SubmitButtom, ContainerVerification, VerificationResponse } from "../../components/Gate/styles";
 import { LoginContainer } from "../Login/styles";
 import { Container } from "../styles";
@@ -31,14 +31,14 @@ function Recover() {
 				await api
 					.patch(`/users/${id}`, data, headers)
 					.then(() => {
-						console.log("changePassword ", "Senha atualizada");
+						success("changePassword - Senha atualizada");
 					})
-					.catch(error => console.log("changePassword", `Erro ${error.status} senha não atualizada`));
+					.catch(err => error(`"changePassword", Erro ${err.status} senha não atualizada`));
 			} else {
-				console.log("changePassword", "As senhas não conferem");
+				error("changePassword, As senhas não conferem");
 			}
 		} else {
-			console.log("changePassword", "A senha deve ter senha 8 caracteres com 1 letra 1 número e 1 caractere especial");
+			error("changePassword, A senha deve ter senha 8 caracteres com 1 letra 1 número e 1 caractere especial");
 		}
 	};
 

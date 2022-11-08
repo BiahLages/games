@@ -3,6 +3,7 @@ import { IAdminGames, ICardGames } from "../types/interfaces/games";
 import { createContext, useContext } from "react";
 import { useAuth } from "./AccountContext";
 import { api } from "../helpers/Api";
+import { error, success } from "src/utils/validation.tools";
 
 const AdminGameContext = createContext({} as IAdminGames);
 
@@ -29,9 +30,10 @@ export const AdminGamesProvider = ({ children }: AllProvidersProps): JSX.Element
 			api.post(`/games`, data, headers)
 				.then((res): void => {
 					console.log(res);
+					success("Registrated");
 				})
 				.catch(error => {
-					console.log(error);
+					error(error);
 				});
 		}
 	};
@@ -54,9 +56,13 @@ export const AdminGamesProvider = ({ children }: AllProvidersProps): JSX.Element
 			};
 			api.patch(`/games/${id}`, data, headers)
 				.then((res): void => {
+					success("Patched");
 					console.log(res);
 				})
-				.catch(error => console.log(error));
+				.catch(err => {
+					error(err);
+					console.log(err);
+				});
 		}
 	};
 
@@ -69,9 +75,11 @@ export const AdminGamesProvider = ({ children }: AllProvidersProps): JSX.Element
 			};
 			api.delete(`/games/${id}`, headers)
 				.then((res): void => {
+					success("Deleted");
 					console.log(res);
 				})
 				.catch(err => {
+					error(err);
 					console.log(err);
 				});
 		}
