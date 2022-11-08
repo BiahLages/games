@@ -7,7 +7,7 @@ import { BackgroundForm, SubmitButtom, ContainerVerification, VerificationRespon
 import { LoginContainer } from "../Login/styles";
 import { Container } from "../styles";
 
-function Recover() {
+function Recover(): JSX.Element {
 	const { id, token } = useParams();
 
 	const [password, setpassword] = useState("");
@@ -16,7 +16,7 @@ function Recover() {
 	const [validPasswordLength, setValidPasswordLength] = useState(false);
 	const navigate = useNavigate();
 
-	const changePassword = async () => {
+	const changePassword = async (): Promise<void> => {
 		if (validPasswordCharacters && validPasswordLength) {
 			if (confirmPassword === password) {
 				const headers = {
