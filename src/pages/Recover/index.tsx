@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Input from "src/components/Input";
 import { api } from "src/helpers/Api";
 import { error, isPw, success } from "src/utils/validation.tools";
@@ -7,15 +7,16 @@ import { BackgroundForm, SubmitButtom, ContainerVerification, VerificationRespon
 import { LoginContainer } from "../Login/styles";
 import { Container } from "../styles";
 
-function Recover() {
+function Recover(): JSX.Element {
 	const { id, token } = useParams();
 
 	const [password, setpassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [validPasswordCharacters, setValidPasswordCharacters] = useState(false);
 	const [validPasswordLength, setValidPasswordLength] = useState(false);
+	const navigate = useNavigate();
 
-	const changePassword = async () => {
+	const changePassword = async (): Promise<void> => {
 		if (validPasswordCharacters && validPasswordLength) {
 			if (confirmPassword === password) {
 				const headers = {
