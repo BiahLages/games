@@ -49,6 +49,11 @@ export const STitle = styled.h2`
 export const SHeart = styled.img`
 	width: 3em;
 	padding-right: 2em;
+	cursor: pointer;
+
+	&:hover {
+		transform: scale(0.98);
+	}
 `;
 
 export const SText = styled.p`
@@ -61,13 +66,13 @@ export const SImage = styled.img`
 `;
 
 export const SGameplay = styled.iframe`
-	width: 560px;
-	height: 315px;
+	max-width: 280px;
+	max-height: 157.5px;
 `;
 
 export const STrailer = styled.iframe`
-	max-width: 280px;
-	max-height: 157.5px;
+	width: 560px;
+	height: 315px;
 `;
 
 export const SGenre = styled.div`

@@ -21,24 +21,21 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 		}
 	};
 
-	const selectProfile = (): void => {
-		const selected = userProfiles.find(profile => {
-			return profile.id === currentProfileId;
-		});
-		if (selected) {
-			localStorage.setItem("currentProfileId", selected.id);
-			setCurrentProfile(selected);
+	const getProfile = (): void => {
+		if (logged) {
+			const profile = localStorage.getItem("profile");
+			if (profile) {
+				const data = JSON.parse(profile);
+				setCurrentProfile(data);
+				setCurrentProfileId(data.id);
+			}
 		}
 	};
 
-	const verifyProfile = (): void => {
-		const localUser = localStorage.getItem("currentProfileId");
-		if (localUser) {
-			const localProfile = localStorage.getItem("currentProfileId");
-			if (localProfile) {
-				setCurrentProfileId(localProfile);
-			}
-		}
+	const selectProfile = (profile: ApiProfiles): void => {
+		setCurrentProfile(profile);
+		setCurrentProfileId(profile.id);
+		localStorage.setItem("profile", JSON.stringify(profile));
 	};
 
 	const createProfile = (title: string, imageUrl: string): void => {
@@ -90,27 +87,22 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 	};
 
 	useEffect(() => {
-		selectProfile();
-	}, [currentProfileId]);
-
-	useEffect(() => {
-		verifyProfile();
-		selectProfile();
 		getAllProfiles();
+		getProfile();
 	}, [logged, currentUser]);
 
 	return (
 		<ProfilesContext.Provider
 			value={{
-				createProfile,
 				currentProfile,
+				userProfiles,
+				setCurrentProfileId,
 				currentProfileId,
 				deleteProfile,
 				editProfile,
 				getAllProfiles,
-				setCurrentProfileId,
-				userProfiles,
-				verifyProfile,
+				selectProfile,
+				createProfile,
 			}}
 		>
 			{children}
