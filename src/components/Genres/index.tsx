@@ -2,7 +2,7 @@
 import Card from "../Card";
 import { useGame } from "../../contexts/GamesContext";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Row, Column, Div } from "./styles";
+import { Row, Column, Div, GenresTitle } from "./styles";
 // import { useState } from "react";
 
 const Genres = (): JSX.Element => {
@@ -10,6 +10,7 @@ const Genres = (): JSX.Element => {
 
 	return (
 		<Column>
+			<GenresTitle>Escolha por gênero:</GenresTitle>
 			<select
 				onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => {
 					console.log("ENTROU");

@@ -11,7 +11,7 @@ export const Container = styled.section`
 	color: ${mixings.colors.contrast1};
 `;
 export const ContentContainer = styled.div`
-	width: calc(100% - 20rem);
+	/* width: calc(100% - 20rem); */
 	padding-top: 15rem;
 	min-height: calc(100% - 15rem);
 `;
