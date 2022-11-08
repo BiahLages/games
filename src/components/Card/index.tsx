@@ -8,7 +8,7 @@ const Card = ({ game, currentKey }: { game: ICardGames; currentKey: number }): J
 		score: number;
 	}
 
-	return (
+	return game ? (
 		<Link to={`/game/${game.id}`}>
 			<SCard>
 				<SGameImg
@@ -33,6 +33,8 @@ const Card = ({ game, currentKey }: { game: ICardGames; currentKey: number }): J
 			<SActionButton>Gender2</SActionButton> */}
 			</SCard>
 		</Link>
+	) : (
+		<></>
 	);
 };
 
