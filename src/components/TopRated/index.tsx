@@ -13,8 +13,6 @@ const TopRated = (): JSX.Element => {
 					{true && (
 						<ArrowBack
 							onClick={(): void => {
-								console.log("ArrowBack");
-								console.log(currentPage);
 								setCurrentPage(currentPage - 1);
 							}}
 						>
@@ -31,9 +29,6 @@ const TopRated = (): JSX.Element => {
 					{!lastValidPage && (
 						<ArrowFoward
 							onClick={(): void => {
-								console.log("ArrowForward");
-								console.log(lastValidPage);
-								console.log(currentPage);
 								setCurrentPage(currentPage + 1);
 							}}
 						>

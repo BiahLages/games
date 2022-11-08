@@ -10,6 +10,8 @@ import { BackgroundForm } from "../Gate/styles";
 import { SYesOrNoButton } from "../MenuDeleteUser/styles";
 import { SContainerSettings } from "src/pages/Setting/styles";
 import { UseAdminGames } from "src/contexts/AdminGamesContext";
+import { useNavigate } from "react-router-dom";
+import { ContentContainer } from "src/pages/styles";
 import { useAuth } from "src/contexts/AccountContext";
 
 const Game = ({ game }: { game: ApiGames }): JSX.Element => {
@@ -20,6 +22,8 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 	const [gamePages, setGamePage] = useState(true);
 	const { favThis, favorites } = useFavorites();
 	const [isFavorite, setIsFavorite] = useState<boolean>(true);
+
+	const navigate = useNavigate();
 
 	const handleDeleteModalOpen = () => {
 		setdeleteModal(true);
@@ -32,9 +36,15 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 	};
 
 	const verificIsfavorite = (): void => {
-		console.log("valor de favoritos", favorites);
 		if (favorites.length > 0) {
-			const test = favorites.find(e => e.id === game.id);
+			const test = favorites.some((e): boolean => {
+				if (e.games) {
+					console.log(e.games.id === game.id);
+					return e.games.id === game.id;
+				} else {
+					return false;
+				}
+			});
 			test ? setIsFavorite(true) : setIsFavorite(false);
 		} else {
 			setIsFavorite(false);
@@ -56,30 +66,33 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 			)}
 			{deleteModal && (
 				<>
-					<SContainerSettings>
-						<BackgroundForm>
-							<h1>Do you really want to delete your account?</h1>
-							<div>
-								<SYesOrNoButton
-									answer="yes"
-									onClick={(): void => {
-										deleteGame(game.id);
-										success("Successfully Deleted");
-									}}
-								>
-									Yes
-								</SYesOrNoButton>
-								<SYesOrNoButton
-									answer="no"
-									onClick={(): void => {
-										handleDeleModalClose();
-									}}
-								>
-									No
-								</SYesOrNoButton>
-							</div>
-						</BackgroundForm>
-					</SContainerSettings>
+					<ContentContainer>
+						<SContainerSettings>
+							<BackgroundForm>
+								<h1>Do you really want to delete your account?</h1>
+								<div>
+									<SYesOrNoButton
+										answer="yes"
+										onClick={(): void => {
+											deleteGame(game.id);
+											success("Successfully Deleted");
+											setTimeout(() => navigate("/"), 3000);
+										}}
+									>
+										Yes
+									</SYesOrNoButton>
+									<SYesOrNoButton
+										answer="no"
+										onClick={(): void => {
+											handleDeleModalClose();
+										}}
+									>
+										No
+									</SYesOrNoButton>
+								</div>
+							</BackgroundForm>
+						</SContainerSettings>
+					</ContentContainer>
 				</>
 			)}
 			{gamePages && (
@@ -89,7 +102,7 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 							<STitle>{game.title}</STitle>
 							<SHeart
 								src={isFavorite ? heartFull : heartBlank}
-								onClick={() => favThis(game.id, true)}
+								onClick={() => favThis(game.id, isFavorite)}
 							/>
 						</STitleHeart>
 						<SRatingContent>

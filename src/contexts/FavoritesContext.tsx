@@ -4,6 +4,7 @@ import type { AllProvidersProps } from "../types/interfaces/system";
 import { ApiFavorites } from "../types/interfaces/api";
 import { useAuth } from "./AccountContext";
 import { api } from "../helpers/Api";
+import { success } from "src/utils/validation.tools";
 
 const FavoriteContext = createContext({} as FavoritesProviderData);
 
@@ -16,8 +17,6 @@ export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element 
 		const token = localStorage.getItem("token");
 		const profile: string | null = localStorage.getItem("profile");
 		const profileParse = profile ? JSON.parse(profile) : null;
-		console.log(profile);
-		console.log(profileParse);
 
 		const headers = {
 			headers: {
@@ -30,7 +29,6 @@ export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element 
 				.then(res => {
 					if (res.status === 200) {
 						setFavorites(res.data);
-						console.log("getFavorites", res);
 					}
 				})
 				.catch(error => console.log(error));
@@ -58,6 +56,7 @@ export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element 
 						await api.delete(`/favorites`, deleteData).then((res: { status: number }) => {
 							if (res.status === 204) {
 								handleGetFavorites();
+								success("Not your favorite anymore");
 							}
 						});
 					}
@@ -78,6 +77,7 @@ export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element 
 						if (res.status === 201) {
 							console.log("status favoritos", res.status);
 							handleGetFavorites();
+							success("Now it is your favorite");
 						}
 					});
 					break;

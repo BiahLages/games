@@ -5,6 +5,7 @@ import { useOrderSettings } from "./OrderSettingsContext";
 import { ApiGames, ApiGenres } from "../types/interfaces/api";
 import { useAuth } from "./AccountContext";
 import { api } from "../helpers/Api";
+import { error } from "src/utils/validation.tools";
 
 const GameContext = createContext({} as GameProviderData);
 
@@ -110,6 +111,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 				})
 				.catch(err => {
 					console.log(err);
+					error("game not found, please reload");
 					return undefined;
 				});
 		}
