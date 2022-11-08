@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { FavoritesProviderData } from "../types/interfaces/favorites";
 import type { AllProvidersProps } from "../types/interfaces/system";
-import { ApiFavorites, ApiProfiles } from "../types/interfaces/api";
+import { ApiFavorites } from "../types/interfaces/api";
 import { useAuth } from "./AccountContext";
 import { api } from "../helpers/Api";
 
@@ -9,29 +9,32 @@ const FavoriteContext = createContext({} as FavoritesProviderData);
 
 export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	const { logged, currentUser } = useAuth();
-	const profile: string | null = localStorage.getItem("profile");
-	const profileParse = profile ? JSON.parse(profile) : null;
 
 	const [favorites, setFavorites] = useState<ApiFavorites[]>([]);
 
 	const handleGetFavorites = async (): Promise<void> => {
 		const token = localStorage.getItem("token");
+		const profile: string | null = localStorage.getItem("profile");
+		const profileParse = profile ? JSON.parse(profile) : null;
+		console.log(profile);
+		console.log(profileParse);
 
 		const headers = {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
 		};
-
-		await api
-			.get(`/favorites/profiles/${profileParse.id}`, headers)
-			.then(res => {
-				if (res.status === 200) {
-					setFavorites(res.data);
-					console.log("getFavorites", res);
-				}
-			})
-			.catch(error => console.log(error));
+		if (profileParse) {
+			await api
+				.get(`/favorites/profiles/${profileParse.id}`, headers)
+				.then(res => {
+					if (res.status === 200) {
+						setFavorites(res.data);
+						console.log("getFavorites", res);
+					}
+				})
+				.catch(error => console.log(error));
+		}
 	};
 
 	const favThis = async (id: string, isFav: boolean): Promise<void> => {
@@ -39,9 +42,11 @@ export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element 
 			const token = localStorage.getItem("token");
 			switch (isFav) {
 				case true:
-					const favId = favorites.filter(e => e.games?.id === id);
+					const favId = favorites.find(e => {
+						if (e.games) return e.games.id === id;
+					});
 					console.log(favId);
-					if (favId[0]) {
+					if (favId) {
 						const deleteData = {
 							headers: {
 								Authorization: `Bearer ${token}`,
