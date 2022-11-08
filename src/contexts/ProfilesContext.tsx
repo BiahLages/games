@@ -5,6 +5,7 @@ import { ApiProfiles } from "../types/interfaces/api";
 import { useAuth } from "./AccountContext";
 import { api } from "../helpers/Api";
 import { useNavigate } from "react-router-dom";
+import { error, success } from "src/utils/validation.tools";
 
 const ProfilesContext = createContext({} as IProfiles);
 
@@ -82,9 +83,12 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 					Authorization: `Bearer ${currentUser.token}`,
 				},
 			};
-			api.delete(`/profiles/${id}`, headers).then((): void => {
-				navigate(0);
-			});
+			api.delete(`/profiles/${id}`, headers)
+				.then((): void => {
+					success("Perfil apagado!");
+					setTimeout(() => navigate(0), 3000);
+				})
+				.catch(() => error("Error ao apagar perfil !"));
 		}
 	};
 

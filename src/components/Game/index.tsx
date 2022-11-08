@@ -10,6 +10,8 @@ import { BackgroundForm } from "../Gate/styles";
 import { SYesOrNoButton } from "../MenuDeleteUser/styles";
 import { SContainerSettings } from "src/pages/Setting/styles";
 import { UseAdminGames } from "src/contexts/AdminGamesContext";
+import { useNavigate } from "react-router-dom";
+import { ContentContainer } from "src/pages/styles";
 import { useAuth } from "src/contexts/AccountContext";
 
 const Game = ({ game }: { game: ApiGames }): JSX.Element => {
@@ -20,6 +22,8 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 	const [gamePages, setGamePage] = useState(true);
 	const { favThis, favorites } = useFavorites();
 	const [isFavorite, setIsFavorite] = useState<boolean>(true);
+
+	const navigate = useNavigate();
 
 	const handleDeleteModalOpen = () => {
 		setdeleteModal(true);
@@ -56,30 +60,33 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 			)}
 			{deleteModal && (
 				<>
-					<SContainerSettings>
-						<BackgroundForm>
-							<h1>Do you really want to delete your account?</h1>
-							<div>
-								<SYesOrNoButton
-									answer="yes"
-									onClick={(): void => {
-										deleteGame(game.id);
-										success("Successfully Deleted");
-									}}
-								>
-									Yes
-								</SYesOrNoButton>
-								<SYesOrNoButton
-									answer="no"
-									onClick={(): void => {
-										handleDeleModalClose();
-									}}
-								>
-									No
-								</SYesOrNoButton>
-							</div>
-						</BackgroundForm>
-					</SContainerSettings>
+					<ContentContainer>
+						<SContainerSettings>
+							<BackgroundForm>
+								<h1>Do you really want to delete your account?</h1>
+								<div>
+									<SYesOrNoButton
+										answer="yes"
+										onClick={(): void => {
+											deleteGame(game.id);
+											success("Successfully Deleted");
+											setTimeout(() => navigate("/"), 3000);
+										}}
+									>
+										Yes
+									</SYesOrNoButton>
+									<SYesOrNoButton
+										answer="no"
+										onClick={(): void => {
+											handleDeleModalClose();
+										}}
+									>
+										No
+									</SYesOrNoButton>
+								</div>
+							</BackgroundForm>
+						</SContainerSettings>
+					</ContentContainer>
 				</>
 			)}
 			{gamePages && (
