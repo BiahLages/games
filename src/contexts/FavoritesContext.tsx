@@ -9,6 +9,7 @@ const FavoriteContext = createContext({} as FavoritesProviderData);
 
 export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	const { logged, currentUser } = useAuth();
+	const profile = localStorage.getItem("currentProfileId");
 
 	const [favorites, setFavorites] = useState<ApiFavorites[]>([]);
 

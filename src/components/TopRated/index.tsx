@@ -1,16 +1,16 @@
 // import { useState, useEffect } from 'react';
 import Card from "../Card";
 import { useGame } from "../../contexts/GamesContext";
-import { Row, Column, Div, ArrowBack } from "./styles";
+import { Row, Column, TopRatedConteiner, ArrowBack, ArrowFoward, TopRatedTitle } from "./styles";
 
 const TopRated = (): JSX.Element => {
 	const { games, currentPage, setCurrentPage, lastValidPage } = useGame();
 	return (
-		<Div>
+		<TopRatedConteiner>
 			<Column>
-				<h2>EM ALTA</h2>
+				<TopRatedTitle>EM ALTA 🔥</TopRatedTitle>
 				<Row>
-					{currentPage !== 1 && (
+					{true && (
 						<ArrowBack
 							onClick={(): void => {
 								console.log("ArrowBack");
@@ -29,7 +29,7 @@ const TopRated = (): JSX.Element => {
 						/>
 					))}
 					{!lastValidPage && (
-						<ArrowBack
+						<ArrowFoward
 							onClick={(): void => {
 								console.log("ArrowForward");
 								console.log(lastValidPage);
@@ -38,11 +38,11 @@ const TopRated = (): JSX.Element => {
 							}}
 						>
 							▶
-						</ArrowBack>
+						</ArrowFoward>
 					)}
 				</Row>
 			</Column>
-		</Div>
+		</TopRatedConteiner>
 	);
 };
 
