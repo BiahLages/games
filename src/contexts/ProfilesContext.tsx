@@ -4,11 +4,12 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { ApiProfiles } from "../types/interfaces/api";
 import { useAuth } from "./AccountContext";
 import { api } from "../helpers/Api";
+import { useConfigUser } from "src/contexts/ConfigUserContext";
 
 const ProfilesContext = createContext({} as IProfiles);
 
 export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element => {
-	const { logged, currentUser } = useAuth();
+	const { logged, currentUser, checkTokenExpiration } = useAuth();
 
 	const [userProfiles, setUserProfiles] = useState<ApiProfiles[]>([]);
 	const [currentProfileId, setCurrentProfileId] = useState<string>("");
@@ -52,7 +53,7 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 			data.userId = currentUser.user.id;
 
 			api.post(`/profiles`, data, headers).then((): void => {
-				getAllProfiles();
+				checkTokenExpiration();
 			});
 		}
 	};
@@ -68,7 +69,7 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 				},
 			};
 			api.patch(`/profiles/${id}`, data, headers).then((): void => {
-				getAllProfiles();
+				checkTokenExpiration();
 			});
 		}
 	};
@@ -81,7 +82,7 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 				},
 			};
 			api.delete(`/profiles/${id}`, headers).then((): void => {
-				getAllProfiles();
+				checkTokenExpiration();
 			});
 		}
 	};
@@ -98,6 +99,7 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 				userProfiles,
 				setCurrentProfileId,
 				currentProfileId,
+				setUserProfiles,
 				deleteProfile,
 				editProfile,
 				getAllProfiles,
