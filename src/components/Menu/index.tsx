@@ -5,7 +5,7 @@ import triangule from "../../assets/icons/triangulo.png";
 import { useAuth } from "../../contexts/AccountContext";
 import logo from "../../assets/images/gamedevs.png";
 import { MenuProps } from "../../types/types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Input from "../Input";
 import { useConfigUser } from "src/contexts/ConfigUserContext";
 
