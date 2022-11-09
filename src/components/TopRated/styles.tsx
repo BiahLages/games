@@ -18,11 +18,13 @@ export const Row = styled.div`
 		background-color: ${mixings.colors.baseBg1Dark};
 	}
 	&::-webkit-scrollbar {
-		width: 20px;
+		width: 1.3vw;
 		background: ${mixings.colors.baseBg2Dark};
 	}
 	&::-webkit-scrollbar-thumb {
 		background: ${mixings.colors.baseBg2Dark};
+		box-shadow: 0 0 3rem 0 ${mixings.colors.baseBg2Dark},
+			inset 0 0 1.8rem 0.5rem ${mixings.colors.contrast1}33;
 		border-radius: 20px;
 	}
 `;
