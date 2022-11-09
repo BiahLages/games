@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { BackgroundForm, ContainerVerification, VerificationResponse } from "src/components/Gate/styles";
+import {
+	BackgroundForm,
+	ContainerVerification,
+	VerificationResponse,
+} from "src/components/Gate/styles";
 import Input from "src/components/Input";
 import { api } from "src/helpers/Api";
 import { success } from "src/utils/validation.tools";
@@ -46,10 +50,18 @@ const Forgot = (): JSX.Element => {
 								value={setEmail}
 							/>
 							<ContainerVerification>
-								<VerificationResponse>{email ? "✅" : "⛔️"} Email valid</VerificationResponse>
+								<VerificationResponse>
+									{email ? "✅" : "⛔️"} Email valid
+								</VerificationResponse>
 							</ContainerVerification>
 							<SContentButton>
-								<SubmitButtom onClick={(): Promise<void> => handleForgotPassword()}>Send</SubmitButtom>
+								<SubmitButtom
+									onClick={(): Promise<void> =>
+										handleForgotPassword()
+									}
+								>
+									Send
+								</SubmitButtom>
 							</SContentButton>
 						</>
 					)}

@@ -29,7 +29,9 @@ function MenuUpdateChoice(): JSX.Element {
 						<EditProfile
 							src={editprofile}
 							alt="Edit my profile"
-							onClick={(): void => functions.handdleChangeConfigUser()}
+							onClick={(): void =>
+								functions.handdleChangeConfigUser()
+							}
 						/>
 						<span>Edit info</span>
 					</div>
@@ -37,7 +39,9 @@ function MenuUpdateChoice(): JSX.Element {
 						<DeleteAccount
 							src={deleteAcc}
 							alt="Delete Account"
-							onClick={(): void => functions.handdleChangeDeleteAccount()}
+							onClick={(): void =>
+								functions.handdleChangeDeleteAccount()
+							}
 						/>
 						<span>Delete account</span>
 					</div>

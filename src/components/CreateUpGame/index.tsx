@@ -6,19 +6,31 @@ import * as S from "./style";
 import Input from "../Input";
 import { useGame } from "src/contexts/GamesContext";
 
-const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; close: () => void }): JSX.Element => {
+const CreateUpGame = ({
+	game,
+	mode,
+	close,
+}: {
+	game: ICardGames;
+	mode: string;
+	close: () => void;
+}): JSX.Element => {
 	const { createGame, editGame } = UseAdminGames();
 	const { allGenres } = useGame();
 	const navigate = useNavigate();
 
 	const [valueTitle, setValueTitle] = useState(game.title || "");
 	const [valueImage, setValueImage] = useState(game.image || "");
-	const [valueDescription, setValueDescription] = useState(game.description || "");
+	const [valueDescription, setValueDescription] = useState(
+		game.description || "",
+	);
 	const [valueYear, setValueYear] = useState(game.year || "");
 	const [valueScore, setValueScore] = useState(game.score || "");
 	const [valueTrailer, setValueTrailer] = useState(game.trailer || "");
 	const [valueGamePlay, setValueGamePlay] = useState(game.gameplay || "");
-	const [valueGenre, setValueGenre] = useState("2a31d77e-683c-4d50-bb4f-776178a675b7");
+	const [valueGenre, setValueGenre] = useState(
+		"2a31d77e-683c-4d50-bb4f-776178a675b7",
+	);
 
 	const actionCUpGames = async (): Promise<void> => {
 		const data: ICardGames = {
@@ -55,7 +67,10 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 		<S.Overlay>
 			<S.FormUpCreate>
 				<S.HeaderForm>
-					<h1> {Boolean(mode === "update") ? `Edit Game` : `Add Game`}</h1>
+					<h1>
+						{" "}
+						{Boolean(mode === "update") ? `Edit Game` : `Add Game`}
+					</h1>
 					<span
 						onClick={(e): void => {
 							close();
@@ -108,7 +123,9 @@ const CreateUpGame = ({ game, mode, close }: { game: ICardGames; mode: string; c
 					value={setValueGamePlay}
 				/>
 				<select
-					onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => {
+					onChange={(
+						e: React.ChangeEvent<HTMLSelectElement>,
+					): void => {
 						setValueGenre(e.target.value);
 					}}
 				>

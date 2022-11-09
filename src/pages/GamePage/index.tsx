@@ -32,7 +32,13 @@ const GamePage = (): JSX.Element => {
 		<>
 			<Menu path="/game/:id" />
 			<Container>
-				<ContentContainer>{current ? <Game game={current} /> : <span>Game not found</span>}</ContentContainer>
+				<ContentContainer>
+					{current ? (
+						<Game game={current} />
+					) : (
+						<span>Game not found</span>
+					)}
+				</ContentContainer>
 			</Container>
 		</>
 	);

@@ -8,7 +8,9 @@ import { success } from "src/utils/validation.tools";
 
 const FavoriteContext = createContext({} as FavoritesProviderData);
 
-export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element => {
+export const FavoritesProvider = ({
+	children,
+}: AllProvidersProps): JSX.Element => {
 	const { logged, currentUser } = useAuth();
 
 	const [favorites, setFavorites] = useState<ApiFavorites[]>([]);
@@ -60,12 +62,14 @@ export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element 
 							},
 						};
 						console.log("deletedata", deleteData);
-						await api.delete(`/favorites`, deleteData).then((res: { status: number }) => {
-							if (res.status === 204) {
-								handleGetFavorites();
-								success("Not your favorite anymore");
-							}
-						});
+						await api
+							.delete(`/favorites`, deleteData)
+							.then((res: { status: number }) => {
+								if (res.status === 204) {
+									handleGetFavorites();
+									success("Not your favorite anymore");
+								}
+							});
 					}
 					break;
 				case false:
@@ -74,18 +78,21 @@ export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element 
 							Authorization: `Bearer ${token}`,
 						},
 					};
-					const profile: string | null = localStorage.getItem("profile");
+					const profile: string | null =
+						localStorage.getItem("profile");
 					const profileParse = profile ? JSON.parse(profile) : null;
 					const body = {
 						profileId: profileParse.id,
 						games: id,
 					};
-					await api.post(`/favorites`, body, headers).then((res: { status: number }) => {
-						if (res.status === 201) {
-							handleGetFavorites();
-							success("Now it is your favorite");
-						}
-					});
+					await api
+						.post(`/favorites`, body, headers)
+						.then((res: { status: number }) => {
+							if (res.status === 201) {
+								handleGetFavorites();
+								success("Now it is your favorite");
+							}
+						});
 					break;
 			}
 		}
@@ -95,7 +102,14 @@ export const FavoritesProvider = ({ children }: AllProvidersProps): JSX.Element 
 		if (logged) handleGetFavorites();
 	}, [logged]);
 
-	return <FavoriteContext.Provider value={{ favorites, handleGetFavorites, favThis }}>{children}</FavoriteContext.Provider>;
+	return (
+		<FavoriteContext.Provider
+			value={{ favorites, handleGetFavorites, favThis }}
+		>
+			{children}
+		</FavoriteContext.Provider>
+	);
 };
 
-export const useFavorites = (): FavoritesProviderData => useContext(FavoriteContext);
+export const useFavorites = (): FavoritesProviderData =>
+	useContext(FavoriteContext);

@@ -20,7 +20,9 @@ const Providers = ({ children }: ProvidersProps): JSX.Element => {
 						<FavoritesProvider>
 							<OrderSettingsProvider>
 								<GamesProvider>
-									<AdminGamesProvider>{children}</AdminGamesProvider>
+									<AdminGamesProvider>
+										{children}
+									</AdminGamesProvider>
 								</GamesProvider>
 							</OrderSettingsProvider>
 						</FavoritesProvider>

@@ -28,7 +28,12 @@ export const STitle = styled.h2`
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background: rgb(2, 0, 36);
-	background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(205, 10, 204, 1) 82%, rgba(0, 212, 255, 1) 100%);
+	background: linear-gradient(
+		90deg,
+		rgba(2, 0, 36, 1) 0%,
+		rgba(205, 10, 204, 1) 82%,
+		rgba(0, 212, 255, 1) 100%
+	);
 	padding: 7px 0px 7px 0px;
 	width: 100%;
 	text-align: center;
@@ -68,7 +73,10 @@ export const SActionButton = styled.button`
 export const SStars = styled.div`
 	width: 20rem;
 	height: 2rem;
-	background: ${(props: IStyleScore): string => `linear-gradient(90deg, rgba(241, 255, 0, 1) ${props.score * 10}%, rgba(255, 255, 255, 1) ${props.score * 10}%)`};
+	background: ${(props: IStyleScore): string =>
+		`linear-gradient(90deg, rgba(241, 255, 0, 1) ${
+			props.score * 10
+		}%, rgba(255, 255, 255, 1) ${props.score * 10}%)`};
 	img {
 		width: 100%;
 		height: 100%;

@@ -2,7 +2,13 @@ import { ICardGames } from "../../types/interfaces/games";
 import { Link } from "react-router-dom";
 import { STitle, SScore, SStars, SText, SCard } from "./styles";
 
-const Card = ({ game, currentKey }: { game: ICardGames; currentKey: number }): JSX.Element => {
+const Card = ({
+	game,
+	currentKey,
+}: {
+	game: ICardGames;
+	currentKey: number;
+}): JSX.Element => {
 	return game ? (
 		<Link to={`/game/${game.id}`}>
 			<SCard backgroundImage={game.image}>

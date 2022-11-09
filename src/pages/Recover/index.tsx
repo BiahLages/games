@@ -3,7 +3,12 @@ import { useParams, useNavigate } from "react-router-dom";
 import Input from "src/components/Input";
 import { api } from "src/helpers/Api";
 import { error, isPw, success } from "src/utils/validation.tools";
-import { BackgroundForm, SubmitButtom, ContainerVerification, VerificationResponse } from "../../components/Gate/styles";
+import {
+	BackgroundForm,
+	SubmitButtom,
+	ContainerVerification,
+	VerificationResponse,
+} from "../../components/Gate/styles";
 import { LoginContainer } from "../Login/styles";
 import { Container } from "../styles";
 
@@ -12,7 +17,8 @@ function Recover(): JSX.Element {
 
 	const [password, setpassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-	const [validPasswordCharacters, setValidPasswordCharacters] = useState(false);
+	const [validPasswordCharacters, setValidPasswordCharacters] =
+		useState(false);
 	const [validPasswordLength, setValidPasswordLength] = useState(false);
 	const navigate = useNavigate();
 
@@ -35,12 +41,18 @@ function Recover(): JSX.Element {
 						success("changePassword - Senha atualizada");
 						setTimeout(() => navigate("/login"), 3000);
 					})
-					.catch(err => error(`"changePassword", Erro ${err.status} senha não atualizada`));
+					.catch(err =>
+						error(
+							`"changePassword", Erro ${err.status} senha não atualizada`,
+						),
+					);
 			} else {
 				error("changePassword, As senhas não conferem");
 			}
 		} else {
-			error("changePassword, A senha deve ter senha 8 caracteres com 1 letra 1 número e 1 caractere especial");
+			error(
+				"changePassword, A senha deve ter senha 8 caracteres com 1 letra 1 número e 1 caractere especial",
+			);
 		}
 	};
 
@@ -68,12 +80,25 @@ function Recover(): JSX.Element {
 							value={setConfirmPassword}
 						/>
 						<ContainerVerification>
-							<VerificationResponse>{password === confirmPassword ? "✅" : "⛔️"} passwords match</VerificationResponse>
-							<VerificationResponse>{validPasswordLength ? "✅" : "⛔️"} 8 characters</VerificationResponse>
-							<VerificationResponse>{validPasswordCharacters ? "✅" : "⛔️"} Uppercase | Lowercase | Symbol | Number</VerificationResponse>
+							<VerificationResponse>
+								{password === confirmPassword ? "✅" : "⛔️"}{" "}
+								passwords match
+							</VerificationResponse>
+							<VerificationResponse>
+								{validPasswordLength ? "✅" : "⛔️"} 8
+								characters
+							</VerificationResponse>
+							<VerificationResponse>
+								{validPasswordCharacters ? "✅" : "⛔️"}{" "}
+								Uppercase | Lowercase | Symbol | Number
+							</VerificationResponse>
 						</ContainerVerification>
 						<div>
-							<SubmitButtom onClick={(): Promise<void> => changePassword()}>Send</SubmitButtom>
+							<SubmitButtom
+								onClick={(): Promise<void> => changePassword()}
+							>
+								Send
+							</SubmitButtom>
 						</div>
 					</>
 				</BackgroundForm>

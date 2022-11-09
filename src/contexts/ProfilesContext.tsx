@@ -4,18 +4,23 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { ApiProfiles } from "../types/interfaces/api";
 import { useAuth } from "./AccountContext";
 import { api } from "../helpers/Api";
-import { useNavigate } from "react-router-dom";
 import { error, success } from "src/utils/validation.tools";
 
 const ProfilesContext = createContext({} as IProfiles);
 
-export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element => {
+export const ProfilesProvider = ({
+	children,
+}: AllProvidersProps): JSX.Element => {
 	const { logged, currentUser } = useAuth();
 	const navigate = useNavigate();
+export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element => {
+	const { logged, currentUser, checkTokenExpiration } = useAuth();
 
 	const [userProfiles, setUserProfiles] = useState<ApiProfiles[]>([]);
 	const [currentProfileId, setCurrentProfileId] = useState<string>("");
-	const [currentProfile, setCurrentProfile] = useState<ApiProfiles | undefined>();
+	const [currentProfile, setCurrentProfile] = useState<
+		ApiProfiles | undefined
+	>();
 
 	const getAllProfiles = (): void => {
 		if (logged && currentUser) {
@@ -55,7 +60,7 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 			data.userId = currentUser.user.id;
 
 			api.post(`/profiles`, data, headers).then((): void => {
-				navigate(0);
+				checkTokenExpiration();
 			});
 		}
 	};
@@ -71,7 +76,7 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 				},
 			};
 			api.patch(`/profiles/${id}`, data, headers).then((): void => {
-				navigate(0);
+				checkTokenExpiration();
 			});
 		}
 	};
@@ -85,9 +90,15 @@ export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element =
 			};
 			api.delete(`/profiles/${id}`, headers)
 				.then((): void => {
+					checkTokenExpiration();
 					success("Perfil apagado!");
-					localStorage.removeItem("profile");
-					setTimeout(() => navigate(0), 3000);
+					const profile = localStorage.getItem("profile");
+					if (profile) {
+						const data = JSON.parse(profile);
+						if (id === data.id) {
+							localStorage.removeItem("profile");
+						}
+					}
 				})
 				.catch(() => error("Error ao apagar perfil !"));
 		}

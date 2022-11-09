@@ -4,7 +4,9 @@ import { createContext, useContext, useState } from "react";
 
 const OrderContext = createContext({} as OrderSettingsProviderData);
 
-export const OrderSettingsProvider = ({ children }: AllProvidersProps): JSX.Element => {
+export const OrderSettingsProvider = ({
+	children,
+}: AllProvidersProps): JSX.Element => {
 	const [orderBy, setOrderBy] = useState("score");
 	const [orderDirection, setOrderDirection] = useState("desc");
 	const [pageLength, setPageLenght] = useState(5);
@@ -25,4 +27,5 @@ export const OrderSettingsProvider = ({ children }: AllProvidersProps): JSX.Elem
 	);
 };
 
-export const useOrderSettings = (): OrderSettingsProviderData => useContext(OrderContext);
+export const useOrderSettings = (): OrderSettingsProviderData =>
+	useContext(OrderContext);
