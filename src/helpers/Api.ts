@@ -1,1 +1,5 @@
-import axios from "axios";export const api = axios.create({	baseURL: "https://gamingdevs.up.railway.app/",});
+import axios from "axios";
+
+export const api = axios.create({
+	baseURL: "https://gamingdevs.up.railway.app/",
+});

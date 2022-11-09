@@ -1,1 +1,5 @@
-import type { CssConstants } from "../../types/interfaces/system";export const constants: CssConstants = {	FontFamily: "Audiowide",};
+import type { CssConstants } from "../../types/interfaces/system";
+
+export const constants: CssConstants = {
+	FontFamily: "Audiowide",
+};
