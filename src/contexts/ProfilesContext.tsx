@@ -8,12 +8,16 @@ import { error, success } from "src/utils/validation.tools";
 
 const ProfilesContext = createContext({} as IProfiles);
 
-export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element => {
+export const ProfilesProvider = ({
+	children,
+}: AllProvidersProps): JSX.Element => {
 	const { logged, currentUser, checkTokenExpiration } = useAuth();
 
 	const [userProfiles, setUserProfiles] = useState<ApiProfiles[]>([]);
 	const [currentProfileId, setCurrentProfileId] = useState<string>("");
-	const [currentProfile, setCurrentProfile] = useState<ApiProfiles | undefined>();
+	const [currentProfile, setCurrentProfile] = useState<
+		ApiProfiles | undefined
+	>();
 
 	const getAllProfiles = (): void => {
 		if (logged && currentUser) {

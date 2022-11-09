@@ -31,7 +31,7 @@ const LoadingUser = (): JSX.Element => {
 			getAllProfiles();
 			return setTimeout(() => {
 				beforeLoad("/login");
-			}, 250);
+			}, 500);
 		}
 	};
 

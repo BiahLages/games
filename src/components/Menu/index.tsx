@@ -68,23 +68,24 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 							})}
 					</SContentSeach>
 				)}
-				{Boolean(path === "home" || path === "/game/:id") && currentProfile && (
-					<Profile backgroundImage={currentProfile.imageUrl}>
-						<div
-							id="profileMenu"
-							onClick={(): void => {
-								setActive(!active);
-							}}
-						></div>
-						<img
-							src={triangule}
-							alt="triangule"
-							onClick={(): void => {
-								setActive(!active);
-							}}
-						/>
-					</Profile>
-				)}
+				{Boolean(path === "home" || path === "/game/:id") &&
+					currentProfile && (
+						<Profile backgroundImage={currentProfile.imageUrl}>
+							<div
+								id="profileMenu"
+								onClick={(): void => {
+									setActive(!active);
+								}}
+							></div>
+							<img
+								src={triangule}
+								alt="triangule"
+								onClick={(): void => {
+									setActive(!active);
+								}}
+							/>
+						</Profile>
+					)}
 				{active ? (
 					<MenuOptions>
 						<li

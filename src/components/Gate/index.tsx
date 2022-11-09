@@ -1,5 +1,18 @@
-import { error, isPw, validateEmail, validateName, validatePassword } from "../../utils/validation.tools";
-import { BackgroundForm, SubmitButtom, SwicherContainer, SwicherButtom, ContainerVerification, VerificationResponse } from "./styles";
+import {
+	error,
+	isPw,
+	validateEmail,
+	validateName,
+	validatePassword,
+} from "../../utils/validation.tools";
+import {
+	BackgroundForm,
+	SubmitButtom,
+	SwicherContainer,
+	SwicherButtom,
+	ContainerVerification,
+	VerificationResponse,
+} from "./styles";
 import { DataType } from "../../types/interfaces/users";
 import { useAuth } from "../../contexts/AccountContext";
 import { useEffect, useState } from "react";
@@ -15,7 +28,8 @@ const Gate = (): JSX.Element => {
 	const [valueEmail, setValueEmail] = useState("");
 	const [valuePassword, setValuePassword] = useState("");
 	const [valueCPF, setValueCPF] = useState("");
-	const [validPasswordCharacters, setValidPasswordCharacters] = useState(false);
+	const [validPasswordCharacters, setValidPasswordCharacters] =
+		useState(false);
 	const [validPasswordLength, setValidPasswordLength] = useState(false);
 
 	const navigate = useNavigate();
@@ -37,11 +51,15 @@ const Gate = (): JSX.Element => {
 					if (isValidName) {
 						data.name = valueName;
 						data.isAdmin = false;
-						const register = await api.post(`/users`, data).then(res => res);
+						const register = await api
+							.post(`/users`, data)
+							.then(res => res);
 						switch (register.status) {
 							case 201:
 								delete data.name;
-								const loginAfterRegister = await api.post(`/auth/login`, data).then(res => res);
+								const loginAfterRegister = await api
+									.post(`/auth/login`, data)
+									.then(res => res);
 								switch (loginAfterRegister.status) {
 									case 200:
 										login(loginAfterRegister.data);
@@ -62,7 +80,9 @@ const Gate = (): JSX.Element => {
 
 				case true:
 					try {
-						const sigin = await api.post(`/auth/login`, data).then(res => res);
+						const sigin = await api
+							.post(`/auth/login`, data)
+							.then(res => res);
 						switch (sigin.status) {
 							case 200:
 								login(sigin.data);
@@ -119,8 +139,13 @@ const Gate = (): JSX.Element => {
 						value={setValuePassword}
 					/>
 					<ContainerVerification>
-						<VerificationResponse>{validPasswordLength ? "✅" : "⛔️"} 8 characters</VerificationResponse>
-						<VerificationResponse>{validPasswordCharacters ? "✅" : "⛔️"} Uppercase | Lowercase | Symbol | Number</VerificationResponse>
+						<VerificationResponse>
+							{validPasswordLength ? "✅" : "⛔️"} 8 characters
+						</VerificationResponse>
+						<VerificationResponse>
+							{validPasswordCharacters ? "✅" : "⛔️"} Uppercase |
+							Lowercase | Symbol | Number
+						</VerificationResponse>
 					</ContainerVerification>
 				</div>
 				<SubmitButtom
@@ -144,7 +169,11 @@ const Gate = (): JSX.Element => {
 				</p>
 			</SwicherContainer>
 			<SwicherContainer>
-				<p>{mode ? `Don't have an account?` : `Alread have an account?`}</p>
+				<p>
+					{mode
+						? `Don't have an account?`
+						: `Alread have an account?`}
+				</p>
 
 				<SwicherButtom
 					onClick={(): void => {
