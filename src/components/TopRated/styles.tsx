@@ -10,9 +10,21 @@ export const Row = styled.div`
 	height: calc(100% - 30px);
 	width: 100%;
 	display: flex;
+	overflow-x: auto;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
+	&::-webkit-scrollbar-track {
+		background-color: ${mixings.colors.baseBg1Dark};
+	}
+	&::-webkit-scrollbar {
+		width: 20px;
+		background: ${mixings.colors.baseBg2Dark};
+	}
+	&::-webkit-scrollbar-thumb {
+		background: ${mixings.colors.baseBg2Dark};
+		border-radius: 20px;
+	}
 `;
 
 export const TopRatedConteiner = styled.div`
@@ -20,6 +32,7 @@ export const TopRatedConteiner = styled.div`
 	width: 100%;
 	min-height: 50vh;
 	display: flex;
+	overflow-x: hidden;
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: flex-start;

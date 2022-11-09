@@ -11,6 +11,7 @@ export const FavoritesConteiner = styled.div`
 	align-items: flex-start;
 	padding: 2rem;
 	border-radius: 8px;
+	overflow-x: hidden;
 
 	div#favorites {
 		overflow-x: auto;
