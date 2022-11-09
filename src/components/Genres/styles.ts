@@ -28,17 +28,20 @@ export const Row = styled.div`
 export const Column = styled.div`
 	display: flex;
 	flex-direction: column;
-	/* margin: 4rem; */
 	margin-top: 4rem;
 `;
 
 export const SelectGender = styled.select`
-	margin: 22px auto 22px 3px;
-	width: 35rem;
-	font-size: 18px;
-	color: #fff;
-	background-color: black;
-	border-radius: 5px;
+	width: 40rem;
+	margin: 2rem 2rem;
+	padding: 2rem;
+	text-align: center;
+	font-size: 4rem;
+	color: ${mixings.colors.contrast1};
+	background-color: ${mixings.colors.baseBg1Dark};
+	border: none;
+	box-shadow: inset 0 0 4rem 0.1rem ${mixings.colors.contrast1}33;
+	border-radius: 10rem;
 `;
 
 export const CardsConteiner = styled.div`
