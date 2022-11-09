@@ -142,5 +142,9 @@ export const SContentSeach = styled.div`
 		justify-content: center;
 		border-radius: 1rem;
 		cursor: pointer;
+		&:hover {
+			background-color: #fff;
+			color: black;
+		}
 	}
 `;
