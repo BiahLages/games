@@ -41,7 +41,9 @@ export const toRight = keyframes`
 export const Overlay = styled.div`
 	position: fixed;
 	left: 0;
+	top: 0;
 	width: 100vw;
+	max-width: 100%;
 	height: 100vh;
 	background: ${mixings.colors.primaryColorOpacity};
 	display: flex;

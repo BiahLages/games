@@ -17,42 +17,40 @@ const Profiles = (): JSX.Element => {
 	switch (addProfile) {
 		case true: {
 			return (
-				<div>
-					<S.Overlay>
-						<S.FormCreateProfile>
-							<S.HeaderForm>
-								<h2>Create a new Profile</h2>
-								<span
-									onClick={(): void => {
-										setAddProfile(!addProfile);
-									}}
-								>
-									➕
-								</span>
-							</S.HeaderForm>
-							<Input
-								label="Name"
-								placeholder="Profile title"
-								type="text"
-								value={setNameProfile}
-							/>
-							<Input
-								label="Image"
-								placeholder="https://linkimage.com/image.png"
-								type="text"
-								value={setImgProfile}
-							/>
-							<S.Button
+				<S.Overlay>
+					<S.FormCreateProfile>
+						<S.HeaderForm>
+							<h2>Create a new Profile</h2>
+							<span
 								onClick={(): void => {
-									createProfile(nameProfile, imgProfile);
 									setAddProfile(!addProfile);
 								}}
 							>
-								Create
-							</S.Button>
-						</S.FormCreateProfile>
-					</S.Overlay>
-				</div>
+								➕
+							</span>
+						</S.HeaderForm>
+						<Input
+							label="Name"
+							placeholder="Profile title"
+							type="text"
+							value={setNameProfile}
+						/>
+						<Input
+							label="Image"
+							placeholder="https://linkimage.com/image.png"
+							type="text"
+							value={setImgProfile}
+						/>
+						<S.Button
+							onClick={(): void => {
+								createProfile(nameProfile, imgProfile);
+								setAddProfile(!addProfile);
+							}}
+						>
+							Create
+						</S.Button>
+					</S.FormCreateProfile>
+				</S.Overlay>
 			);
 		}
 		case false: {
