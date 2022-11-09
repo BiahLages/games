@@ -1,4 +1,11 @@
-import { LogoContainer, MenuContainer, MenuContent, MenuOptions, Profile, SContentSeach } from "./styles";
+import {
+	LogoContainer,
+	MenuContainer,
+	MenuContent,
+	MenuOptions,
+	Profile,
+	SContentSeach,
+} from "./styles";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useProfiles } from "../../contexts/ProfilesContext";
 import triangule from "../../assets/icons/triangulo.png";
@@ -52,14 +59,21 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 							value={setSearch}
 						/>
 						{allGamesSwitch
-							.filter((e: ApiGames) => e.title.toLowerCase().includes(search.toLowerCase()))
+							.filter((e: ApiGames) =>
+								e.title
+									.toLowerCase()
+									.includes(search.toLowerCase()),
+							)
 							.map((e: ApiGames) => {
 								return (
 									<span
 										key={e.id}
 										onClick={(): void => {
 											navigate("/loading");
-											setTimeout(() => navigate(`/game/${e.id}`), 2000);
+											setTimeout(
+												() => navigate(`/game/${e.id}`),
+												2000,
+											);
 										}}
 									>
 										{e.title}
