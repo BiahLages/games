@@ -121,3 +121,30 @@ export const Profile = styled.article<ProfileItemProps>`
 		cursor: pointer;
 	}
 `;
+
+export const SContentSeach = styled.div`
+	position: absolute;
+	top: 1rem;
+	left: 50rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	margin-top: 3rem;
+	gap: 1rem;
+	span {
+		display: flex;
+		align-items: center;
+		height: 5rem;
+		width: 46%;
+		background-color: black;
+		font-size: 2rem;
+		color: #fff;
+		justify-content: center;
+		border-radius: 1rem;
+		cursor: pointer;
+		&:hover {
+			background-color: #fff;
+			color: black;
+		}
+	}
+`;

@@ -4,6 +4,7 @@ import {
 	MenuContent,
 	MenuOptions,
 	Profile,
+	SContentSeach,
 } from "./styles";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useProfiles } from "../../contexts/ProfilesContext";
@@ -11,18 +12,31 @@ import triangule from "../../assets/icons/triangulo.png";
 import { useAuth } from "../../contexts/AccountContext";
 import logo from "../../assets/images/gamedevs.png";
 import { MenuProps } from "../../types/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../Input";
 import { useConfigUser } from "src/contexts/ConfigUserContext";
+import { ApiGames } from "src/types/interfaces/api";
+import { useGame } from "src/contexts/GamesContext";
 
 const Menu = ({ path }: MenuProps): JSX.Element => {
 	const { logout } = useAuth();
+	const { allGames, handleGetServerStatus } = useGame();
 	const { currentProfile } = useProfiles();
 	const { functions } = useConfigUser();
 	const navigate: NavigateFunction = useNavigate();
 	const [active, setActive] = useState(false);
+	const [allGamesSwitch, setAllGamesSwitch] = useState<ApiGames[]>([]);
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [search, setSearch] = useState("");
+
+	useEffect(() => {
+		if (search.length > 0) {
+			handleGetServerStatus();
+			setAllGamesSwitch(allGames);
+		} else {
+			setAllGamesSwitch([]);
+		}
+	}, [search]);
 
 	return (
 		<MenuContainer>
@@ -37,12 +51,36 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 					/>
 				</LogoContainer>
 				{Boolean(path === "home" || path === "/game/:id") && (
-					<Input
-						label="search"
-						type="text"
-						placeholder="Pesquisa"
-						value={setSearch}
-					/>
+					<SContentSeach>
+						<Input
+							label="search"
+							type="text"
+							placeholder="Pesquisa"
+							value={setSearch}
+						/>
+						{allGamesSwitch
+							.filter((e: ApiGames) =>
+								e.title
+									.toLowerCase()
+									.includes(search.toLowerCase()),
+							)
+							.map((e: ApiGames) => {
+								return (
+									<span
+										key={e.id}
+										onClick={(): void => {
+											navigate("/loading");
+											setTimeout(
+												() => navigate(`/game/${e.id}`),
+												2000,
+											);
+										}}
+									>
+										{e.title}
+									</span>
+								);
+							})}
+					</SContentSeach>
 				)}
 				{Boolean(path === "home" || path === "/game/:id") &&
 					currentProfile && (
