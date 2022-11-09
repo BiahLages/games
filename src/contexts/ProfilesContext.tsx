@@ -8,11 +8,6 @@ import { error, success } from "src/utils/validation.tools";
 
 const ProfilesContext = createContext({} as IProfiles);
 
-export const ProfilesProvider = ({
-	children,
-}: AllProvidersProps): JSX.Element => {
-	const { logged, currentUser } = useAuth();
-	const navigate = useNavigate();
 export const ProfilesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	const { logged, currentUser, checkTokenExpiration } = useAuth();
 
