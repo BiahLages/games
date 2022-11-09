@@ -19,8 +19,9 @@ export const FavoritesConteiner = styled.div`
 		width: 100%;
 		display: flex;
 		flex-direction: row;
-		justify-content: space-between;
+		justify-content: flex-start;
 		align-items: center;
+		gap: 1rem;
 	}
 	div#favorites::-webkit-scrollbar-track {
 		background-color: ${mixings.colors.baseBg1Dark};
