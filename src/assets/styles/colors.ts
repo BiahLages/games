@@ -1,13 +1,8 @@
 import { CssColors } from "../../types/interfaces/system";
 
 export const colors: CssColors = {
-	/*>>> NÃO USAR <<< Cores temporárias que só serão retiradas depois que a aplicação inteira não estiver utilizando*/
-	baseBg1: "#282a36",
-	baseBg2: "#44475a",
-	baseBg3: "bd93f9",
-
 	/* usar para modo escuro*/
-	baseBg1Dark: "#212121",
+	baseBg1Dark: "#201f20",
 	baseBg2Dark: "#313131",
 
 	/* usar para modo escuro*/
