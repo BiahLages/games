@@ -10,8 +10,13 @@ module.exports = {
 		tsconfigRootDir: __dirname,
 		sourceType: "module",
 	},
-	plugins: ["@typescript-eslint/eslint-plugin"],
-	extends: ["plugin:@typescript-eslint/recommended", "plugin:prettier/recommended", "plugin:react/recommended", "plugin:react/jsx-runtime"],
+	plugins: ["@typescript-eslint/eslint-plugin", "react"],
+	extends: [
+		"plugin:@typescript-eslint/recommended",
+		"plugin:prettier/recommended",
+		"plugin:react/recommended",
+		"plugin:react/jsx-runtime",
+	],
 	root: true,
 	env: {
 		node: true,
@@ -26,5 +31,11 @@ module.exports = {
 		"@typescript-eslint/explicit-function-return-type": "warn",
 		"@typescript-eslint/explicit-module-boundary-types": "warn",
 		"@typescript-eslint/no-explicit-any": "warn",
+		"linebreak-style": 0,
+	},
+	settings: {
+		react: {
+			version: "detect",
+		},
 	},
 };

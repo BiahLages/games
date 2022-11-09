@@ -1,4 +1,7 @@
-import { MenuItemButtonProps, ProfileItemProps } from "../../types/interfaces/system";
+import {
+	MenuItemButtonProps,
+	ProfileItemProps,
+} from "../../types/interfaces/system";
 import styled, { css, Interpolation } from "styled-components";
 import mixings from "../../assets/styles/mixins";
 

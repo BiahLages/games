@@ -113,7 +113,10 @@ export const SScore = styled.div`
 export const SStars = styled.div`
 	width: 100rem;
 	height: 9rem;
-	background: ${(props: IStyleScore): string => `linear-gradient(90deg, rgba(241, 255, 0, 1) ${props.score * 10}%, rgba(255, 255, 255, 1) ${props.score * 10}%)`};
+	background: ${(props: IStyleScore): string =>
+		`linear-gradient(90deg, rgba(241, 255, 0, 1) ${
+			props.score * 10
+		}%, rgba(255, 255, 255, 1) ${props.score * 10}%)`};
 	img {
 		width: 100%;
 		height: 100%;

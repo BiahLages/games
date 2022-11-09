@@ -1,4 +1,10 @@
-import { LogoContainer, MenuContainer, MenuContent, MenuOptions, Profile } from "./styles";
+import {
+	LogoContainer,
+	MenuContainer,
+	MenuContent,
+	MenuOptions,
+	Profile,
+} from "./styles";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 import { useProfiles } from "../../contexts/ProfilesContext";
 import triangule from "../../assets/icons/triangulo.png";
@@ -38,23 +44,24 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 						value={setSearch}
 					/>
 				)}
-				{Boolean(path === "home" || path === "/game/:id") && currentProfile && (
-					<Profile backgroundImage={currentProfile.imageUrl}>
-						<div
-							id="profileMenu"
-							onClick={(): void => {
-								setActive(!active);
-							}}
-						></div>
-						<img
-							src={triangule}
-							alt="triangule"
-							onClick={(): void => {
-								setActive(!active);
-							}}
-						/>
-					</Profile>
-				)}
+				{Boolean(path === "home" || path === "/game/:id") &&
+					currentProfile && (
+						<Profile backgroundImage={currentProfile.imageUrl}>
+							<div
+								id="profileMenu"
+								onClick={(): void => {
+									setActive(!active);
+								}}
+							></div>
+							<img
+								src={triangule}
+								alt="triangule"
+								onClick={(): void => {
+									setActive(!active);
+								}}
+							/>
+						</Profile>
+					)}
 				{active ? (
 					<MenuOptions>
 						<li

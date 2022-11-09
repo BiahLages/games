@@ -1,7 +1,15 @@
-import { createGlobalStyle, DefaultTheme, GlobalStyleComponent, ThemeProps } from "styled-components";
+import {
+	createGlobalStyle,
+	DefaultTheme,
+	GlobalStyleComponent,
+	ThemeProps,
+} from "styled-components";
 import mixings from "./mixins";
 
-const GlobalStyle: GlobalStyleComponent<ThemeProps<DefaultTheme>, DefaultTheme> = createGlobalStyle`
+const GlobalStyle: GlobalStyleComponent<
+	ThemeProps<DefaultTheme>,
+	DefaultTheme
+> = createGlobalStyle`
 *{
 	margin: 0;
 	padding: 0;

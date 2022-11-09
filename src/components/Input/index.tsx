@@ -11,7 +11,15 @@ interface InputType {
 	min?: number;
 }
 
-const Input = ({ label, placeholder, type, value, step, max, min }: InputType): JSX.Element => {
+const Input = ({
+	label,
+	placeholder,
+	type,
+	value,
+	step,
+	max,
+	min,
+}: InputType): JSX.Element => {
 	const [blind, setBlind] = useState<boolean>(true);
 
 	switch (type) {

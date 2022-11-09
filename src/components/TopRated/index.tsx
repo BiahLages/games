@@ -1,7 +1,13 @@
 // import { useState, useEffect } from 'react';
 import Card from "../Card";
 import { useGame } from "../../contexts/GamesContext";
-import { Row, TopRatedConteiner, ArrowBack, ArrowFoward, TopRatedTitle } from "./styles";
+import {
+	Row,
+	TopRatedConteiner,
+	ArrowBack,
+	ArrowFoward,
+	TopRatedTitle,
+} from "./styles";
 
 const TopRated = (): JSX.Element => {
 	const { games, currentPage, setCurrentPage, lastValidPage } = useGame();

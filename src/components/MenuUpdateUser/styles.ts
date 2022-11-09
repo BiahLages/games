@@ -53,7 +53,8 @@ export const BackgroundForm = styled.div`
 export const SCancelOrSaveButton = styled.button`
 	height: 2em;
 	width: 6em;
-	background: ${(props: ICancelOrSaveButton): string => (props.answer === "save" ? "#6cea69" : "#ff5555")};
+	background: ${(props: ICancelOrSaveButton): string =>
+		props.answer === "save" ? "#6cea69" : "#ff5555"};
 	color: ${mixings.colors.contrast1};
 	border: none;
 	border-radius: 2em;
