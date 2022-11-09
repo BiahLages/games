@@ -1,4 +1,22 @@
-import { SGame, SImage, STitle, SText, SRatingContent, SMediaContent, SVideosContent, SGameplay, STrailer, SInfoContent, SGenre, SButton, SButtonsContainer, SHeart, STitleHeart, SStars, SScore } from "./styles";
+import {
+	SGame,
+	SImage,
+	STitle,
+	SText,
+	SRatingContent,
+	SMediaContent,
+	SVideosContent,
+	SGameplay,
+	STrailer,
+	SInfoContent,
+	SGenre,
+	SButton,
+	SButtonsContainer,
+	SHeart,
+	STitleHeart,
+	SStars,
+	SScore,
+} from "./styles";
 import { ApiGames, ApiGenres } from "../../types/interfaces/api";
 import heartBlank from "src/assets/icons/heartBlank.png";
 import heartFull from "src/assets/icons/heartFull.png";
@@ -68,14 +86,19 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 					<ContentContainer>
 						<SContainerSettings>
 							<BackgroundForm>
-								<h1>Do you really want to delete your account?</h1>
+								<h1>
+									Do you really want to delete your account?
+								</h1>
 								<div>
 									<SYesOrNoButton
 										answer="yes"
 										onClick={(): void => {
 											deleteGame(game.id);
 											success("Successfully Deleted");
-											setTimeout(() => navigate("/"), 3000);
+											setTimeout(
+												() => navigate("/"),
+												3000,
+											);
 										}}
 									>
 										Yes
@@ -133,9 +156,13 @@ const Game = ({ game }: { game: ApiGames }): JSX.Element => {
 						</SMediaContent>
 						{game.genres && (
 							<SGenre>
-								{game.genres.map((genre: ApiGenres, i: number) => {
-									return <SText key={i}>{genre.name}</SText>;
-								})}
+								{game.genres.map(
+									(genre: ApiGenres, i: number) => {
+										return (
+											<SText key={i}>{genre.name}</SText>
+										);
+									},
+								)}
 							</SGenre>
 						)}
 						{currentUser && currentUser.user.isAdmin ? (

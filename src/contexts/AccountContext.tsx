@@ -60,7 +60,13 @@ export const AuthProvider = ({ children }: AllProvidersProps): JSX.Element => {
 		if (token) checkTokenExpiration();
 	}, []);
 
-	return <AuthContext.Provider value={{ logged, login, logout, currentUser, checkTokenExpiration }}>{children}</AuthContext.Provider>;
+	return (
+		<AuthContext.Provider
+			value={{ logged, login, logout, currentUser, checkTokenExpiration }}
+		>
+			{children}
+		</AuthContext.Provider>
+	);
 };
 
 export const useAuth = (): AuthProviderData => useContext(AuthContext);

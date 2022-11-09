@@ -7,10 +7,21 @@ import { error, success } from "src/utils/validation.tools";
 
 const AdminGameContext = createContext({} as IAdminGames);
 
-export const AdminGamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
+export const AdminGamesProvider = ({
+	children,
+}: AllProvidersProps): JSX.Element => {
 	const { logged, currentUser } = useAuth();
 
-	const createGame = async ({ title, image, year, description, score, trailer, gameplay, genreId }: ICardGames): Promise<void> => {
+	const createGame = async ({
+		title,
+		image,
+		year,
+		description,
+		score,
+		trailer,
+		gameplay,
+		genreId,
+	}: ICardGames): Promise<void> => {
 		const data: ICardGames = {
 			title,
 			image,
@@ -38,7 +49,19 @@ export const AdminGamesProvider = ({ children }: AllProvidersProps): JSX.Element
 		}
 	};
 
-	const editGame = async (id: string, { title, image, year, description, score, trailer, gameplay, genreId }: ICardGames): Promise<void> => {
+	const editGame = async (
+		id: string,
+		{
+			title,
+			image,
+			year,
+			description,
+			score,
+			trailer,
+			gameplay,
+			genreId,
+		}: ICardGames,
+	): Promise<void> => {
 		const data: ICardGames = {};
 		if (logged && currentUser) {
 			if (title) data.title = title;

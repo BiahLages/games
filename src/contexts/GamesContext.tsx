@@ -46,19 +46,24 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	const handleGetGames = async (): Promise<void> => {
 		if (!headers.headers.Authorization.includes("null")) {
-			await api.get(`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`, headers).then(res => {
-				setGames(res.data);
-				if (allGames.length !== 0) {
-					setShownCards(shownCards + res.data.length);
-					if (shownCards >= allGames.length) {
-						setLastValidPage(true);
-					} else if (shownCards !== allGames.length) {
+			await api
+				.get(
+					`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`,
+					headers,
+				)
+				.then(res => {
+					setGames(res.data);
+					if (allGames.length !== 0) {
 						setShownCards(shownCards + res.data.length);
-						setLastValidPage(false);
-						setLastPage(currentPage);
+						if (shownCards >= allGames.length) {
+							setLastValidPage(true);
+						} else if (shownCards !== allGames.length) {
+							setShownCards(shownCards + res.data.length);
+							setLastValidPage(false);
+							setLastPage(currentPage);
+						}
 					}
-				}
-			});
+				});
 		}
 	};
 
@@ -88,13 +93,27 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 		return { gameplay, trailer };
 	};
 
-	const handleGetGameById = async (id: string): Promise<ApiGames | undefined> => {
+	const handleGetGameById = async (
+		id: string,
+	): Promise<ApiGames | undefined> => {
 		if (logged && currentUser) {
 			return await api
 				.get(`/games/${id}`, headers)
 				.then(res => {
 					const game: ApiGames = res.data;
-					const { id, title, image, description, year, score, trailer, gameplay, genres, createdAt, updatedAt } = game;
+					const {
+						id,
+						title,
+						image,
+						description,
+						year,
+						score,
+						trailer,
+						gameplay,
+						genres,
+						createdAt,
+						updatedAt,
+					} = game;
 					const linkEdited = handleFormatLink(gameplay, trailer);
 					return {
 						id,

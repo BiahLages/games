@@ -1,4 +1,15 @@
-import { ContainerProfile, ContentProfile, ContainerImgProfile, NameUser, DivImgEdit, ImgEditDelete, Overlay, FormEditProfile, HeaderForm, OptionsEditDelete } from "./style";
+import {
+	ContainerProfile,
+	ContentProfile,
+	ContainerImgProfile,
+	NameUser,
+	DivImgEdit,
+	ImgEditDelete,
+	Overlay,
+	FormEditProfile,
+	HeaderForm,
+	OptionsEditDelete,
+} from "./style";
 import { useProfiles } from "src/contexts/ProfilesContext";
 import { ApiProfiles } from "../../types/interfaces/api";
 import trash from "../../assets/icons/trash.png";
@@ -8,8 +19,15 @@ import { useState } from "react";
 import Input from "../Input";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
-const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: number }): JSX.Element => {
-	const { getAllProfiles, editProfile, deleteProfile, selectProfile } = useProfiles();
+const Profile = ({
+	profile,
+	currentKey,
+}: {
+	profile: ApiProfiles;
+	currentKey: number;
+}): JSX.Element => {
+	const { getAllProfiles, editProfile, deleteProfile, selectProfile } =
+		useProfiles();
 
 	const navigate: NavigateFunction = useNavigate();
 
@@ -87,9 +105,13 @@ const Profile = ({ profile, currentKey }: { profile: ApiProfiles; currentKey: nu
 							navigate(0);
 						}}
 					>
-						<ContainerImgProfile backgroundImage={profile.imageUrl} />
+						<ContainerImgProfile
+							backgroundImage={profile.imageUrl}
+						/>
 						<NameUser key={`profileContentTitle${currentKey}`}>
-							<h2 key={`profileTitle${currentKey}`}>{profile.title}</h2>
+							<h2 key={`profileTitle${currentKey}`}>
+								{profile.title}
+							</h2>
 						</NameUser>
 					</ContentProfile>
 					<DivImgEdit

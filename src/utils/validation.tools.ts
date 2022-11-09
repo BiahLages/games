@@ -47,6 +47,8 @@ export const validatePassword = (pw: string): boolean | void => {
 	if (isPw.test(pw) && pw.length > 7) {
 		return isPw.test(pw);
 	} else {
-		error("Must have a minimal of 8 characters, one uppercase, one lowercase, one symbol and one number.");
+		error(
+			"Must have a minimal of 8 characters, one uppercase, one lowercase, one symbol and one number.",
+		);
 	}
 };

@@ -9,7 +9,9 @@ import { useAuth } from "./AccountContext";
 
 const ConfigUserContext = createContext({} as IConfigUserProviderData);
 
-export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element => {
+export const ConfigUserProvider = ({
+	children,
+}: AllProvidersProps): JSX.Element => {
 	const { logged, currentUser, logout } = useAuth();
 
 	//States para config do usuário logado.
@@ -25,13 +27,17 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 	const [nameUser, setNameUser] = useState<null | string>(null);
 	const [emailUser, setEmailUser] = useState<null | string>(null);
 	const [cpfUser, setCpfUser] = useState<null | string>(null);
-	const [passwordUser, setPasswordUser] = useState<undefined | string>(undefined);
+	const [passwordUser, setPasswordUser] = useState<undefined | string>(
+		undefined,
+	);
 	const [isAdminUser, setIsAdminUser] = useState<null | boolean>(null);
 
 	// States para troca de menus.
-	const [switchMenuUpdateChoice, setSwitchMenuUpdateChoice] = useState<boolean>();
+	const [switchMenuUpdateChoice, setSwitchMenuUpdateChoice] =
+		useState<boolean>();
 	const [switchMenuUpdateUSer, setSwitchMenuUpdateUser] = useState<boolean>();
-	const [switchMenuUpdateAdmin, setSwitchMenuUpdateAdmin] = useState<boolean>();
+	const [switchMenuUpdateAdmin, setSwitchMenuUpdateAdmin] =
+		useState<boolean>();
 
 	const headers = {
 		headers: {
@@ -55,10 +61,17 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 			await api
 				.patch(`/users/${currentUser.user.id}`, data, headers)
 				.then(res => {
-					localStorage.setItem("user", JSON.stringify({ ...res.data, isAdmin, cpf }));
+					localStorage.setItem(
+						"user",
+						JSON.stringify({ ...res.data, isAdmin, cpf }),
+					);
 					success("handdleUpdateUser Usuário Atualizado");
 				})
-				.catch(err => error(`"handdleUpdateUser", Erro ${err.status} Usuário não atualizado`));
+				.catch(err =>
+					error(
+						`"handdleUpdateUser", Erro ${err.status} Usuário não atualizado`,
+					),
+				);
 		}
 	};
 
@@ -71,7 +84,11 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 					logout();
 					success("handdleDeleteUser, Usuário Deletado");
 				})
-				.catch(err => console.log(`"handdleDeleteUser", Erro ${err.status} Usuário não deletado`));
+				.catch(err =>
+					console.log(
+						`"handdleDeleteUser", Erro ${err.status} Usuário não deletado`,
+					),
+				);
 	};
 
 	const handdleGetUsers = async (): Promise<void> => {
@@ -89,31 +106,54 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 			await api
 				.get(`/users/${id}`, headers)
 				.then(res => {
-					console.log("handdleGetUsers", "Lista de usuários carregada");
+					console.log(
+						"handdleGetUsers",
+						"Lista de usuários carregada",
+					);
 					setDataUserForId(res.data);
 				})
 				.catch(error => {
 					console.log("handdleGetUsers", `Error ${error.status}`);
 				});
 		} else {
-			console.log("handdleGetUserForId", "Usuario não logado ou não Admin ");
+			console.log(
+				"handdleGetUserForId",
+				"Usuario não logado ou não Admin ",
+			);
 		}
 	};
 
 	// Implentar um modal de confirmação.
 	const handdleUpdateUserAdmin = async (): Promise<void> => {
 		if (logged && currentUser && dataUserForId) {
-			const dataAdmin = { name: nameUser, email: emailUser, cpf: cpfUser, password: passwordUser, isAdmin: isAdminUser };
+			const dataAdmin = {
+				name: nameUser,
+				email: emailUser,
+				cpf: cpfUser,
+				password: passwordUser,
+				isAdmin: isAdminUser,
+			};
 
 			await api
 				.patch(`/users${dataUserForId.id}`, dataAdmin, headers)
 				.then(() => {
-					console.log("handdleUpdateUser", `Usuário ${dataUserForId.name} atualizado`);
+					console.log(
+						"handdleUpdateUser",
+						`Usuário ${dataUserForId.name} atualizado`,
+					);
 					handdleGetUsers();
 				})
-				.catch(error => console.log("handdleUpdateUserAdmin", `Erro ${error.status}, Usuário ${dataUserForId.name} não atualizado`));
+				.catch(error =>
+					console.log(
+						"handdleUpdateUserAdmin",
+						`Erro ${error.status}, Usuário ${dataUserForId.name} não atualizado`,
+					),
+				);
 		} else {
-			console.log("handdleUpdateUserAdmin", "Usuario não logado ou não Admin ");
+			console.log(
+				"handdleUpdateUserAdmin",
+				"Usuario não logado ou não Admin ",
+			);
 		}
 	};
 
@@ -123,10 +163,18 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 			await api
 				.delete(`/users${dataUserForId.id}`, headers)
 				.then(() => {
-					console.log("handdleDeleteUserAdmin", `Usuário ${dataUserForId.name} Deletado`);
+					console.log(
+						"handdleDeleteUserAdmin",
+						`Usuário ${dataUserForId.name} Deletado`,
+					);
 					handdleGetUsers();
 				})
-				.catch(error => console.log("handdleDeleteUser", `Erro ${error.status}, usuário ${dataUserForId.name} não deletado`));
+				.catch(error =>
+					console.log(
+						"handdleDeleteUser",
+						`Erro ${error.status}, usuário ${dataUserForId.name} não deletado`,
+					),
+				);
 	};
 
 	const handdleStateUSer = (): void => {
@@ -215,4 +263,5 @@ export const ConfigUserProvider = ({ children }: AllProvidersProps): JSX.Element
 	);
 };
 
-export const useConfigUser = (): IConfigUserProviderData => useContext(ConfigUserContext);
+export const useConfigUser = (): IConfigUserProviderData =>
+	useContext(ConfigUserContext);
