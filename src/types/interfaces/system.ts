@@ -5,9 +5,6 @@ export interface AllProvidersProps {
 }
 
 export interface CssColors {
-	baseBg1: string;
-	baseBg2: string;
-	baseBg3: string;
 	baseBg1Dark: string;
 	baseBg2Dark: string;
 	baseBg1Light: string;
