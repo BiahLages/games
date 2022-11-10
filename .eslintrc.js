@@ -31,7 +31,12 @@ module.exports = {
 		"@typescript-eslint/explicit-function-return-type": "warn",
 		"@typescript-eslint/explicit-module-boundary-types": "warn",
 		"@typescript-eslint/no-explicit-any": "warn",
-		"linebreak-style": 0,
+		"prettier/prettier": [
+			"error",
+			{
+				endOfLine: "auto",
+			},
+		],
 	},
 	settings: {
 		react: {
