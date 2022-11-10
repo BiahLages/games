@@ -1,28 +1,31 @@
 import mixings from "src/assets/styles/mixins";
 import styled from "styled-components";
 
-export const GenresConteiner = styled.div`
-	box-shadow: inset 0 0 0.25rem 0.5rem ${mixings.colors.contrast0}22;
-	width: 100%;
-	min-height: 50vh;
-	display: flex;
-	padding: 2rem;
-	border-radius: 8px;
-	margin-bottom: 1rem;
-`;
-
-export const GenresTitle = styled.h2`
-	font-size: 20px;
-`;
-
 export const Row = styled.div`
-	display: flex;
+	height: calc(100% - 30px);
 	width: 100%;
-	gap: 5rem;
-	justify-content: center;
+	display: flex;
 	flex-direction: row;
-	margin-top: 2rem;
+	justify-content: center;
+	gap: 1rem;
+
 	flex-wrap: wrap;
+
+	div#genres {
+		height: 20vh;
+		font-size: 0.75rem;
+
+		h2#genresTitle {
+			bottom: -2rem;
+			font-style: italic;
+			font-weight: lighter;
+			letter-spacing: 0.2rem;
+			line-height: 1.2rem;
+		}
+		div#genresScore {
+			display: none;
+		}
+	}
 `;
 
 export const Column = styled.div`

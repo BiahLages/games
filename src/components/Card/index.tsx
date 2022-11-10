@@ -11,9 +11,17 @@ const Card = ({
 }): JSX.Element => {
 	return game ? (
 		<Link to={`/game/${game.id}`}>
-			<SCard backgroundImage={game.image}>
-				<STitle key={`title${currentKey}`}>{game.title}</STitle>
-				<SScore>
+			<SCard
+				backgroundImage={game.image}
+				id="genres"
+			>
+				<STitle
+					id="genresTitle"
+					key={`title${currentKey}`}
+				>
+					{game.title}
+				</STitle>
+				<SScore id="genresScore">
 					<SStars score={Number(game.score)}>
 						<img
 							src="https://media.discordapp.net/attachments/985645895779508254/1039019480359112775/stars.png"

@@ -1,8 +1,8 @@
 import { Container } from "../styles";
 import Menu from "../../components/Menu";
-import Favorites from "src/components/Favorites";
-import TopRated from "src/components/TopRated";
-import Genres from "src/components/Genres";
+import Favorites from "src/components/home/Favorites";
+import TopRated from "src/components/home/TopRated";
+import Genres from "src/components/home/Genres";
 import { HomeContainer } from "./styles";
 
 const Home = (): JSX.Element => {

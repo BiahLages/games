@@ -1,20 +1,21 @@
-// import { useState, useEffect } from 'react';
-import Card from "../Card";
-import { useGame } from "../../contexts/GamesContext";
+import Card from "../../Card";
+import { useGame } from "../../../contexts/GamesContext";
+import { ArrowBack, ArrowFoward } from "./styles";
 import {
-	Row,
-	TopRatedConteiner,
-	ArrowBack,
-	ArrowFoward,
-	TopRatedTitle,
-} from "./styles";
+	SHomeComponentsContainer,
+	HomeComponentsTitle,
+	HomeComponentsRow,
+} from "../styled";
 
 const TopRated = (): JSX.Element => {
 	const { games, currentPage, setCurrentPage, lastValidPage } = useGame();
 	return (
-		<TopRatedConteiner>
-			<TopRatedTitle>EM ALTA 🔥</TopRatedTitle>
-			<Row>
+		<SHomeComponentsContainer scroll="side">
+			<HomeComponentsTitle>EM ALTA 🔥</HomeComponentsTitle>
+			<HomeComponentsRow
+				type="overflow"
+				align="center"
+			>
 				{currentPage > 1 && (
 					<ArrowBack
 						onClick={(): void => {
@@ -42,8 +43,8 @@ const TopRated = (): JSX.Element => {
 						▶
 					</ArrowFoward>
 				)}
-			</Row>
-		</TopRatedConteiner>
+			</HomeComponentsRow>
+		</SHomeComponentsContainer>
 	);
 };
 

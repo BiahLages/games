@@ -1,16 +1,12 @@
 import { useEffect } from "react";
-import Card from "../Card";
-import { useGame } from "../../contexts/GamesContext";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import Card from "../../Card";
+import { useGame } from "../../../contexts/GamesContext";
+import { Column, SelectGender, CardsConteiner } from "./styles";
 import {
-	Row,
-	Column,
-	GenresConteiner,
-	GenresTitle,
-	SelectGender,
-	CardsConteiner,
-} from "./styles";
-// import { useState } from "react";
+	SHomeComponentsContainer,
+	HomeComponentsTitle,
+	HomeComponentsRow,
+} from "../styled";
 
 const Genres = (): JSX.Element => {
 	const { gamesByGender, allGenres, handleGetGamesByGenre } = useGame();
@@ -19,9 +15,9 @@ const Genres = (): JSX.Element => {
 	}, []);
 
 	return (
-		<GenresConteiner>
+		<SHomeComponentsContainer>
 			<Column>
-				<GenresTitle>Escolha por gênero:</GenresTitle>
+				<HomeComponentsTitle>GENEROS</HomeComponentsTitle>
 				<CardsConteiner>
 					<SelectGender
 						onChange={(
@@ -42,7 +38,7 @@ const Genres = (): JSX.Element => {
 						})}
 					</SelectGender>
 				</CardsConteiner>
-				<Row>
+				<HomeComponentsRow type="mini">
 					{gamesByGender
 						? gamesByGender.map((game, key) => (
 								<Card
@@ -52,9 +48,9 @@ const Genres = (): JSX.Element => {
 								/>
 						  ))
 						: []}
-				</Row>
+				</HomeComponentsRow>
 			</Column>
-		</GenresConteiner>
+		</SHomeComponentsContainer>
 	);
 };
 
