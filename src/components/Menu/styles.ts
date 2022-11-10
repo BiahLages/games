@@ -134,17 +134,22 @@ export const SContentSeach = styled.div`
 	span {
 		display: flex;
 		align-items: center;
-		height: 5rem;
-		width: 46%;
-		background-color: black;
+		width: 100%;
+		max-width: 400px;
+		padding: 1.2rem;
+		background-color: ${mixings.colors.contrast1};
 		font-size: 2rem;
-		color: #fff;
+		color: black;
 		justify-content: center;
-		border-radius: 1rem;
 		cursor: pointer;
 		&:hover {
-			background-color: #fff;
-			color: black;
+			background-color: grey;
 		}
+	}
+	@media (max-width: 599px) {
+		left: 23rem;
+	}
+	@media (min-width: 600px) and (max-width: 1022px) {
+		left: 30rem;
 	}
 `;
