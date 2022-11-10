@@ -13,17 +13,13 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	const { orderBy, orderDirection, pageLength } = useOrderSettings();
 	const { logged, currentUser } = useAuth();
 
-	const [allGames, setAllGames] = useState<ApiGames[]>([]);
-	const [games, setGames] = useState<ApiGames[]>([]);
-	const [allGenres, setGenres] = useState<ApiGenres[]>([]);
 	const [gamesByGender, setGamesByGender] = useState<ApiGames[]>([]);
+	const [allGames, setAllGames] = useState<ApiGames[]>([]);
+	const [allGenres, setGenres] = useState<ApiGenres[]>([]);
 	const [lastValidPage, setLastValidPage] = useState(false);
-	const [shownCards, setShownCards] = useState(3);
-	const [status, getStatus] = useState(false);
+	const [games, setGames] = useState<ApiGames[]>([]);
 	const [currentPage, setCurrentPage] = useState(1);
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const [lastPage, setLastPage] = useState(0);
-
+	const [status, getStatus] = useState(false);
 	const token = localStorage.getItem("token");
 
 	const headers = {
@@ -46,6 +42,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	const handleGetGames = async (): Promise<void> => {
 		if (!headers.headers.Authorization.includes("null")) {
+			const gamesLength = await api.get("/games/entity/info", headers);
 			await api
 				.get(
 					`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`,
@@ -54,14 +51,15 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 				.then(res => {
 					setGames(res.data);
 					if (allGames.length !== 0) {
-						setShownCards(shownCards + res.data.length);
-						if (shownCards >= allGames.length) {
-							setLastValidPage(true);
-						} else if (shownCards !== allGames.length) {
-							setShownCards(shownCards + res.data.length);
-							setLastValidPage(false);
-							setLastPage(currentPage);
-						}
+						setLastValidPage(
+							(gamesLength.data % pageLength === 0 &&
+								gamesLength.data / pageLength ===
+									currentPage) ||
+								(gamesLength.data % pageLength !== 0 &&
+									Math.floor(gamesLength.data / pageLength) +
+										1 ===
+										currentPage),
+						);
 					}
 				});
 		}
@@ -135,6 +133,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 				});
 		}
 	};
+
 	const handleGetAllGames = async (): Promise<void> => {
 		if (status) {
 			await api.get("/games", headers).then(res => {
@@ -142,6 +141,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 			});
 		}
 	};
+
 	const handleGetServerStatus = (): void => {
 		api.get("/status").then(res => {
 			if (res.status === 200) {
@@ -160,15 +160,12 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	useEffect(() => {
 		handleGetAllGames();
-	}, [status]);
-
-	useEffect(() => {
-		handleGetGames();
-	}, [status]);
-
-	useEffect(() => {
 		handleGetAllGenres();
 	}, [status]);
+
+	useEffect(() => {
+		handleGetServerStatus();
+	}, []);
 
 	return (
 		<GameContext.Provider

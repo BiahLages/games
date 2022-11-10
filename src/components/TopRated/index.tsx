@@ -15,7 +15,7 @@ const TopRated = (): JSX.Element => {
 		<TopRatedConteiner>
 			<TopRatedTitle>EM ALTA 🔥</TopRatedTitle>
 			<Row>
-				{true && (
+				{currentPage > 1 && (
 					<ArrowBack
 						onClick={(): void => {
 							setCurrentPage(currentPage - 1);
