@@ -9,6 +9,7 @@ export const OrderSettingsProvider = ({
 }: AllProvidersProps): JSX.Element => {
 	const [orderBy, setOrderBy] = useState("score");
 	const [orderDirection, setOrderDirection] = useState("desc");
+	const [currentGenre, setCurrentGenre] = useState("");
 	const [pageLength, setPageLenght] = useState(5);
 
 	return (
@@ -20,6 +21,8 @@ export const OrderSettingsProvider = ({
 				setOrderBy,
 				setOrderDirection,
 				setPageLenght,
+				currentGenre,
+				setCurrentGenre,
 			}}
 		>
 			{children}

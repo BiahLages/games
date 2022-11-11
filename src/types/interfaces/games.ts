@@ -1,19 +1,24 @@
 import React from "react";
 import { ApiGames, ApiGenres } from "./api";
 
-export interface GameProviderData {
-	allGenres: ApiGenres[];
-	gamesByGender: ApiGames[];
+export interface IGameProviderData {
 	allGames: ApiGames[];
-	lastValidPage: boolean;
-	setLastValidPage: React.Dispatch<React.SetStateAction<boolean>>;
-	currentPage: number;
-	setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-	status: boolean;
+	allGenres: ApiGenres[];
+	currentGamesPage: number;
+	currentGenresPage: number;
 	games: ApiGames[];
+	genres: ApiGames[];
+	lastValidGamePage: boolean;
+	lastValidGenrePage: boolean;
 	handleGetGameById: (id: string) => Promise<ApiGames | undefined>;
+	handleGetGenres: () => void;
 	handleGetServerStatus: () => void;
-	handleGetGamesByGenre: (id: string) => Promise<void>;
+	setCurrentGamesPage: React.Dispatch<React.SetStateAction<number>>;
+	setCurrentGenresPage: React.Dispatch<React.SetStateAction<number>>;
+	setGenres: React.Dispatch<React.SetStateAction<ApiGames[]>>;
+	setLastValidGamePage: React.Dispatch<React.SetStateAction<boolean>>;
+	setLastValidGenrePage: React.Dispatch<React.SetStateAction<boolean>>;
+	status: boolean;
 }
 
 export interface ICardGames {
@@ -31,8 +36,8 @@ export interface ICardGames {
 
 export interface IAdminGames {
 	createGame: (data: ICardGames) => Promise<void>;
-	editGame: (id: string, data: ICardGames) => Promise<void>;
 	deleteGame: (id: string) => Promise<void>;
+	editGame: (id: string, data: ICardGames) => Promise<void>;
 }
 
 export interface IStyleScore {

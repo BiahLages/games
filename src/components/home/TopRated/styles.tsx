@@ -26,16 +26,3 @@ export const Row = styled.div`
 		border-radius: 20px;
 	}
 `;
-
-export const ArrowBack = styled.div`
-	font-size: 40px;
-	border: solid 1px #fff;
-	border: none;
-	cursor: pointer;
-`;
-export const ArrowFoward = styled.div`
-	font-size: 40px;
-	border: solid 1px #fff;
-	border: none;
-	cursor: pointer;
-`;

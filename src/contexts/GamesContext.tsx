@@ -1,24 +1,32 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { AllProvidersProps } from "../types/interfaces/system";
-import { GameProviderData } from "../types/interfaces/games";
+import { IGameProviderData } from "../types/interfaces/games";
 import { useOrderSettings } from "./OrderSettingsContext";
 import { ApiGames, ApiGenres } from "../types/interfaces/api";
 import { useAuth } from "./AccountContext";
 import { api } from "../helpers/Api";
 import { error } from "src/utils/validation.tools";
 
-const GameContext = createContext({} as GameProviderData);
+const GameContext = createContext({} as IGameProviderData);
 
 export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
-	const { orderBy, orderDirection, pageLength } = useOrderSettings();
+	const {
+		orderBy,
+		orderDirection,
+		pageLength,
+		currentGenre,
+		setCurrentGenre,
+	} = useOrderSettings();
 	const { logged, currentUser } = useAuth();
 
-	const [gamesByGender, setGamesByGender] = useState<ApiGames[]>([]);
 	const [allGames, setAllGames] = useState<ApiGames[]>([]);
-	const [allGenres, setGenres] = useState<ApiGenres[]>([]);
-	const [lastValidPage, setLastValidPage] = useState(false);
+	const [allGenres, setAllGenres] = useState<ApiGenres[]>([]);
+	const [lastValidGamePage, setLastValidGamePage] = useState(false);
+	const [lastValidGenrePage, setLastValidGenrePage] = useState(false);
 	const [games, setGames] = useState<ApiGames[]>([]);
-	const [currentPage, setCurrentPage] = useState(1);
+	const [genres, setGenres] = useState<ApiGames[]>([]);
+	const [currentGamesPage, setCurrentGamesPage] = useState(1);
+	const [currentGenresPage, setCurrentGenresPage] = useState(1);
 	const [status, getStatus] = useState(false);
 	const token = localStorage.getItem("token");
 
@@ -26,43 +34,6 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},
-	};
-
-	const handleGetAllGenres = async (): Promise<void> => {
-		await api.get(`/genres`).then(res => {
-			setGenres(res.data);
-		});
-	};
-
-	const handleGetGamesByGenre = async (id: string): Promise<void> => {
-		await api.get(`/genres/${id}`, headers).then(res => {
-			setGamesByGender(res.data.games);
-		});
-	};
-
-	const handleGetGames = async (): Promise<void> => {
-		if (!headers.headers.Authorization.includes("null")) {
-			const gamesLength = await api.get("/games/entity/info", headers);
-			await api
-				.get(
-					`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentPage}`,
-					headers,
-				)
-				.then(res => {
-					setGames(res.data);
-					if (allGames.length !== 0) {
-						setLastValidPage(
-							(gamesLength.data % pageLength === 0 &&
-								gamesLength.data / pageLength ===
-									currentPage) ||
-								(gamesLength.data % pageLength !== 0 &&
-									Math.floor(gamesLength.data / pageLength) +
-										1 ===
-										currentPage),
-						);
-					}
-				});
-		}
 	};
 
 	const handleFormatLink = (
@@ -89,6 +60,85 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 		}
 
 		return { gameplay, trailer };
+	};
+
+	const handleGetAllGenres = async (): Promise<void> => {
+		await api.get(`/genres`).then(res => {
+			const dto = res.data.sort((a: ApiGenres, b: ApiGenres) => {
+				if (a.name < b.name) {
+					return -1;
+				}
+				if (a.name > b.name) {
+					return 1;
+				}
+				return 0;
+			});
+			setAllGenres(dto);
+			setCurrentGenre(dto[0].id);
+		});
+	};
+
+	const handleGetGenres = async (): Promise<void> => {
+		if (!headers.headers.Authorization.includes("null")) {
+			const gamesLength = await api.get(
+				`/genres/entity/info/${currentGenre}`,
+				headers,
+			);
+			await api
+				.get(
+					`/genres/search/${currentGenre}/${orderBy}/${orderDirection}/${
+						pageLength * 3
+					}/${currentGenresPage}`,
+					headers,
+				)
+				.then(res => {
+					const dto: ApiGames[] = [];
+					for (const game of [...genres, ...res.data.games]) {
+						if (!dto.some(({ id }) => id === game.id)) {
+							dto.push(game);
+						}
+					}
+					setGenres(dto);
+					console.log("gamesLength, page, currentGenresPage");
+					console.log(gamesLength.data);
+					console.log(pageLength * 3);
+					console.log(currentGenresPage);
+					setLastValidGenrePage(
+						(gamesLength.data % (pageLength * 3) === 0 &&
+							gamesLength.data / (pageLength * 3) ===
+								currentGenresPage) ||
+							(gamesLength.data % (pageLength * 3) !== 0 &&
+								Math.floor(
+									gamesLength.data / (pageLength * 3),
+								) +
+									1 ===
+									currentGenresPage),
+					);
+				});
+		}
+	};
+
+	const handleGetGames = async (): Promise<void> => {
+		if (!headers.headers.Authorization.includes("null")) {
+			const gamesLength = await api.get("/games/entity/info", headers);
+			await api
+				.get(
+					`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentGamesPage}`,
+					headers,
+				)
+				.then(res => {
+					setGames(res.data);
+					setLastValidGamePage(
+						(gamesLength.data % pageLength === 0 &&
+							gamesLength.data / pageLength ===
+								currentGamesPage) ||
+							(gamesLength.data % pageLength !== 0 &&
+								Math.floor(gamesLength.data / pageLength) +
+									1 ===
+									currentGamesPage),
+					);
+				});
+		}
 	};
 
 	const handleGetGameById = async (
@@ -152,15 +202,20 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	useEffect(() => {
 		handleGetGames();
-	}, [currentPage]);
+	}, [currentGamesPage]);
 
 	useEffect(() => {
 		handleGetGames();
 	}, [status, allGames]);
 
 	useEffect(() => {
+		handleGetGenres();
+	}, [currentGenre]);
+
+	useEffect(() => {
 		handleGetAllGames();
 		handleGetAllGenres();
+		handleGetGenres();
 	}, [status]);
 
 	useEffect(() => {
@@ -170,18 +225,23 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	return (
 		<GameContext.Provider
 			value={{
-				allGenres,
-				gamesByGender,
-				allGames,
-				lastValidPage,
-				setLastValidPage,
-				currentPage,
-				setCurrentPage,
-				status,
 				games,
+				genres,
+				status,
+				allGames,
+				allGenres,
+				setGenres,
+				handleGetGenres,
+				currentGamesPage,
+				currentGenresPage,
 				handleGetGameById,
+				lastValidGamePage,
+				lastValidGenrePage,
+				setCurrentGamesPage,
+				setCurrentGenresPage,
+				setLastValidGamePage,
 				handleGetServerStatus,
-				handleGetGamesByGenre,
+				setLastValidGenrePage,
 			}}
 		>
 			{children}
@@ -189,4 +249,4 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 	);
 };
 
-export const useGame = (): GameProviderData => useContext(GameContext);
+export const useGame = (): IGameProviderData => useContext(GameContext);

@@ -55,6 +55,7 @@ export const HomeComponentsRow = styled.div<IHomeComponentsRow>`
 	align-items: center;
 	gap: 1rem;
 	justify-content: flex-start;
+	padding-bottom: 2rem;
 
 	${({ type, align }): Interpolation<IHomeComponentsRow> => {
 		switch (type) {
@@ -119,7 +120,7 @@ export const HomeComponentsRow = styled.div<IHomeComponentsRow>`
 		background-color: ${mixings.colors.baseBg1Dark};
 	}
 	&::-webkit-scrollbar {
-		width: 1.3vw;
+		height: 1vh;
 		background: ${mixings.colors.baseBg2Dark};
 	}
 	&::-webkit-scrollbar-thumb {
@@ -128,4 +129,18 @@ export const HomeComponentsRow = styled.div<IHomeComponentsRow>`
 			inset 0 0 1.8rem 0.5rem ${mixings.colors.contrast1}33;
 		border-radius: 20px;
 	}
+`;
+
+export const ArrowBack = styled.div`
+	font-size: 40px;
+	border: solid 1px #fff;
+	border: none;
+	cursor: pointer;
+`;
+
+export const ArrowFoward = styled.div`
+	font-size: 40px;
+	border: solid 1px #fff;
+	border: none;
+	cursor: pointer;
 `;

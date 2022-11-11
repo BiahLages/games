@@ -1,14 +1,15 @@
 import Card from "../../Card";
 import { useGame } from "../../../contexts/GamesContext";
-import { ArrowBack, ArrowFoward } from "./styles";
+import { ArrowBack, ArrowFoward } from "../styles";
 import {
 	SHomeComponentsContainer,
 	HomeComponentsTitle,
 	HomeComponentsRow,
-} from "../styled";
+} from "../styles";
 
 const TopRated = (): JSX.Element => {
-	const { games, currentPage, setCurrentPage, lastValidPage } = useGame();
+	const { games, currentGamesPage, setCurrentGamesPage, lastValidGamePage } =
+		useGame();
 	return (
 		<SHomeComponentsContainer scroll="side">
 			<HomeComponentsTitle>EM ALTA 🔥</HomeComponentsTitle>
@@ -16,10 +17,10 @@ const TopRated = (): JSX.Element => {
 				type="overflow"
 				align="center"
 			>
-				{currentPage > 1 && (
+				{currentGamesPage > 1 && (
 					<ArrowBack
 						onClick={(): void => {
-							setCurrentPage(currentPage - 1);
+							setCurrentGamesPage(currentGamesPage - 1);
 						}}
 					>
 						◀
@@ -34,10 +35,10 @@ const TopRated = (): JSX.Element => {
 							/>
 					  ))
 					: []}
-				{!lastValidPage && (
+				{!lastValidGamePage && (
 					<ArrowFoward
 						onClick={(): void => {
-							setCurrentPage(currentPage + 1);
+							setCurrentGamesPage(currentGamesPage + 1);
 						}}
 					>
 						▶

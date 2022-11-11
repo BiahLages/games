@@ -4,7 +4,7 @@ import {
 	SHomeComponentsContainer,
 	HomeComponentsTitle,
 	HomeComponentsRow,
-} from "../styled";
+} from "../styles";
 import { Msg } from "./styles";
 
 const Favorites = (): JSX.Element => {

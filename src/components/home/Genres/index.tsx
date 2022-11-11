@@ -1,17 +1,38 @@
+import { useOrderSettings } from "../../../contexts/OrderSettingsContext";
+import { ApiGames, ApiGenres } from "../../../types/interfaces/api";
+import { Column, SelectGender, CardsConteiner } from "./styles";
+import loaderGif from "../../../assets/icons/loader.png";
+import { useGame } from "../../../contexts/GamesContext";
+import { ArrowFoward } from "../styles";
 import { useEffect } from "react";
 import Card from "../../Card";
-import { useGame } from "../../../contexts/GamesContext";
-import { Column, SelectGender, CardsConteiner } from "./styles";
 import {
 	SHomeComponentsContainer,
 	HomeComponentsTitle,
 	HomeComponentsRow,
-} from "../styled";
+} from "../styles";
 
 const Genres = (): JSX.Element => {
-	const { gamesByGender, allGenres, handleGetGamesByGenre } = useGame();
+	const {
+		setCurrentGenresPage,
+		lastValidGenrePage,
+		currentGenresPage,
+		handleGetGenres,
+		allGenres,
+		setGenres,
+		genres,
+	} = useGame();
+
+	const { currentGenre, setCurrentGenre } = useOrderSettings();
+
 	useEffect(() => {
-		handleGetGamesByGenre("b901bd71-40a2-4515-9154-7c73b29a253b");
+		handleGetGenres();
+	}, [currentGenresPage, currentGenre]);
+
+	useEffect(() => {
+		setCurrentGenresPage(1);
+		setGenres([]);
+		handleGetGenres();
 	}, []);
 
 	return (
@@ -23,10 +44,12 @@ const Genres = (): JSX.Element => {
 						onChange={(
 							e: React.ChangeEvent<HTMLSelectElement>,
 						): void => {
-							handleGetGamesByGenre(e.target.value);
+							setGenres([]);
+							setCurrentGenresPage(1);
+							setCurrentGenre(e.target.value);
 						}}
 					>
-						{allGenres.map((genre, key) => {
+						{allGenres.map((genre: ApiGenres, key: number) => {
 							return (
 								<option
 									value={genre.id}
@@ -39,15 +62,30 @@ const Genres = (): JSX.Element => {
 					</SelectGender>
 				</CardsConteiner>
 				<HomeComponentsRow type="mini">
-					{gamesByGender
-						? gamesByGender.map((game, key) => (
-								<Card
-									key={key}
-									game={game}
-									currentKey={key}
-								/>
-						  ))
-						: []}
+					{genres ? (
+						genres.map((game: ApiGames, key: number) => (
+							<Card
+								key={key}
+								game={game}
+								currentKey={key}
+							/>
+						))
+					) : (
+						<img
+							src={loaderGif}
+							alt="loader"
+							height="32px"
+						/>
+					)}
+					{!lastValidGenrePage && (
+						<ArrowFoward
+							onClick={(): void => {
+								setCurrentGenresPage(currentGenresPage + 1);
+							}}
+						>
+							▼
+						</ArrowFoward>
+					)}
 				</HomeComponentsRow>
 			</Column>
 		</SHomeComponentsContainer>
