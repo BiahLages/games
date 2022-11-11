@@ -19,7 +19,6 @@ export const Overlay = styled.div`
 	width: 100vw;
 	min-height: 100vh;
 	height: auto;
-	padding: 5em 0;
 	background: ${mixings.colors.primaryColorOpacity};
 	display: flex;
 	flex-direction: column;

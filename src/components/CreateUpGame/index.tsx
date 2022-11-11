@@ -1,10 +1,10 @@
-import { ICardGames } from "../../types/interfaces/games";
 import { UseAdminGames } from "../../contexts/AdminGamesContext";
-import { useNavigate } from "react-router-dom";
+import { ICardGames } from "../../types/interfaces/games";
+import { useGame } from "../../contexts/GamesContext";
+import { error } from "../../utils/validation.tools";
 import { useState } from "react";
-import * as S from "./style";
 import Input from "../Input";
-import { useGame } from "src/contexts/GamesContext";
+import * as S from "./style";
 
 const CreateUpGame = ({
 	game,
@@ -17,7 +17,6 @@ const CreateUpGame = ({
 }): JSX.Element => {
 	const { createGame, editGame } = UseAdminGames();
 	const { allGenres } = useGame();
-	const navigate = useNavigate();
 
 	const [valueTitle, setValueTitle] = useState(game.title || "");
 	const [valueImage, setValueImage] = useState(game.image || "");
@@ -28,9 +27,7 @@ const CreateUpGame = ({
 	const [valueScore, setValueScore] = useState(game.score || "");
 	const [valueTrailer, setValueTrailer] = useState(game.trailer || "");
 	const [valueGamePlay, setValueGamePlay] = useState(game.gameplay || "");
-	const [valueGenre, setValueGenre] = useState(
-		"2a31d77e-683c-4d50-bb4f-776178a675b7",
-	);
+	const [valueGenre, setValueGenre] = useState<string>();
 
 	const actionCUpGames = async (): Promise<void> => {
 		const data: ICardGames = {
@@ -46,19 +43,20 @@ const CreateUpGame = ({
 		switch (mode) {
 			case "update":
 				if (game.id) {
-					editGame(game.id, data).then((res): void => {
+					editGame(game.id, data).then((): void => {
 						close();
-						navigate(0);
-						console.log(res);
 					});
 				}
 				break;
 			case "create":
-				createGame(data).then((res): void => {
-					close();
-					navigate(0);
-					console.log(res);
-				});
+				const test = Object.values(data);
+				if (!test.includes(undefined) || !test.includes("")) {
+					createGame(data).then((): void => {
+						close();
+					});
+				} else {
+					error("cannot be empty");
+				}
 				break;
 		}
 	};
@@ -68,7 +66,6 @@ const CreateUpGame = ({
 			<S.FormUpCreate>
 				<S.HeaderForm>
 					<h1>
-						{" "}
 						{Boolean(mode === "update") ? `Edit Game` : `Add Game`}
 					</h1>
 					<span
@@ -129,6 +126,11 @@ const CreateUpGame = ({
 						setValueGenre(e.target.value);
 					}}
 				>
+					<option
+						value={undefined}
+						key="default"
+						defaultValue={undefined}
+					></option>
 					{allGenres.map((genre, key) => {
 						return (
 							<option

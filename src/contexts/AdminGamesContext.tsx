@@ -39,8 +39,7 @@ export const AdminGamesProvider = ({
 				},
 			};
 			api.post(`/games`, data, headers)
-				.then((res): void => {
-					console.log(res);
+				.then((): void => {
 					success("Registrated");
 				})
 				.catch(error => {
@@ -78,9 +77,8 @@ export const AdminGamesProvider = ({
 				},
 			};
 			api.patch(`/games/${id}`, data, headers)
-				.then((res): void => {
+				.then((): void => {
 					success("Patched");
-					console.log(res);
 				})
 				.catch(err => {
 					error(err);
@@ -97,9 +95,8 @@ export const AdminGamesProvider = ({
 				},
 			};
 			api.delete(`/games/${id}`, headers)
-				.then((res): void => {
+				.then((): void => {
 					success("Deleted");
-					console.log(res);
 				})
 				.catch(err => {
 					error(err);
