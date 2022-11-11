@@ -13,7 +13,7 @@ export const Container = styled.section`
 `;
 export const ContentContainer = styled.div`
 	/* width: calc(100% - 20rem); */
-	margin-top: 20rem;
+	margin-top: 10rem;
 	min-height: auto;
 	/* calc(100% - 15rem); */
 `;

@@ -11,6 +11,7 @@ export const SettingsContent = styled.main`
 	article {
 		padding-top: 10em;
 		display: flex;
+		flex-wrap: wrap;
 	}
 	div {
 		display: flex;
