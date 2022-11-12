@@ -5,7 +5,7 @@ import axios from "axios";
 // });
 
 export const api = axios.create({
-	baseURL: "https://gamingdev.onrender.com/docs",
+	baseURL: "https://gamingdevs.onrender.com/docs",
 });
 
 // export const api = axios.create({
