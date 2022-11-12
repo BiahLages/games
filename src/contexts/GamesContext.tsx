@@ -125,10 +125,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 			const gamesLength = await api
 				.get("/games/entity/info", headers)
 				.catch(err => {
-					if (err.response.status !== 404) {
-						console.log(err);
-						throw new Error("error");
-					}
+					err;
 				});
 			await api
 				.get(
