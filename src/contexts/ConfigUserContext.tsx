@@ -15,29 +15,29 @@ export const ConfigUserProvider = ({
 	const { logged, currentUser, logout } = useAuth();
 
 	//States para config do usuário logado.
+	const [cpf, setCpf] = useState<string>();
 	const [name, setName] = useState<string>();
 	const [email, setEmail] = useState<string>();
-	const [cpf, setCpf] = useState<string>();
-	const [password, setPassword] = useState<string>("");
 	const [isAdmin, setIsadmin] = useState<boolean>();
+	const [password, setPassword] = useState<string>("");
 
 	//States para config de outros usuários.
+	const [cpfUser, setCpfUser] = useState<null | string>(null);
 	const [dataUsers, setDataUsers] = useState<TDataUser>(null);
-	const [dataUserForId, setDataUserForId] = useState<TDataUserForId>(null);
 	const [nameUser, setNameUser] = useState<null | string>(null);
 	const [emailUser, setEmailUser] = useState<null | string>(null);
-	const [cpfUser, setCpfUser] = useState<null | string>(null);
+	const [isAdminUser, setIsAdminUser] = useState<null | boolean>(null);
+	const [dataUserForId, setDataUserForId] = useState<TDataUserForId>(null);
 	const [passwordUser, setPasswordUser] = useState<undefined | string>(
 		undefined,
 	);
-	const [isAdminUser, setIsAdminUser] = useState<null | boolean>(null);
 
 	// States para troca de menus.
 	const [switchMenuUpdateChoice, setSwitchMenuUpdateChoice] =
 		useState<boolean>();
-	const [switchMenuUpdateUSer, setSwitchMenuUpdateUser] = useState<boolean>();
 	const [switchMenuUpdateAdmin, setSwitchMenuUpdateAdmin] =
 		useState<boolean>();
+	const [switchMenuUpdateUSer, setSwitchMenuUpdateUser] = useState<boolean>();
 
 	const headers = {
 		headers: {
@@ -60,18 +60,18 @@ export const ConfigUserProvider = ({
 
 			await api
 				.patch(`/users/${currentUser.user.id}`, data, headers)
-				.then(res => {
-					localStorage.setItem(
-						"user",
-						JSON.stringify({ ...res.data, isAdmin, cpf }),
-					);
-					success("handdleUpdateUser Usuário Atualizado");
-				})
-				.catch(err =>
-					error(
-						`"handdleUpdateUser", Erro ${err.status} Usuário não atualizado`,
-					),
-				);
+				.catch(({ response }) => {
+					console.log(response);
+					if (response.status === 418) {
+						console.log("out!");
+						logout();
+					} else {
+						console.log(response);
+						error(
+							`"handdleUpdateUser", Erro ${response.status} Usuário não atualizado. RECARREGUE A PÁGINA!`,
+						);
+					}
+				});
 		}
 	};
 
