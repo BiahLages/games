@@ -80,10 +80,14 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	const handleGetGenres = async (): Promise<void> => {
 		if (!headers.headers.Authorization.includes("null")) {
-			const gamesLength = await api.get(
-				`/genres/entity/info/${currentGenre}`,
-				headers,
-			);
+			const gamesLength = await api
+				.get(`/genres/entity/info/${currentGenre}`, headers)
+				.catch(err => {
+					if (err.status !== 404) {
+						console.log(err);
+						throw new Error("error");
+					}
+				});
 			await api
 				.get(
 					`/genres/search/${currentGenre}/${orderBy}/${orderDirection}/${
@@ -99,24 +103,33 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 						}
 					}
 					setGenres(dto);
-					setLastValidGenrePage(
-						(gamesLength.data % (pageLength * 3) === 0 &&
-							gamesLength.data / (pageLength * 3) ===
-								currentGenresPage) ||
-							(gamesLength.data % (pageLength * 3) !== 0 &&
-								Math.floor(
-									gamesLength.data / (pageLength * 3),
-								) +
-									1 ===
-									currentGenresPage),
-					);
+					if (gamesLength) {
+						setLastValidGenrePage(
+							(gamesLength.data % (pageLength * 3) === 0 &&
+								gamesLength.data / (pageLength * 3) ===
+									currentGenresPage) ||
+								(gamesLength.data % (pageLength * 3) !== 0 &&
+									Math.floor(
+										gamesLength.data / (pageLength * 3),
+									) +
+										1 ===
+										currentGenresPage),
+						);
+					}
 				});
 		}
 	};
 
 	const handleGetGames = async (): Promise<void> => {
 		if (!headers.headers.Authorization.includes("null")) {
-			const gamesLength = await api.get("/games/entity/info", headers);
+			const gamesLength = await api
+				.get("/games/entity/info", headers)
+				.catch(err => {
+					if (err.status !== 404) {
+						console.log(err);
+						throw new Error("error");
+					}
+				});
 			await api
 				.get(
 					`/games/search/${orderBy}/${orderDirection}/${pageLength}/${currentGamesPage}`,
@@ -124,15 +137,17 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 				)
 				.then(res => {
 					setGames(res.data);
-					setLastValidGamePage(
-						(gamesLength.data % pageLength === 0 &&
-							gamesLength.data / pageLength ===
-								currentGamesPage) ||
-							(gamesLength.data % pageLength !== 0 &&
-								Math.floor(gamesLength.data / pageLength) +
-									1 ===
-									currentGamesPage),
-					);
+					if (gamesLength) {
+						setLastValidGamePage(
+							(gamesLength.data % pageLength === 0 &&
+								gamesLength.data / pageLength ===
+									currentGamesPage) ||
+								(gamesLength.data % pageLength !== 0 &&
+									Math.floor(gamesLength.data / pageLength) +
+										1 ===
+										currentGamesPage),
+						);
+					}
 				});
 		}
 	};
