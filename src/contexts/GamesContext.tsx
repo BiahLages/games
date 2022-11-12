@@ -99,10 +99,6 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 						}
 					}
 					setGenres(dto);
-					console.log("gamesLength, page, currentGenresPage");
-					console.log(gamesLength.data);
-					console.log(pageLength * 3);
-					console.log(currentGenresPage);
 					setLastValidGenrePage(
 						(gamesLength.data % (pageLength * 3) === 0 &&
 							gamesLength.data / (pageLength * 3) ===

@@ -61,7 +61,6 @@ export const ConfigUserProvider = ({
 			await api
 				.patch(`/users/${currentUser.user.id}`, data, headers)
 				.catch(({ response }) => {
-					console.log(response);
 					if (response.status === 418) {
 						console.log("out!");
 						logout();

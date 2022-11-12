@@ -42,7 +42,6 @@ export const FavoritesProvider = ({
 			const token = localStorage.getItem("token");
 			switch (isFav) {
 				case true:
-					console.log("favorites", favorites);
 					const favId = favorites.find((e): boolean => {
 						if (e.games.length > 0) {
 							return e.games[0].id === id;
@@ -52,7 +51,6 @@ export const FavoritesProvider = ({
 					});
 
 					if (favId) {
-						console.log(favId.games[0].id);
 						const deleteData = {
 							headers: {
 								Authorization: `Bearer ${token}`,
@@ -61,7 +59,6 @@ export const FavoritesProvider = ({
 								favoriteId: favId.id,
 							},
 						};
-						console.log("deletedata", deleteData);
 						await api
 							.delete(`/favorites`, deleteData)
 							.then((res: { status: number }) => {
