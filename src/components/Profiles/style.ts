@@ -1,5 +1,5 @@
 import mixings from "src/assets/styles/mixins";
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes } from "styled-components/macro";
 
 export const ContainerProfiles = styled.section`
 	width: 100%;

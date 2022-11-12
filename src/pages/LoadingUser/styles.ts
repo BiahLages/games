@@ -1,5 +1,5 @@
 import mixings from "src/assets/styles/mixins";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 export const LoadingUserStyle = styled.div`
 	background: ${mixings.colors.baseBg1Dark};

@@ -1,4 +1,4 @@
-import styled, { css, Interpolation, keyframes } from "styled-components";
+import styled, { css, Interpolation, keyframes } from "styled-components/macro";
 import mixings from "../../assets/styles/mixins";
 import { ProfileItemProps } from "../../types/interfaces/system";
 

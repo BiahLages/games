@@ -1,4 +1,4 @@
-import styled, { css, Interpolation } from "styled-components";
+import styled, { css, Interpolation } from "styled-components/macro";
 import { IStyleScore } from "src/types/interfaces/games";
 import mixings from "src/assets/styles/mixins";
 import { ProfileItemProps } from "src/types/interfaces/system";

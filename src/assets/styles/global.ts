@@ -3,7 +3,7 @@ import {
 	DefaultTheme,
 	GlobalStyleComponent,
 	ThemeProps,
-} from "styled-components";
+} from "styled-components/macro";
 import mixings from "./mixins";
 
 const GlobalStyle: GlobalStyleComponent<

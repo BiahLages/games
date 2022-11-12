@@ -1,5 +1,5 @@
 import mixings from "src/assets/styles/mixins";
-import styled, { css, Interpolation } from "styled-components";
+import styled, { css, Interpolation } from "styled-components/macro";
 
 export interface IHomeComponentsContainer {
 	scroll?: "side" | "down";

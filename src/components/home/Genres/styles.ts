@@ -1,5 +1,5 @@
 import mixings from "src/assets/styles/mixins";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 export const Row = styled.div`
 	height: calc(100% - 30px);

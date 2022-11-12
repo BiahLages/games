@@ -1,5 +1,5 @@
 import { IStyleScore } from "src/types/interfaces/games";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import mixings from "../../assets/styles/mixins";
 
 export const SGame = styled.div`

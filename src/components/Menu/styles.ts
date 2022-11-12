@@ -2,7 +2,7 @@ import {
 	MenuItemButtonProps,
 	ProfileItemProps,
 } from "../../types/interfaces/system";
-import styled, { css, Interpolation } from "styled-components";
+import styled, { css, Interpolation } from "styled-components/macro";
 import mixings from "../../assets/styles/mixins";
 
 export const MenuContainer = styled.header`
