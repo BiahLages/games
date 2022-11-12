@@ -83,7 +83,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 			const gamesLength = await api
 				.get(`/genres/entity/info/${currentGenre}`, headers)
 				.catch(err => {
-					if (err.status !== 404) {
+					if (err.response.status !== 404) {
 						console.log(err);
 						throw new Error("error");
 					}
@@ -125,7 +125,7 @@ export const GamesProvider = ({ children }: AllProvidersProps): JSX.Element => {
 			const gamesLength = await api
 				.get("/games/entity/info", headers)
 				.catch(err => {
-					if (err.status !== 404) {
+					if (err.response.status !== 404) {
 						console.log(err);
 						throw new Error("error");
 					}
