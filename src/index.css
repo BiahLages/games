@@ -1,17 +1,1 @@
 @import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
-
-@media (max-width: 599px) {
-	html {
-		font-size: 1vw;
-	}
-}
-@media (min-width: 600px) and (max-width: 1022px) {
-	html {
-		font-size: 0.7vw;
-	}
-}
-@media (min-width: 1023px) {
-	html {
-		font-size: 0.8vh;
-	}
-}

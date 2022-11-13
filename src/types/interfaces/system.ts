@@ -50,4 +50,22 @@ export interface ProfileItemProps {
 export interface IMixings {
 	colors: CssColors;
 	constants: CssConstants;
+	device: IDevices;
+}
+
+export interface IDevices {
+	min: IDevicesSize;
+	max: IDevicesSize;
+}
+export interface IDevicesSize {
+	mobileS: string;
+	mobileM: string;
+	mobileL: string;
+	mobileMax?: string;
+	tabletMin?: string;
+	tablet: string;
+	tabletMax?: string;
+	laptop: string;
+	laptopL: string;
+	desktop: string;
 }

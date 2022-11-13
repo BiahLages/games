@@ -10,6 +10,22 @@ const GlobalStyle: GlobalStyleComponent<
 	ThemeProps<DefaultTheme>,
 	DefaultTheme
 > = createGlobalStyle`
+@media (max-width: 599px) {
+	html {
+		font-size: 1vw;
+	}
+}
+@media (min-width: 600px) and (max-width: 1022px) {
+	html {
+		font-size: 0.7vw;
+	}
+}
+@media (min-width: 1023px) {
+	html {
+		font-size: 0.8vh;
+	}
+}
+
 *{
 	margin: 0;
 	padding: 0;
