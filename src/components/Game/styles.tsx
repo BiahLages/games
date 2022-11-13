@@ -9,6 +9,7 @@ export const SGame = styled.div`
 	flex-direction: column;
 	flex-wrap: wrap;
 	font-size: 3rem;
+	margin-top: 5rem;
 `;
 
 export const SRatingContent = styled.div`
@@ -20,12 +21,16 @@ export const SRatingContent = styled.div`
 export const SInfoContent = styled.div`
 	display: flex;
 	flex-direction: column;
+	max-width: 70%;
+	/* flex-direction: column-reverse; */
 `;
 
 export const SMediaContent = styled.div`
 	display: flex;
 	flex-direction: row;
 	gap: 1em;
+	align-items: flex-start;
+	flex-wrap: wrap;
 `;
 
 export const SVideosContent = styled.div`
@@ -33,17 +38,19 @@ export const SVideosContent = styled.div`
 	flex-direction: row;
 	gap: 1em;
 	padding-bottom: 1em;
+	align-items: flex-start;
 `;
 
 export const STitleHeart = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	align-items: center;
 `;
 
 export const STitle = styled.h2`
 	font-size: 2em;
-	margin: 0;
+	padding: 1em 0.5em 0 0;
 `;
 
 export const SHeart = styled.img`
@@ -58,21 +65,24 @@ export const SHeart = styled.img`
 
 export const SText = styled.p`
 	font-size: 1em;
-	margin: 0;
+	padding: 2em;
 `;
 
 export const SImage = styled.img`
-	width: 15em;
+	width: 20%;
+	aspect-ratio: 0.57;
 `;
 
 export const SGameplay = styled.iframe`
-	max-width: 280px;
-	max-height: 157.5px;
+	width: 30rem;
+	min-width: 25%;
+	aspect-ratio: 1.704;
 `;
 
 export const STrailer = styled.iframe`
-	width: 560px;
-	height: 315px;
+	width: 50rem;
+	min-width: 50%;
+	aspect-ratio: 1.704;
 `;
 
 export const SGenre = styled.div`
@@ -113,6 +123,7 @@ export const SScore = styled.div`
 export const SStars = styled.div`
 	width: 100rem;
 	height: 9rem;
+	max-width: calc(100vw - 20rem);
 	background: ${(props: IStyleScore): string =>
 		`linear-gradient(90deg, rgba(241, 255, 0, 1) ${
 			props.score * 10
