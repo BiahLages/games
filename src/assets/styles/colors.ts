@@ -2,7 +2,7 @@ import { CssColors } from "../../types/interfaces/system";
 
 export const colors: CssColors = {
 	/* usar para modo escuro*/
-	baseBg1Dark: "#201f20",
+	baseBg1Dark: "#212021",
 	baseBg2Dark: "#313131",
 
 	/* usar para modo escuro*/

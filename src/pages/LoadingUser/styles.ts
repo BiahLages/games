@@ -11,16 +11,17 @@ export const LoadingUserStyle = styled.div<ProfileItemProps>`
 	justify-content: center;
 	align-items: center;
 	div {
-		width: 20vw;
+		width: 90rem;
 		aspect-ratio: 1;
-		box-shadow: 0 0 1rem 1rem ${mixings.colors.baseBg1Dark};
 		${({ backgroundImage }): Interpolation<ProfileItemProps> => {
 			return css`
+				background-color: ${mixings.colors.baseBg1Dark};
 				background-image: url(${backgroundImage});
 				background-size: cover;
 				background-repeat: no-repeat;
 				background-position: center;
+				background-blend-mode: lighten;
 			`;
-		}}
+		}};
 	}
 `;

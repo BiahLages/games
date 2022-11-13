@@ -1,16 +1,16 @@
 import LoaderImageDark2 from "../../assets/images/loaderIII.gif";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { LoadingUserStyle } from "./styles";
 import { useEffect } from "react";
 import { useProfiles } from "src/contexts/ProfilesContext";
 
 const LoadingUser = (): JSX.Element => {
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 	const { getAllProfiles } = useProfiles();
 
-	// const beforeLoad = (location: string): void => {
-	// 	navigate(location);
-	// };
+	const beforeLoad = (location: string): void => {
+		navigate(location);
+	};
 
 	const logState = async (): Promise<NodeJS.Timeout> => {
 		const user = localStorage.getItem("user");
@@ -20,20 +20,17 @@ const LoadingUser = (): JSX.Element => {
 		if (user && token && profile) {
 			getAllProfiles();
 			return setTimeout(() => {
-				// beforeLoad("/");
-				console.log("done");
+				beforeLoad("/");
 			}, 1420);
 		} else if (user && token) {
 			getAllProfiles();
 			return setTimeout(() => {
-				// beforeLoad("/profile");
-				console.log("done");
+				beforeLoad("/profile");
 			}, 1420);
 		} else {
 			getAllProfiles();
 			return setTimeout(() => {
-				// beforeLoad("/login");
-				console.log("done");
+				beforeLoad("/login");
 			}, 500);
 		}
 	};
