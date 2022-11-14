@@ -130,14 +130,17 @@ export const MenuOptions = styled.nav<MenuItemButtonProps>`
 `;
 
 export const Profile = styled.article<ProfileItemProps>`
-	width: 20%;
+	height: 100%;
 	display: flex;
 	justify-content: flex-end;
+	align-items: center;
 
 	div#profileMenu {
-		width: 7rem;
-		height: 7rem;
-		border-radius: 3.5rem;
+		width: 10rem;
+		max-width: calc(10 * 0.8vh);
+		aspect-ratio: 1;
+		max-height: 100%;
+		border-radius: 10rem;
 		cursor: pointer;
 		${({ backgroundImage }): Interpolation<ProfileItemProps> => {
 			return css`
