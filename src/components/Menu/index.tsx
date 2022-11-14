@@ -84,7 +84,10 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 				)}
 				{Boolean(path === "home" || path === "/game/:id") &&
 					currentProfile && (
-						<Profile backgroundImage={currentProfile.imageUrl}>
+						<Profile
+							backgroundImage={currentProfile.imageUrl}
+							active={active}
+						>
 							<div
 								id="profileMenu"
 								onClick={(): void => {
@@ -101,7 +104,7 @@ const Menu = ({ path }: MenuProps): JSX.Element => {
 						</Profile>
 					)}
 				{active ? (
-					<MenuOptions>
+					<MenuOptions active={active}>
 						<li
 							onClick={(): void => {
 								navigate("/profile");

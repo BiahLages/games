@@ -45,6 +45,7 @@ export interface MenuItemButtonProps {
 
 export interface ProfileItemProps {
 	backgroundImage?: string;
+	active?: boolean;
 }
 
 export interface IMixings {

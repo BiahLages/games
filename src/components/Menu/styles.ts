@@ -2,14 +2,19 @@ import {
 	MenuItemButtonProps,
 	ProfileItemProps,
 } from "../../types/interfaces/system";
-import styled, { css, Interpolation } from "styled-components/macro";
+import styled, { css, Interpolation, keyframes } from "styled-components/macro";
 import mixings from "../../assets/styles/mixins";
+
+const SGrownAnimation = keyframes`
+ 0% { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);}
+ 100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);}
+`;
 
 export const MenuContainer = styled.header`
 	position: fixed;
 	width: 100%;
 	height: 10vh;
-	background-color: rgba(0, 0, 0, 0.2);
+	background-color: ${mixings.colors.primaryColorOpacity};
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -72,25 +77,54 @@ export const LogoContainer = styled.header`
 `;
 export const MenuOptions = styled.nav<MenuItemButtonProps>`
 	position: absolute;
-	right: 0;
-	top: 8vh;
-	width: 20rem;
-	background-color: ${mixings.colors.contrast1};
+	right: -10rem;
+	top: 9vh;
+	color: ${mixings.colors.primaryColor};
+	width: calc(100% - 10rem);
+	max-width: 100rem;
+	height: calc(100vh - 10vh);
+	background-color: ${mixings.colors.baseBg1Dark};
+	background-image: linear-gradient(
+		0deg,
+		${mixings.colors.primaryColorOpacity} 0%,
+		${mixings.colors.primaryColorOpacity} 100%
+	);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: space-around;
+	gap: 1rem;
+	transition: 0.84s;
+	clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+
+	${({ active }): Interpolation<MenuItemButtonProps> => {
+		return (
+			active &&
+			css`
+				animation-name: ${SGrownAnimation};
+				animation-duration: 0.84s;
+				animation-direction: normal;
+				animation-fill-mode: forwards;
+			`
+		);
+	}}
 
 	li {
 		box-sizing: border-box;
 		width: 100%;
+		height: 100%;
 		padding: 2rem;
 		list-style-type: none;
 		text-align: center;
-		font-size: 2.5rem;
+		font-size: 5rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		cursor: pointer;
 
 		:hover {
 			background-color: ${mixings.colors.primaryColorOpacity};
+			color: ${mixings.colors.secondaryColor};
 		}
 	}
 `;
@@ -118,7 +152,16 @@ export const Profile = styled.article<ProfileItemProps>`
 	img {
 		width: 3rem;
 		height: 3rem;
+		transition: 1.42s;
 		cursor: pointer;
+		${({ active }): Interpolation<ProfileItemProps> => {
+			return (
+				active &&
+				css`
+					transform: rotateX(-180deg);
+				`
+			);
+		}}
 	}
 `;
 
