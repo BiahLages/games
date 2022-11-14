@@ -62,7 +62,13 @@ export const AuthProvider = ({ children }: AllProvidersProps): JSX.Element => {
 
 	return (
 		<AuthContext.Provider
-			value={{ logged, login, logout, currentUser, checkTokenExpiration }}
+			value={{
+				logged,
+				login,
+				logout,
+				currentUser,
+				checkTokenExpiration,
+			}}
 		>
 			{children}
 		</AuthContext.Provider>
