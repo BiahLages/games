@@ -1,6 +1,6 @@
 # [GamingDevs landing](https://gamedevs.vercel.app)
 
-##### [GamingDevs API](https://gamingdevs.up.railway.app/)
+##### [GamingDevs API](https://gamingdev.onrender.com/)
 
 #### REACT APP created for studying purpose
 
